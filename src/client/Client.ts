@@ -1,10 +1,6 @@
 import BaseClient from './BaseClient.js';
-import type { httpInterface } from '../util/Constants.js';
+import type { ClientOptions } from '../util/Constants.js';
 import fetch from 'node-fetch';
-
-interface ClientOptions {
-  http: httpInterface | null;
-}
 
 interface ClientCredentials {
   clientID: string;
