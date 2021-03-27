@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itspotify/tspotify.git"
+    "url": "git+https://github.com/tspotify/tspotify.git"
   },
   "author": "Shubham Parihar <shubhamparihar391@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/itspotify/tspotify/issues"
+    "url": "https://github.com/tspotify/tspotify/issues"
   },
-  "homepage": "https://github.com/itspotify/tspotify#readme"
+  "homepage": "https://github.com/tspotify/tspotify#readme"
 }
