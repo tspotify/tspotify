@@ -1,1 +1,3 @@
-console.log('test');
+import Client from './client/Client.js';
+
+export { Client };

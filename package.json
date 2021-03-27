@@ -1,8 +1,8 @@
 {
   "name": "tspotify",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "A TypeScript library for interacting with Spotify API",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc"
   },
@@ -16,7 +16,10 @@
     "url": "https://github.com/tspotify/tspotify/issues"
   },
   "homepage": "https://github.com/tspotify/tspotify#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/node-fetch": "^2.5.8",
+    "node-fetch": "^2.6.1"
+  },
   "devDependencies": {
     "@types/node": "^14.14.37",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
