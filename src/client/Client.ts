@@ -1,8 +1,10 @@
 import BaseClient from './BaseClient.js';
 import type { ClientOptions } from '../util/Constants.js';
-import fetch from 'node-fetch';
+import RESTManager from '../rest/RESTManager.js';
+import APIOptions from '../structures/APIOptions.js';
+import AccessTokenDetails from '../structures/AccessTokenDetails.js';
 
-interface ClientCredentials {
+export interface ClientCredentials {
   clientID: string;
   clientSecret: string;
 }
@@ -10,6 +12,7 @@ interface ClientCredentials {
 export default class Client extends BaseClient {
   credentials: ClientCredentials | null;
   accessTokenDetails: AccessTokenDetails | null;
+  rest: RESTManager;
 
   constructor(options?: ClientOptions) {
     super(options);
@@ -19,39 +22,21 @@ export default class Client extends BaseClient {
 
     Object.defineProperty(this, 'accessTokenDetails', { writable: true });
     this.accessTokenDetails = null;
+
+    this.rest = new RESTManager(this);
+  }
+
+  get _api(): any {
+    return this.rest.routeBuilder;
   }
 
   async login(credentials: ClientCredentials): Promise<AccessTokenDetails> {
     this.credentials = credentials;
-    const { clientID, clientSecret } = this.credentials;
-    const authString = Buffer.from(`${clientID}:${clientSecret}`).toString('base64');
-    const bodyContent = new URLSearchParams();
-    bodyContent.append('grant_type', 'client_credentials');
-    const res = await fetch('https://accounts.spotify.com/api/token', {
-      headers: {
-        Authorization: `Basic ${authString}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: bodyContent,
-      method: 'post',
+    const apiOptions = new APIOptions('account', null, {
+      grant_type: 'client_credentials',
     });
-    const data = await res.json();
+    const data = await this._api.api.token.post(apiOptions);
     this.accessTokenDetails = new AccessTokenDetails(data);
     return this.accessTokenDetails;
-  }
-}
-
-class AccessTokenDetails {
-  accessToken: string;
-  tokenType: string;
-  expiresIn: number;
-
-  /* eslint-disable */
-  constructor(data: any) {
-    this.accessToken = data?.access_token ?? null;
-
-    this.tokenType = data?.token_type ?? null;
-
-    this.expiresIn = data?.expires_in ?? null;
   }
 }

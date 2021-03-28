@@ -1,15 +1,17 @@
 export interface ClientOptions {
-  http: HttpOptions;
+  api: ApiOptions;
 }
 
-export interface HttpOptions {
+export interface ApiOptions {
   version: number;
-  api: string;
+  baseURL: string;
+  baseAccountServiceURL: string;
 }
 
 export const DefaultClientOptions: ClientOptions = {
-  http: {
+  api: {
     version: 1,
-    api: 'https://api.spotify.com',
+    baseURL: 'https://api.spotify.com',
+    baseAccountServiceURL: 'https://accounts.spotify.com',
   },
 };
