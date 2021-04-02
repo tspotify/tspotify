@@ -33,11 +33,6 @@ export default class BaseAlbum extends BaseStructure {
   href: string;
 
   /**
-   * The Spotify ID of the alnum
-   */
-  id: string;
-
-  /**
    * The cover art for the album in various sizes, widest first
    */
   images: Array<object>;
@@ -73,7 +68,7 @@ export default class BaseAlbum extends BaseStructure {
   uri: string;
 
   constructor(client: Client, data: AlbumObject | SimplifiedAlbumObject) {
-    super(client);
+    super(client, data.id);
 
     this.type = data.album_type;
 
@@ -84,8 +79,6 @@ export default class BaseAlbum extends BaseStructure {
     this.externalUrls = data.external_urls;
 
     this.href = data.href;
-
-    this.id = data.id;
 
     this.images = data.images;
 

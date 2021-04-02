@@ -14,11 +14,6 @@ export default class SimplifiedArtist extends BaseStructure {
   href: string;
 
   /**
-   * The Spotify ID for the artist
-   */
-  id: string;
-
-  /**
    * The name of the artist
    */
   name: string;
@@ -34,13 +29,11 @@ export default class SimplifiedArtist extends BaseStructure {
   uri: string;
 
   constructor(client: Client, data: SimplifiedArtistObject) {
-    super(client);
+    super(client, data.id);
 
     this.externalUrls = data.external_urls;
 
     this.href = data.href;
-
-    this.id = data.href;
 
     this.name = data.name;
 
