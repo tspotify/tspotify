@@ -7,6 +7,6 @@
     "dist/**"
   ],
   "entryPoints": [
-    "src"
+    "src/index.ts"
   ]
 }
