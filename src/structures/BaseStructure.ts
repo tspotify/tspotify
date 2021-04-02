@@ -1,7 +1,7 @@
 import Client from '../client/Client.js';
 
 /**
- * Base class for all twitter.js structures
+ * Base class for all structures
  */
 export default class BaseStructure {
   /**
