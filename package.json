@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tspotify/tspotify#readme",
   "dependencies": {
+    "@discordjs/collection": "^0.1.6",
     "@types/node-fetch": "^2.5.8",
     "node-fetch": "^2.6.1",
     "spotify-api-types": "0.0.5"
