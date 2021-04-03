@@ -1,6 +1,7 @@
 import Client from '../client/Client.js';
 import BaseAlbum from './BaseAlbum.js';
-import type { AlbumObject } from 'spotify-api-types';
+import SimplifiedTrack from './SimplifiedTrack.js';
+import type { AlbumObject, SimplifiedTrackObject } from 'spotify-api-types';
 
 /**
  * Represents an album on Spotify
@@ -34,7 +35,7 @@ export default class Album extends BaseAlbum {
   /**
    * The tracks of the album
    */
-  tracks: Array<object>;
+  tracks: Array<SimplifiedTrack>;
 
   constructor(client: Client, data: AlbumObject) {
     super(client, data);
@@ -49,7 +50,14 @@ export default class Album extends BaseAlbum {
 
     this.popularity = data.popularity;
 
-    // use a patch method for this later
-    this.tracks = data.tracks;
+    this.tracks = this._patchTracks(data.tracks.items);
+  }
+
+  private _patchTracks(data: Array<SimplifiedTrackObject>): Array<SimplifiedTrack> {
+    const trackArray: Array<SimplifiedTrack> = [];
+    data.forEach(trackObject => {
+      trackArray.push(new SimplifiedTrack(this.client, trackObject));
+    });
+    return trackArray;
   }
 }
