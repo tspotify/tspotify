@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BaseStructure | tspotify</title>
+	<title>Copyright | tspotify</title>
 	<meta name="description" content="Documentation for tspotify">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2728,19 +2728,8 @@ img {
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="basemanager.html" class="tsd-kind-icon">Base<wbr>Manager</a>
 		</li>
-		<li class="current tsd-kind-class">
+		<li class=" tsd-kind-class">
 			<a href="basestructure.html" class="tsd-kind-icon">Base<wbr>Structure</a>
-			<ul>
-				<li class=" tsd-kind-constructor tsd-parent-kind-class">
-					<a href="basestructure.html#constructor" class="tsd-kind-icon">constructor</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="basestructure.html#client" class="tsd-kind-icon">client</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="basestructure.html#id" class="tsd-kind-icon">id</a>
-				</li>
-			</ul>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="client.html" class="tsd-kind-icon">Client</a>
@@ -2748,8 +2737,19 @@ img {
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="collection.html" class="tsd-kind-icon">Collection</a>
 		</li>
-		<li class=" tsd-kind-class">
+		<li class="current tsd-kind-class">
 			<a href="copyright.html" class="tsd-kind-icon">Copyright</a>
+			<ul>
+				<li class=" tsd-kind-constructor tsd-parent-kind-class">
+					<a href="copyright.html#constructor" class="tsd-kind-icon">constructor</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="copyright.html#text" class="tsd-kind-icon">text</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="copyright.html#type" class="tsd-kind-icon">type</a>
+				</li>
+			</ul>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="externalid.html" class="tsd-kind-icon">External<wbr>Id</a>
@@ -2794,7 +2794,7 @@ img {
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<p>Base class for all structures</p>
+					<p>Holds copyright details for a content on Spotify</p>
 				</div>
 			</div>
 		</section>
@@ -2802,15 +2802,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">BaseStructure</span>
-					<ul class="tsd-hierarchy">
-						<li>
-							<a href="basealbum.html" class="tsd-signature-type" data-tsd-kind="Class">BaseAlbum</a>
-						</li>
-						<li>
-							<a href="simplifiedartist.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedArtist</a>
-						</li>
-					</ul>
+					<span class="target">Copyright</span>
 				</li>
 			</ul>
 		</section>
@@ -2821,14 +2813,14 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Constructors</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="basestructure.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="copyright.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="basestructure.html#client" class="tsd-kind-icon">client</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="basestructure.html#id" class="tsd-kind-icon">id</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="copyright.html#text" class="tsd-kind-icon">text</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="copyright.html#type" class="tsd-kind-icon">type</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2840,31 +2832,22 @@ img {
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Structure<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="basestructure.html" class="tsd-signature-type" data-tsd-kind="Class">BaseStructure</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Copyright<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CopyrightObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="copyright.html" class="tsd-signature-type" data-tsd-kind="Class">Copyright</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/cc206ad/src/structures/BaseStructure.ts#L15">src/structures/BaseStructure.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/cc206ad/src/structures/Misc.ts#L15">src/structures/Misc.ts:15</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>client: <a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>The client that instantiated this class</p>
-								</div>
-							</li>
-							<li>
-								<h5>id: <span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>The Spotify ID of the structure</p>
-								</div>
+								<h5>data: <span class="tsd-signature-type">CopyrightObject</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="basestructure.html" class="tsd-signature-type" data-tsd-kind="Class">BaseStructure</a></h4>
+						<h4 class="tsd-returns-title">Returns <a href="copyright.html" class="tsd-signature-type" data-tsd-kind="Class">Copyright</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -2872,32 +2855,32 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="client" class="tsd-anchor"></a>
-				<h3>client</h3>
-				<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></div>
+				<a name="text" class="tsd-anchor"></a>
+				<h3>text</h3>
+				<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/cc206ad/src/structures/BaseStructure.ts#L10">src/structures/BaseStructure.ts:10</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/cc206ad/src/structures/Misc.ts#L10">src/structures/Misc.ts:10</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The client that instantiated this class</p>
+						<p>The copyright text for this content</p>
 					</div>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="id" class="tsd-anchor"></a>
-				<h3>id</h3>
-				<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<a name="type" class="tsd-anchor"></a>
+				<h3>type</h3>
+				<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/cc206ad/src/structures/BaseStructure.ts#L15">src/structures/BaseStructure.ts:15</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/cc206ad/src/structures/Misc.ts#L15">src/structures/Misc.ts:15</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The Spotify ID of the structure</p>
+						<p>The type of copyright: <code>C</code> = the copyright, <code>P</code> = the sound recording (performance) copyright</p>
 					</div>
 				</div>
 			</section>
