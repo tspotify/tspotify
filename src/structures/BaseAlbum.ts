@@ -2,6 +2,7 @@ import BaseStructure from './BaseStructure.js';
 import SimplifiedArtist from './SimplifiedArtist.js';
 import Client from '../client/Client.js';
 import { ExternalUrl } from './Misc.js';
+import Collection from '../util/Collection.js';
 import type { AlbumObject, SimplifiedArtistObject, SimplifiedAlbumObject } from 'spotify-api-types';
 
 /**
@@ -16,7 +17,7 @@ export default class BaseAlbum extends BaseStructure {
   /**
    * The artists of the album
    */
-  artists: Array<SimplifiedArtist>;
+  artists: Collection<string, SimplifiedArtist>;
 
   /**
    * The markets in which the album is available
@@ -96,11 +97,11 @@ export default class BaseAlbum extends BaseStructure {
     this.uri = data.uri;
   }
 
-  private _patchArtists(data: Array<SimplifiedArtistObject>): Array<SimplifiedArtist> {
-    const artistsArray: Array<SimplifiedArtist> = [];
+  private _patchArtists(data: Array<SimplifiedArtistObject>): Collection<string, SimplifiedArtist> {
+    const artistsCollection = new Collection<string, SimplifiedArtist>();
     data.forEach(artistObject => {
-      artistsArray.push(new SimplifiedArtist(this.client, artistObject));
+      artistsCollection.set(artistObject.id, new SimplifiedArtist(this.client, artistObject));
     });
-    return artistsArray;
+    return artistsCollection;
   }
 }

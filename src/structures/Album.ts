@@ -2,6 +2,7 @@ import Client from '../client/Client.js';
 import BaseAlbum from './BaseAlbum.js';
 import SimplifiedTrack from './SimplifiedTrack.js';
 import { Copyright, ExternalId } from './Misc.js';
+import Collection from '../util/Collection.js';
 import type { AlbumObject, SimplifiedTrackObject, CopyrightObject } from 'spotify-api-types';
 
 /**
@@ -36,7 +37,7 @@ export default class Album extends BaseAlbum {
   /**
    * The tracks of the album
    */
-  tracks: Array<SimplifiedTrack>;
+  tracks: Collection<string, SimplifiedTrack>;
 
   constructor(client: Client, data: AlbumObject) {
     super(client, data);
@@ -54,12 +55,12 @@ export default class Album extends BaseAlbum {
     this.tracks = this._patchTracks(data.tracks.items);
   }
 
-  private _patchTracks(data: Array<SimplifiedTrackObject>): Array<SimplifiedTrack> {
-    const trackArray: Array<SimplifiedTrack> = [];
+  private _patchTracks(data: Array<SimplifiedTrackObject>): Collection<string, SimplifiedTrack> {
+    const tracksCollection = new Collection<string, SimplifiedTrack>();
     data.forEach(trackObject => {
-      trackArray.push(new SimplifiedTrack(this.client, trackObject));
+      tracksCollection.set(trackObject.id, new SimplifiedTrack(this.client, trackObject));
     });
-    return trackArray;
+    return tracksCollection;
   }
 
   private _patchCopyrights(data: Array<CopyrightObject>): Array<Copyright> {

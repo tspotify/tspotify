@@ -1,5 +1,6 @@
 import LinkedTrack from './LinkedTrack.js';
 import SimplifiedArtist from './SimplifiedArtist.js';
+import Collection from '../util/Collection.js';
 import type Client from '../client/Client.js';
 import type { SimplifiedTrackObject, SimplifiedArtistObject } from 'spotify-api-types';
 
@@ -7,7 +8,7 @@ export default class SimplifiedTrack extends LinkedTrack {
   /**
    * The artists who performed the track. Each artist object includes a link in `href` to more detailed information about the artist
    */
-  artists: Array<SimplifiedArtist>;
+  artists: Collection<string, SimplifiedArtist>;
 
   /**
    * A list of the countries in which the track can be played, identified by their `ISO 3166-1 alpha-2` code
@@ -92,11 +93,11 @@ export default class SimplifiedTrack extends LinkedTrack {
     this.trackNumber = data.track_number;
   }
 
-  private _patchArtists(data: Array<SimplifiedArtistObject>): Array<SimplifiedArtist> {
-    const artistsArray: Array<SimplifiedArtist> = [];
+  private _patchArtists(data: Array<SimplifiedArtistObject>): Collection<string, SimplifiedArtist> {
+    const artistsCollection = new Collection<string, SimplifiedArtist>();
     data.forEach(artistObject => {
-      artistsArray.push(new SimplifiedArtist(this.client, artistObject));
+      artistsCollection.set(artistObject.id, new SimplifiedArtist(this.client, artistObject));
     });
-    return artistsArray;
+    return artistsCollection;
   }
 }
