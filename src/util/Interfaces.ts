@@ -9,9 +9,14 @@ export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
  */
 export interface FetchAlbumOptions {
   /**
-   * The Spotify ID of the album
+   * The album to fetch
    */
-  album: string | Array<string>;
+  album: AlbumResolvable;
+
+  /**
+   * The market you’d like to request
+   */
+  market?: string;
 
   /**
    * Whether to fetch album from the API directly or check the cache first
@@ -27,19 +32,9 @@ export interface FetchAlbumOptions {
 /**
  * Options used for fetching multiple albums
  */
-export interface FetchAlbumsOptions {
+export interface FetchAlbumsOptions extends Omit<FetchAlbumOptions, 'album'> {
   /**
-   * An array of Spotify ID of the albums
+   * The album(s) to fetch (max 20)
    */
-  albums: Array<string>;
-
-  /**
-   * Whether to fetch albums from the API directly or check the cache first
-   */
-  skipCacheCheck?: boolean;
-
-  /**
-   * Whether to cache the fetched albums or not
-   */
-  cacheAfterFetching?: boolean;
+  albums: AlbumResolvable | Array<AlbumResolvable>;
 }
