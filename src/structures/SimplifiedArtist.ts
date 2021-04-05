@@ -1,12 +1,13 @@
 import BaseStructure from './BaseStructure.js';
 import Client from '../client/Client.js';
+import { ExternalUrl } from './Misc.js';
 import type { SimplifiedArtistObject } from 'spotify-api-types';
 
 export default class SimplifiedArtist extends BaseStructure {
   /**
    * Known external URLs for this artist
    */
-  externalUrls: object;
+  externalUrls: ExternalUrl;
 
   /**
    * A link to the Web API endpoint providing full details of the artist
@@ -31,7 +32,7 @@ export default class SimplifiedArtist extends BaseStructure {
   constructor(client: Client, data: SimplifiedArtistObject) {
     super(client, data.id);
 
-    this.externalUrls = data.external_urls;
+    this.externalUrls = new ExternalUrl(data.external_urls);
 
     this.href = data.href;
 

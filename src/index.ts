@@ -14,6 +14,7 @@ import Collection from './util/Collection.js';
 export * from './util/Constants.js';
 export * from './util/Interfaces.js';
 export * from './util/Util.js';
+export * from './structures/Misc.js';
 
 export {
   BaseClient,

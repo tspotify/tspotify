@@ -1,6 +1,7 @@
 import BaseStructure from './BaseStructure.js';
 import SimplifiedArtist from './SimplifiedArtist.js';
 import Client from '../client/Client.js';
+import { ExternalUrl } from './Misc.js';
 import type { AlbumObject, SimplifiedArtistObject, SimplifiedAlbumObject } from 'spotify-api-types';
 
 /**
@@ -25,7 +26,7 @@ export default class BaseAlbum extends BaseStructure {
   /**
    * Known external URLs for the album
    */
-  externalUrls: object;
+  externalUrls: ExternalUrl;
 
   /**
    * A link to the Web API endpoint providing full details of the album
@@ -76,7 +77,7 @@ export default class BaseAlbum extends BaseStructure {
 
     this.availableMarkets = data.available_markets;
 
-    this.externalUrls = data.external_urls;
+    this.externalUrls = new ExternalUrl(data.external_urls);
 
     this.href = data.href;
 

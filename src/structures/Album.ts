@@ -1,7 +1,8 @@
 import Client from '../client/Client.js';
 import BaseAlbum from './BaseAlbum.js';
 import SimplifiedTrack from './SimplifiedTrack.js';
-import type { AlbumObject, SimplifiedTrackObject } from 'spotify-api-types';
+import { Copyright, ExternalId } from './Misc.js';
+import type { AlbumObject, SimplifiedTrackObject, CopyrightObject } from 'spotify-api-types';
 
 /**
  * Represents an album on Spotify
@@ -10,12 +11,12 @@ export default class Album extends BaseAlbum {
   /**
    * The copyright statements of the album
    */
-  copyrights: Array<any>;
+  copyrights: Array<Copyright>;
 
   /**
    * Known external IDs for the album
    */
-  externalIds: object;
+  externalIds: ExternalId;
 
   /**
    * A list of the genres used to classify the album
@@ -40,9 +41,9 @@ export default class Album extends BaseAlbum {
   constructor(client: Client, data: AlbumObject) {
     super(client, data);
 
-    this.copyrights = data.copyrights;
+    this.copyrights = this._patchCopyrights(data.copyrights);
 
-    this.externalIds = data.external_ids;
+    this.externalIds = new ExternalId(data.external_ids);
 
     this.genres = data.genres;
 
@@ -59,5 +60,13 @@ export default class Album extends BaseAlbum {
       trackArray.push(new SimplifiedTrack(this.client, trackObject));
     });
     return trackArray;
+  }
+
+  private _patchCopyrights(data: Array<CopyrightObject>): Array<Copyright> {
+    const copyrightArray: Array<CopyrightObject> = [];
+    data.forEach(copyrightObject => {
+      copyrightArray.push(new Copyright(copyrightObject));
+    });
+    return copyrightArray;
   }
 }

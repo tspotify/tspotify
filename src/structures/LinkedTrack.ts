@@ -1,4 +1,5 @@
 import BaseStructure from './BaseStructure.js';
+import { ExternalUrl } from './Misc.js';
 import type Client from '../client/Client.js';
 import type { LinkedTrackObject } from 'spotify-api-types';
 
@@ -6,7 +7,7 @@ export default class LinkedTrack extends BaseStructure {
   /**
    * Known external URLs for this track
    */
-  externalUrls: object;
+  externalUrls: ExternalUrl;
 
   /**
    * A link to the Web API endpoint providing full details of the track
@@ -26,7 +27,7 @@ export default class LinkedTrack extends BaseStructure {
   constructor(client: Client, data: LinkedTrackObject) {
     super(client, data.id);
 
-    this.externalUrls = data.external_urls;
+    this.externalUrls = new ExternalUrl(data.external_urls);
 
     this.href = data.href;
 

@@ -42,7 +42,7 @@ export default class SimplifiedTrack extends LinkedTrack {
   /**
    * Part of the response when `Track Relinking` is applied and is only part of the response if the track linking, in fact, exists. The requested track has been replaced with a different track. The track in the `linkedFrom` object contains information about the originally requested track
    */
-  linkedFrom: any | null;
+  linkedFrom: LinkedTrack | null;
 
   /**
    * The name of the track
@@ -81,7 +81,7 @@ export default class SimplifiedTrack extends LinkedTrack {
 
     this.isPlayable = data?.is_playable ?? null;
 
-    this.linkedFrom = data.linked_from;
+    this.linkedFrom = data?.linked_from ? new LinkedTrack(this.client, data.linked_from) : null;
 
     this.name = data.name;
 
