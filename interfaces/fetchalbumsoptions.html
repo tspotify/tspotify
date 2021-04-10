@@ -2761,6 +2761,9 @@ img {
 		<li class=" tsd-kind-interface">
 			<a href="fetchalbumoptions.html" class="tsd-kind-icon">Fetch<wbr>Album<wbr>Options</a>
 		</li>
+		<li class=" tsd-kind-interface">
+			<a href="fetchalbumtracksoptions.html" class="tsd-kind-icon">Fetch<wbr>Album<wbr>Tracks<wbr>Options</a>
+		</li>
 		<li class="current tsd-kind-interface">
 			<a href="fetchalbumsoptions.html" class="tsd-kind-icon">Fetch<wbr>Albums<wbr>Options</a>
 			<ul>
@@ -2768,13 +2771,7 @@ img {
 					<a href="fetchalbumsoptions.html#albums" class="tsd-kind-icon">albums</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="fetchalbumsoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="fetchalbumsoptions.html#market" class="tsd-kind-icon">market</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="fetchalbumsoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a>
 				</li>
 			</ul>
 		</li>
@@ -2808,7 +2805,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="fetchalbumoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchAlbumOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;album&quot;</span><span class="tsd-signature-symbol">&gt;</span>
+					<span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="fetchalbumoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchAlbumOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;album&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;skipCacheCheck&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cacheAfterFetching&quot;</span><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">FetchAlbumsOptions</span>
@@ -2825,9 +2822,7 @@ img {
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchalbumsoptions.html#albums" class="tsd-kind-icon">albums</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchalbumsoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchalbumsoptions.html#market" class="tsd-kind-icon">market</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchalbumsoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2841,28 +2836,12 @@ img {
 				<div class="tsd-signature tsd-kind-icon">albums<span class="tsd-signature-symbol">:</span> <a href="../modules.html#albumresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">AlbumResolvable</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/028876f/src/util/Interfaces.ts#L40">src/util/Interfaces.ts:40</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/f68ea49/src/util/Interfaces.ts#L40">src/util/Interfaces.ts:40</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>The album(s) to fetch (max 20)</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="cacheafterfetching" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> cache<wbr>After<wbr>Fetching</h3>
-				<div class="tsd-signature tsd-kind-icon">cache<wbr>After<wbr>Fetching<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from Omit.cacheAfterFetching</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/028876f/src/util/Interfaces.ts#L30">src/util/Interfaces.ts:30</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to cache the fetched album or not</p>
 					</div>
 				</div>
 			</section>
@@ -2873,28 +2852,12 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from Omit.market</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/028876f/src/util/Interfaces.ts#L20">src/util/Interfaces.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/f68ea49/src/util/Interfaces.ts#L20">src/util/Interfaces.ts:20</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>The market you’d like to request</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="skipcachecheck" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> skip<wbr>Cache<wbr>Check</h3>
-				<div class="tsd-signature tsd-kind-icon">skip<wbr>Cache<wbr>Check<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from Omit.skipCacheCheck</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/028876f/src/util/Interfaces.ts#L25">src/util/Interfaces.ts:25</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to fetch album from the API directly or check the cache first</p>
 					</div>
 				</div>
 			</section>
@@ -2909,10 +2872,11 @@ img {
 						<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 					</ul>
 					<ul class="tsd-legend">
-						<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+						<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+						<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 					</ul>
 					<ul class="tsd-legend">
-						<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+						<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 					</ul>
 					<ul class="tsd-legend">
 						<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
