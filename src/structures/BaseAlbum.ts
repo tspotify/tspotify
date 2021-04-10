@@ -3,7 +3,16 @@ import SimplifiedArtist from './SimplifiedArtist.js';
 import Client from '../client/Client.js';
 import { ExternalUrl } from './Misc.js';
 import Collection from '../util/Collection.js';
-import type { AlbumObject, SimplifiedArtistObject, SimplifiedAlbumObject } from 'spotify-api-types';
+import APIOptions from './APIOptions.js';
+import SimplifiedTrack from './SimplifiedTrack.js';
+import type {
+  AlbumObject,
+  SimplifiedArtistObject,
+  SimplifiedAlbumObject,
+  GetAlbumTracksQuery,
+  GetAlbumTracksResponse,
+} from 'spotify-api-types';
+import type { FetchAlbumTracksOptions } from '../util/Interfaces.js';
 
 /**
  * Base class for all album-like structures
@@ -103,5 +112,24 @@ export default class BaseAlbum extends BaseStructure {
       artistsCollection.set(artistObject.id, new SimplifiedArtist(this.client, artistObject));
     });
     return artistsCollection;
+  }
+
+  /**
+   * Fetches tracks of the album
+   */
+  async fetchTracks(options?: FetchAlbumTracksOptions): Promise<Collection<string, SimplifiedTrack>> {
+    const query: GetAlbumTracksQuery = {
+      market: options?.market,
+      limit: options?.limit,
+      offset: options?.offset,
+    };
+    const apiOptions = new APIOptions('api', query, null);
+    const data: GetAlbumTracksResponse = await this.client._api.albums(this.id).tracks.get(apiOptions);
+    const tracksCollection = new Collection<string, SimplifiedTrack>();
+    data.items.forEach(item => {
+      const track = new SimplifiedTrack(this.client, item);
+      tracksCollection.set(track.id, track);
+    });
+    return tracksCollection;
   }
 }

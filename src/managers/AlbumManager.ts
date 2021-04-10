@@ -6,7 +6,13 @@ import type Client from '../client/Client.js';
 import type { AlbumResolvable, FetchAlbumOptions, FetchAlbumsOptions } from '../util/Interfaces.js';
 import type SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type BaseAlbum from '../structures/BaseAlbum.js';
-import type { AlbumObject } from 'spotify-api-types';
+import type {
+  AlbumObject,
+  GetAlbumQuery,
+  GetAlbumResponse,
+  GetMultipleAlbumsQuery,
+  GetMultipleAlbumsResponse,
+} from 'spotify-api-types';
 import type { FetchedAlbum } from '../util/Interfaces.js';
 
 /**
@@ -46,8 +52,8 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     return null;
   }
 
-  add(id: string, cache = true, data: AlbumObject): Album {
-    return super.add(id, cache, data);
+  add(id: string, cacheAfterFetching = true, data: AlbumObject): Album {
+    return super.add(id, cacheAfterFetching, data);
   }
 
   /**
@@ -60,36 +66,47 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     if (!options) throw new Error('No album IDs were provided');
     const albumId = this.resolveID(options as string);
     // @ts-ignore
-    if (albumId) return this._fetchSingle(albumId, true);
+    if (albumId) return this._fetchSingle(albumId);
     const album = (options as FetchAlbumOptions)?.album as AlbumResolvable;
     if (album) {
       const albumId = this.resolveID(album);
       // @ts-ignore
-      if (albumId) return this._fetchSingle(albumId);
+      if (albumId) return this._fetchSingle(albumId, options);
     }
     const albums = (options as FetchAlbumsOptions)?.albums;
     if (albums) {
       if (Array.isArray(albums)) {
         const albumIds = albums.map(album => this.resolveID(album));
         // @ts-ignore
-        return this._fetchMany(albumIds, true);
+        return this._fetchMany(albumIds, options);
       }
     }
     return null;
   }
 
-  private async _fetchSingle(id: string, cache?: boolean): Promise<Album> {
-    const apiOptions = new APIOptions('api', null, null);
-    const data: AlbumObject = await this.client._api.albums(id).get(apiOptions);
-    return this.add(data.id, cache, data);
+  private async _fetchSingle(id: string, options?: FetchAlbumOptions): Promise<Album> {
+    if (!options?.skipCacheCheck) {
+      const cachedAlbum = this.client.albums.cache.get(id);
+      if (cachedAlbum) return cachedAlbum;
+    }
+    const query: GetAlbumQuery = {
+      market: options?.market,
+    };
+    const apiOptions = new APIOptions('api', query, null);
+    const data: GetAlbumResponse = await this.client._api.albums(id).get(apiOptions);
+    return this.add(data.id, options?.cacheAfterFetching, data);
   }
 
-  private async _fetchMany(ids: Array<string>, cache?: boolean): Promise<Collection<string, Album>> {
-    const apiOptions = new APIOptions('api', { ids }, null);
-    const data: Record<string, Array<AlbumObject>> = await this.client._api.albums.get(apiOptions);
+  private async _fetchMany(ids: Array<string>, options?: FetchAlbumsOptions): Promise<Collection<string, Album>> {
+    const query: GetMultipleAlbumsQuery = {
+      ids,
+      market: options?.market,
+    };
+    const apiOptions = new APIOptions('api', query, null);
+    const data: GetMultipleAlbumsResponse = await this.client._api.albums.get(apiOptions);
     const albums = new Collection<string, Album>();
     data.albums.forEach(albumObject => {
-      const album = this.add(albumObject.id, cache, albumObject);
+      const album = this.add((albumObject as AlbumObject).id, false, albumObject as AlbumObject);
       albums.set(album.id, album);
     });
     return albums;

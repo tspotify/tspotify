@@ -88,7 +88,7 @@ export default class SimplifiedTrack extends LinkedTrack {
 
     this.previewUrl = data?.preview_url ?? null;
 
-    this.restrictions = data.restrictions;
+    this.restrictions = data?.restrictions ?? null;
 
     this.trackNumber = data.track_number;
   }

@@ -33,7 +33,7 @@ export interface FetchAlbumOptions {
 /**
  * Options used for fetching multiple albums
  */
-export interface FetchAlbumsOptions extends Omit<FetchAlbumOptions, 'album'> {
+export interface FetchAlbumsOptions extends Omit<FetchAlbumOptions, 'album' | 'skipCacheCheck' | 'cacheAfterFetching'> {
   /**
    * The album(s) to fetch (max 20)
    */
@@ -45,3 +45,23 @@ export type FetchedAlbum<T extends AlbumResolvable | FetchAlbumOptions | FetchAl
   | FetchAlbumOptions
   ? Album
   : Collection<string, Album>;
+
+/**
+ * Options used for fetching tracks of an album
+ */
+export interface FetchAlbumTracksOptions {
+  /**
+   * The market you would like to request
+   */
+  market?: string;
+
+  /**
+   * The maximum number of tracks to fetch. Must be between 1-50, inclusive
+   */
+  limit: number;
+
+  /**
+   * The index of the first track to fetch. Use this with limit to fetch the next set of tracks
+   */
+  offset: number;
+}

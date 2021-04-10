@@ -58,13 +58,13 @@ export default class BaseManager<R, T extends BaseStructure> {
   /**
    * Converts raw data sent by the API to a structure and adds it to the cache
    * @param id The ID of the structure
-   * @param cache Whether to cache the structure or not
+   * @param cacheAfterFetching Whether to cache the structure or not
    * @param data The raw data returned by the API for this structure
    */
-  add(id: string, cache = true, data: unknown): T {
+  add(id: string, cacheAfterFetching = true, data: unknown): T {
     // @ts-ignore
     const entry = new this._holds(this.client, data);
-    if (cache) this.cache.set(id, entry);
+    if (cacheAfterFetching) this.cache.set(id, entry);
     return entry;
   }
 }
