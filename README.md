@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <p>
-    <a href="#"><img src="https://i.imgur.com/doGPCO5.png" alt="twitter.js" /></a>
+    <a href="#"><img src="https://i.imgur.com/doGPCO5.png" alt="tspotify" /></a>
   </p>
   <br />
   <p>
