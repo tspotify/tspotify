@@ -3,6 +3,7 @@ import RESTManager from '../rest/RESTManager.js';
 import APIOptions from '../structures/APIOptions.js';
 import AccessTokenDetails from '../structures/AccessTokenDetails.js';
 import AlbumManager from '../managers/AlbumManager.js';
+import ArtistManager from '../managers/ArtistManager.js';
 import { Events } from '../util/Constants.js';
 import type { ClientOptions } from '../util/Constants.js';
 
@@ -43,6 +44,11 @@ export default class Client extends BaseClient {
    */
   readyAt: Date | null;
 
+  /**
+   * The manager class that holds cache and API methods of artists
+   */
+  artists: ArtistManager;
+
   constructor(options?: ClientOptions) {
     super(options);
 
@@ -57,6 +63,8 @@ export default class Client extends BaseClient {
     this.albums = new AlbumManager(this);
 
     this.readyAt = null;
+
+    this.artists = new ArtistManager(this);
   }
 
   get _api(): any {

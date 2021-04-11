@@ -2,8 +2,12 @@ import type BaseAlbum from '../structures/BaseAlbum.js';
 import type SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type Album from '../structures/Album.js';
 import type Collection from './Collection.js';
+import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
+import type Artist from '../structures/Artist.js';
 
 export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
+
+export type ArtistResolvable = string | SimplifiedArtist | Artist;
 
 /**
  * Options used for fetching a single album
