@@ -25,6 +25,14 @@ export interface BaseFetchOptions {
 }
 
 /**
+ * The object containing client id and secret
+ */
+export interface ClientCredentials {
+  clientID: string;
+  clientSecret: string;
+}
+
+/**
  * Options used for fetching a single album
  */
 export interface FetchAlbumOptions extends BaseFetchOptions {

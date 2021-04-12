@@ -6,14 +6,7 @@ import AlbumManager from '../managers/AlbumManager.js';
 import ArtistManager from '../managers/ArtistManager.js';
 import { Events } from '../util/Constants.js';
 import type { ClientOptions } from '../util/Constants.js';
-
-/**
- * The object containing client id and secret
- */
-export interface ClientCredentials {
-  clientID: string;
-  clientSecret: string;
-}
+import type { ClientCredentials } from '../util/Interfaces.js';
 
 /**
  * The core of the library
