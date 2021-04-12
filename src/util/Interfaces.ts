@@ -10,19 +10,9 @@ export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
 export type ArtistResolvable = string | SimplifiedArtist | Artist;
 
 /**
- * Options used for fetching a single album
+ * Base interface for all fetch options interfaces
  */
-export interface FetchAlbumOptions {
-  /**
-   * The album to fetch
-   */
-  album: AlbumResolvable;
-
-  /**
-   * The market you’d like to request
-   */
-  market?: string;
-
+export interface BaseFetchOptions {
   /**
    * Whether to fetch album from the API directly or check the cache first
    */
@@ -35,9 +25,24 @@ export interface FetchAlbumOptions {
 }
 
 /**
+ * Options used for fetching a single album
+ */
+export interface FetchAlbumOptions extends BaseFetchOptions {
+  /**
+   * The album to fetch
+   */
+  album: AlbumResolvable;
+
+  /**
+   * The market you’d like to request
+   */
+  market?: string;
+}
+
+/**
  * Options used for fetching multiple albums
  */
-export interface FetchAlbumsOptions extends Omit<FetchAlbumOptions, 'album' | 'skipCacheCheck' | 'cacheAfterFetching'> {
+export interface FetchAlbumsOptions extends Omit<FetchAlbumOptions, 'album'> {
   /**
    * The album(s) to fetch (max 20)
    */

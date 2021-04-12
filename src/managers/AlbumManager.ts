@@ -25,35 +25,28 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
 
   /**
    * Resolves an AlbumResolvable to an Album object
-   * @param album An album on Spotify
    */
-  resolve(album: AlbumResolvable): Album | null {
-    let albumResolvable = super.resolve(album);
-    if (albumResolvable) return albumResolvable;
-    if ((album as BaseAlbum | SimplifiedAlbum).id) {
-      const id = (album as BaseAlbum | SimplifiedAlbum).id;
-      albumResolvable = super.resolve(id);
-      if (albumResolvable) return albumResolvable;
+  resolve(albumResolvable: AlbumResolvable): Album | null {
+    let album = super.resolve(albumResolvable);
+    if (album) return album;
+    if ((albumResolvable as BaseAlbum | SimplifiedAlbum).id) {
+      const id = (albumResolvable as BaseAlbum | SimplifiedAlbum).id;
+      album = super.resolve(id);
+      if (album) return album;
     }
     return null;
   }
 
   /**
    * Resolves an AlbumResolvable to an Album ID
-   * @param album An album on Spotify
    */
-  resolveID(album: AlbumResolvable): string | null {
-    const albumResolvable = super.resolveID(album);
-    if (albumResolvable) return albumResolvable;
-    if ((album as BaseAlbum | SimplifiedAlbum).id) {
-      const id = (album as BaseAlbum | SimplifiedAlbum).id;
-      if (id) return id;
+  resolveID(albumResolvable: AlbumResolvable): string | null {
+    const albumID = super.resolveID(albumResolvable);
+    if (albumID) return albumID;
+    if ((albumResolvable as BaseAlbum | SimplifiedAlbum).id) {
+      return (albumResolvable as BaseAlbum | SimplifiedAlbum).id;
     }
     return null;
-  }
-
-  add(id: string, cacheAfterFetching = true, data: AlbumObject): Album {
-    return super.add(id, cacheAfterFetching, data);
   }
 
   /**
@@ -98,15 +91,26 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
   }
 
   private async _fetchMany(ids: Array<string>, options?: FetchAlbumsOptions): Promise<Collection<string, Album>> {
+    const albums = new Collection<string, Album>();
+    if (!options?.skipCacheCheck) {
+      const cachedAlbums: Array<string> = [];
+      ids.forEach(id => {
+        const album = this.cache.get(id);
+        if (album) {
+          albums.set(album.id, album);
+          cachedAlbums.push(album.id);
+        }
+      });
+      ids = ids.filter(id => !cachedAlbums.includes(id));
+    }
     const query: GetMultipleAlbumsQuery = {
       ids,
       market: options?.market,
     };
     const apiOptions = new APIOptions('api', query, null);
     const data: GetMultipleAlbumsResponse = await this.client._api.albums.get(apiOptions);
-    const albums = new Collection<string, Album>();
     data.albums.forEach(albumObject => {
-      const album = this.add((albumObject as AlbumObject).id, false, albumObject as AlbumObject);
+      const album = this.add((albumObject as AlbumObject).id, options?.cacheAfterFetching, albumObject as AlbumObject);
       albums.set(album.id, album);
     });
     return albums;
