@@ -2,6 +2,7 @@ import BaseClient from './client/BaseClient.js';
 import Client from './client/Client.js';
 
 import AlbumManager from './managers/AlbumManager.js';
+import ArtistManager from './managers/ArtistManager.js';
 import BaseManager from './managers/BaseManager.js';
 
 import AccessTokenDetails from './structures/AccessTokenDetails.js';
@@ -26,6 +27,7 @@ export {
   BaseClient,
   Client,
   AlbumManager,
+  ArtistManager,
   BaseManager,
   AccessTokenDetails,
   Album,
