@@ -1,7 +1,7 @@
-import type Client from '../client/Client.js';
-import type { ClientCredentials } from '../client/Client.js';
 import APIRequest from './APIRequest.js';
 import { buildRoute } from './APIRouter.js';
+import type Client from '../client/Client.js';
+import type { ClientCredentials } from '../util/Interfaces.js';
 
 export default class RESTManager {
   client: Client;
