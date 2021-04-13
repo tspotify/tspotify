@@ -60,7 +60,7 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     const albumId = this.resolveID(options as string);
     // @ts-ignore
     if (albumId) return this._fetchSingle(albumId);
-    const album = (options as FetchAlbumOptions)?.album as AlbumResolvable;
+    const album = (options as FetchAlbumOptions)?.album;
     if (album) {
       const albumId = this.resolveID(album);
       // @ts-ignore
@@ -71,7 +71,7 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
       if (Array.isArray(albums)) {
         const albumIds = albums.map(album => this.resolveID(album));
         // @ts-ignore
-        return this._fetchMany(albumIds, options);
+        if (albumIds) return this._fetchMany(albumIds, options);
       }
     }
     return null;
@@ -79,7 +79,7 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
 
   private async _fetchSingle(id: string, options?: FetchAlbumOptions): Promise<Album> {
     if (!options?.skipCacheCheck) {
-      const cachedAlbum = this.client.albums.cache.get(id);
+      const cachedAlbum = this.cache.get(id);
       if (cachedAlbum) return cachedAlbum;
     }
     const query: GetAlbumQuery = {
@@ -110,7 +110,7 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     const apiOptions = new APIOptions('api', query, null);
     const data: GetMultipleAlbumsResponse = await this.client._api.albums.get(apiOptions);
     data.albums.forEach(albumObject => {
-      const album = this.add((albumObject as AlbumObject).id, options?.cacheAfterFetching, albumObject as AlbumObject);
+      const album = this.add((albumObject as AlbumObject).id, options?.cacheAfterFetching, albumObject);
       albums.set(album.id, album);
     });
     return albums;

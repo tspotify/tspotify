@@ -28,7 +28,14 @@ export interface BaseFetchOptions {
  * The object containing client id and secret
  */
 export interface ClientCredentials {
+  /**
+   * The Client ID for the bot
+   */
   clientID: string;
+
+  /**
+   * The Client Secret for the bot
+   */
   clientSecret: string;
 }
 
