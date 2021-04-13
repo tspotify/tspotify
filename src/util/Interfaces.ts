@@ -82,3 +82,23 @@ export interface FetchAlbumTracksOptions {
    */
   offset: number;
 }
+
+export interface FetchArtistOptions extends BaseFetchOptions {
+  /**
+   * The artist to fetch
+   */
+  artist: ArtistResolvable;
+}
+
+export interface FetchArtistsOptions extends BaseFetchOptions {
+  /**
+   * The artist(s) to fetch
+   */
+  artists: Array<ArtistResolvable>;
+}
+
+export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | FetchArtistsOptions> = T extends
+  | ArtistResolvable
+  | FetchArtistOptions
+  ? Artist
+  : Collection<string, Artist>;
