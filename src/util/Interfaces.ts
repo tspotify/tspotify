@@ -4,6 +4,8 @@ import type Album from '../structures/Album.js';
 import type Collection from './Collection.js';
 import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
 import type Artist from '../structures/Artist.js';
+import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
+import type Track from '../structures/Track.js';
 
 export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
 
@@ -109,3 +111,5 @@ export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | Fetc
   | FetchArtistOptions
   ? Artist
   : Collection<string, Artist>;
+
+export type TrackResolvable = string | SimplifiedTrack | Track;
