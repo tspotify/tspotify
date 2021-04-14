@@ -112,4 +112,18 @@ export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | Fetc
   ? Artist
   : Collection<string, Artist>;
 
+export interface FetchTrackOptions extends Omit<FetchAlbumOptions, 'album'> {
+  /**
+   * The track to fetch
+   */
+  track: TrackResolvable;
+}
+
+export interface FetchTracksOptions extends Omit<FetchAlbumOptions, 'album'> {
+  /**
+   * The tracks(s) to fetch (max 50)
+   */
+  tracks: Array<TrackResolvable>;
+}
+
 export type TrackResolvable = string | SimplifiedTrack | Track;
