@@ -1,9 +1,9 @@
 import BaseManager from './BaseManager.js';
-import Track from '../structures/Track';
+import Track from '../structures/Track.js';
 import APIOptions from '../structures/APIOptions.js';
 import Collection from '../util/Collection.js';
 import type Client from '../client/Client.js';
-import type { TrackResolvable, FetchTrackOptions, FetchTracksOptions } from '../util/Interfaces.js';
+import type { TrackResolvable, FetchTrackOptions, FetchTracksOptions, FetchedTrack } from '../util/Interfaces.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type {
   TrackObject,
@@ -40,6 +40,33 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     if (trackID) return trackID;
     if ((trackResolvable as SimplifiedTrack).id) {
       return (trackResolvable as SimplifiedTrack).id;
+    }
+    return null;
+  }
+
+  /**
+   * Fetches track(s) from Spotify
+   */
+  async fetch<T extends TrackResolvable | FetchTrackOptions | FetchTracksOptions>(
+    options: T,
+  ): Promise<FetchedTrack<T> | null> {
+    if (!options) throw new Error('No track IDs were provided');
+    const trackId = this.resolveID(options as TrackResolvable);
+    // @ts-ignore
+    if (trackId) return this._fetchSingle(trackId);
+    const track = (options as FetchTrackOptions)?.track;
+    if (track) {
+      const trackId = this.resolveID(track);
+      // @ts-ignore
+      if (trackId) return this._fetchSingle(trackId, options);
+    }
+    const tracks = (options as FetchTracksOptions)?.tracks;
+    if (tracks) {
+      if (Array.isArray(tracks)) {
+        const trackIds = tracks.map(track => this.resolveID(track));
+        // @ts-ignore
+        if (trackIds) return this._fetchMany(trackIds, options);
+      }
     }
     return null;
   }
