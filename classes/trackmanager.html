@@ -2779,6 +2779,12 @@ img {
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="trackmanager.html#client" class="tsd-kind-icon">client</a>
 				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="trackmanager.html#_fetchmany" class="tsd-kind-icon">_fetch<wbr>Many</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="trackmanager.html#_fetchsingle" class="tsd-kind-icon">_fetch<wbr>Single</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a href="trackmanager.html#add" class="tsd-kind-icon">add</a>
 				</li>
@@ -2816,6 +2822,12 @@ img {
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="../interfaces/fetchartistsoptions.html" class="tsd-kind-icon">Fetch<wbr>Artists<wbr>Options</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/fetchtrackoptions.html" class="tsd-kind-icon">Fetch<wbr>Track<wbr>Options</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/fetchtracksoptions.html" class="tsd-kind-icon">Fetch<wbr>Tracks<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../modules.html#albumresolvable" class="tsd-kind-icon">Album<wbr>Resolvable</a>
@@ -2879,6 +2891,8 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="trackmanager.html#_fetchmany" class="tsd-kind-icon">_fetch<wbr>Many</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="trackmanager.html#_fetchsingle" class="tsd-kind-icon">_fetch<wbr>Single</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="trackmanager.html#add" class="tsd-kind-icon">add</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="trackmanager.html#resolve" class="tsd-kind-icon">resolve</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="trackmanager.html#resolveid" class="tsd-kind-icon">resolveID</a></li>
@@ -2900,7 +2914,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides <a href="basemanager.html">BaseManager</a>.<a href="basemanager.html#constructor">constructor</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/a56977e/src/managers/TrackManager.ts#L7">src/managers/TrackManager.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/TrackManager.ts#L16">src/managers/TrackManager.ts:16</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2923,7 +2937,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="basemanager.html">BaseManager</a>.<a href="basemanager.html#_holds">_holds</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/a56977e/src/managers/BaseManager.ts#L22">src/managers/BaseManager.ts:22</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/BaseManager.ts#L22">src/managers/BaseManager.ts:22</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2939,7 +2953,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="basemanager.html">BaseManager</a>.<a href="basemanager.html#cache">cache</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/a56977e/src/managers/BaseManager.ts#L17">src/managers/BaseManager.ts:17</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/BaseManager.ts#L17">src/managers/BaseManager.ts:17</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2955,7 +2969,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="basemanager.html">BaseManager</a>.<a href="basemanager.html#client">client</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/a56977e/src/managers/BaseManager.ts#L12">src/managers/BaseManager.ts:12</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/BaseManager.ts#L12">src/managers/BaseManager.ts:12</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2967,6 +2981,58 @@ img {
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="_fetchmany" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> _fetch<wbr>Many</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">_fetch<wbr>Many<span class="tsd-signature-symbol">(</span>ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/fetchtracksoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchTracksOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="track.html" class="tsd-signature-type" data-tsd-kind="Class">Track</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/TrackManager.ts#L60">src/managers/TrackManager.ts:60</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>ids: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/fetchtracksoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchTracksOptions</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="track.html" class="tsd-signature-type" data-tsd-kind="Class">Track</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="_fetchsingle" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> _fetch<wbr>Single</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">_fetch<wbr>Single<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/fetchtrackoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchTrackOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="track.html" class="tsd-signature-type" data-tsd-kind="Class">Track</a><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/TrackManager.ts#L47">src/managers/TrackManager.ts:47</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>id: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/fetchtrackoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchTrackOptions</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="track.html" class="tsd-signature-type" data-tsd-kind="Class">Track</a><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 				<a name="add" class="tsd-anchor"></a>
 				<h3>add</h3>
@@ -2978,7 +3044,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="basemanager.html">BaseManager</a>.<a href="basemanager.html#add">add</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/a56977e/src/managers/BaseManager.ts#L64">src/managers/BaseManager.ts:64</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/BaseManager.ts#L64">src/managers/BaseManager.ts:64</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3022,7 +3088,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides <a href="basemanager.html">BaseManager</a>.<a href="basemanager.html#resolve">resolve</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/a56977e/src/managers/TrackManager.ts#L15">src/managers/TrackManager.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/TrackManager.ts#L24">src/managers/TrackManager.ts:24</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3051,7 +3117,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides <a href="basemanager.html">BaseManager</a>.<a href="basemanager.html#resolveid">resolveID</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/a56977e/src/managers/TrackManager.ts#L29">src/managers/TrackManager.ts:29</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/22494bb/src/managers/TrackManager.ts#L38">src/managers/TrackManager.ts:38</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
