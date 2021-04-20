@@ -6,6 +6,8 @@ import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
 import type Artist from '../structures/Artist.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type Track from '../structures/Track.js';
+import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
+import type Episode from '../structures/Episode.js';
 
 export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
 
@@ -40,6 +42,8 @@ export interface ClientCredentials {
    */
   clientSecret: string;
 }
+
+export type EpisodeResolvable = string | SimplifiedEpisode | Episode;
 
 /**
  * Options used for fetching a single album
