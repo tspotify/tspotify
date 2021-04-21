@@ -122,6 +122,25 @@ export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTr
   ? Track
   : Collection<string, Track>;
 
+export interface FetchEpisodeOptions extends BaseFetchOptions {
+  /**
+   * The episode to fetch
+   */
+  episode: EpisodeResolvable;
+
+  /**
+   * The market you’d like to request
+   */
+  market: string;
+}
+
+export interface FetchEpisodesOptions extends Omit<FetchEpisodeOptions, 'episode'> {
+  /**
+   * The episode(s) to fetch
+   */
+  episodes: Array<EpisodeResolvable>;
+}
+
 export interface FetchTrackOptions extends Omit<FetchAlbumOptions, 'album'> {
   /**
    * The track to fetch

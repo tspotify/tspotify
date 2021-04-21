@@ -4,6 +4,7 @@ import Client from './client/Client.js';
 import AlbumManager from './managers/AlbumManager.js';
 import ArtistManager from './managers/ArtistManager.js';
 import BaseManager from './managers/BaseManager.js';
+import EpisodeManager from './managers/EpisodeManager.js';
 import TrackManager from './managers/TrackManager.js';
 
 import AccessTokenDetails from './structures/AccessTokenDetails.js';
@@ -30,6 +31,7 @@ export {
   AlbumManager,
   ArtistManager,
   BaseManager,
+  EpisodeManager,
   TrackManager,
   AccessTokenDetails,
   Album,
