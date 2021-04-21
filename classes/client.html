@@ -2722,6 +2722,9 @@ img {
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="client.html#credentials" class="tsd-kind-icon">credentials</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="client.html#episodes" class="tsd-kind-icon">episodes</a>
+				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="client.html#options" class="tsd-kind-icon">options</a>
 				</li>
@@ -2849,6 +2852,7 @@ img {
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="client.html#albums" class="tsd-kind-icon">albums</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="client.html#artists" class="tsd-kind-icon">artists</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="client.html#credentials" class="tsd-kind-icon">credentials</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="client.html#episodes" class="tsd-kind-icon">episodes</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="client.html#options" class="tsd-kind-icon">options</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="client.html#readyat" class="tsd-kind-icon">ready<wbr>At</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="client.html#rest" class="tsd-kind-icon">rest</a></li>
@@ -2905,7 +2909,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides <a href="baseclient.html">BaseClient</a>.<a href="baseclient.html#constructor">constructor</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L49">src/client/Client.ts:49</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L55">src/client/Client.ts:55</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2927,7 +2931,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">access<wbr>Token<wbr>Details<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="accesstokendetails.html" class="tsd-signature-type" data-tsd-kind="Class">AccessTokenDetails</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L24">src/client/Client.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L25">src/client/Client.ts:25</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2942,7 +2946,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">albums<span class="tsd-signature-symbol">:</span> <a href="albummanager.html" class="tsd-signature-type" data-tsd-kind="Class">AlbumManager</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L34">src/client/Client.ts:34</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L35">src/client/Client.ts:35</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2957,7 +2961,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">artists<span class="tsd-signature-symbol">:</span> <a href="artistmanager.html" class="tsd-signature-type" data-tsd-kind="Class">ArtistManager</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L44">src/client/Client.ts:44</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L45">src/client/Client.ts:45</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2972,12 +2976,27 @@ img {
 				<div class="tsd-signature tsd-kind-icon">credentials<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/clientcredentials.html" class="tsd-signature-type" data-tsd-kind="Interface">ClientCredentials</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L19">src/client/Client.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L20">src/client/Client.ts:20</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>The credentials for the client to login with</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="episodes" class="tsd-anchor"></a>
+				<h3>episodes</h3>
+				<div class="tsd-signature tsd-kind-icon">episodes<span class="tsd-signature-symbol">:</span> <a href="episodemanager.html" class="tsd-signature-type" data-tsd-kind="Class">EpisodeManager</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L55">src/client/Client.ts:55</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The manager class that holds cache and API methods of episodes</p>
 					</div>
 				</div>
 			</section>
@@ -2988,7 +3007,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="baseclient.html">BaseClient</a>.<a href="baseclient.html#options">options</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/BaseClient.ts#L13">src/client/BaseClient.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/BaseClient.ts#L13">src/client/BaseClient.ts:13</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3003,7 +3022,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ready<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L39">src/client/Client.ts:39</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L40">src/client/Client.ts:40</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3018,7 +3037,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">rest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">default</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L29">src/client/Client.ts:29</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L30">src/client/Client.ts:30</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3033,7 +3052,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">tracks<span class="tsd-signature-symbol">:</span> <a href="trackmanager.html" class="tsd-signature-type" data-tsd-kind="Class">TrackManager</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L49">src/client/Client.ts:49</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L50">src/client/Client.ts:50</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3114,7 +3133,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L71">src/client/Client.ts:71</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L79">src/client/Client.ts:79</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -3290,7 +3309,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/708395d/src/client/Client.ts#L78">src/client/Client.ts:78</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/2120f10/src/client/Client.ts#L86">src/client/Client.ts:86</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
