@@ -126,6 +126,11 @@ export interface FetchTracksOptions extends BaseFetchOptions {
   tracks: Array<TrackResolvable>;
 }
 
+export interface StructureConstructable<T> {
+  // @ts-ignore
+  new(...args: any[]): T;
+}
+
 export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
 
 export type ArtistResolvable = string | SimplifiedArtist | Artist;

@@ -20,7 +20,7 @@ import type { FetchedAlbum } from '../util/Interfaces.js';
  */
 export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
   constructor(client: Client) {
-    super(client, Album as any);
+    super(client, Album);
   }
 
   /**

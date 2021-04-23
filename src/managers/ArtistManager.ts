@@ -17,7 +17,7 @@ import type {
  */
 export default class ArtistManager extends BaseManager<ArtistResolvable, Artist> {
   constructor(client: Client) {
-    super(client, Artist as any);
+    super(client, Artist);
   }
 
   /**

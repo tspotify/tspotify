@@ -15,7 +15,7 @@ import type {
 
 export default class TrackManager extends BaseManager<TrackResolvable, Track> {
   constructor(client: Client) {
-    super(client, Track as any);
+    super(client, Track);
   }
 
   /**

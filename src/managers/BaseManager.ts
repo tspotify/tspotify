@@ -1,6 +1,7 @@
 import Client from '../client/Client.js';
 import Collection from '../util/Collection.js';
 import type BaseStructure from '../structures/BaseStructure.js';
+import type { StructureConstructable } from '../util/Interfaces.js';
 
 /**
  * Base class for all managers
@@ -19,13 +20,13 @@ export default class BaseManager<R, T extends BaseStructure> {
   /**
    * The type of structure held by this manager
    */
-  protected _holds: T;
+  protected _holds: StructureConstructable<T>;
 
   /**
    * @param client The client that instantiated this manager
    * @param structureType The type of structure held by this manager
    */
-  constructor(client: Client, structureType: T) {
+  constructor(client: Client, structureType: StructureConstructable<T>) {
     Object.defineProperty(this, 'client', { writable: true });
     this.client = client;
 
@@ -40,8 +41,8 @@ export default class BaseManager<R, T extends BaseStructure> {
    * @param idOrInstance The ID or instance of the structure held by this manager
    */
   resolve(idOrInstance: string | R): T | null {
-    if (idOrInstance instanceof (this._holds as any)) return (idOrInstance as unknown) as T;
-    if (typeof idOrInstance === 'string') return ((this.cache.get(idOrInstance) as unknown) as T) ?? null;
+    if (idOrInstance instanceof this._holds) return idOrInstance;
+    if (typeof idOrInstance === 'string') return this.cache.get(idOrInstance) ?? null;
     return null;
   }
 
@@ -50,8 +51,8 @@ export default class BaseManager<R, T extends BaseStructure> {
    * @param idOrInstance The ID or instance of the strucutre held by this manager
    */
   resolveID(idOrInstance: string | R): string | null {
-    if (idOrInstance instanceof (this._holds as any)) return ((idOrInstance as unknown) as T).id;
-    if (typeof idOrInstance === 'string') return idOrInstance as string;
+    if (idOrInstance instanceof this._holds) return idOrInstance.id;
+    if (typeof idOrInstance === 'string') return idOrInstance;
     return null;
   }
 
@@ -62,7 +63,6 @@ export default class BaseManager<R, T extends BaseStructure> {
    * @param data The raw data returned by the API for this structure
    */
   add(id: string, cacheAfterFetching = true, data: unknown): T {
-    // @ts-ignore
     const entry = new this._holds(this.client, data);
     if (cacheAfterFetching) this.cache.set(id, entry);
     return entry;

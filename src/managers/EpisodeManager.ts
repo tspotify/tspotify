@@ -8,7 +8,7 @@ import type { GetEpisodeQuery, GetEpisodeResponse } from 'spotify-api-types';
 
 export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episode> {
   constructor(client: Client) {
-    super(client, Episode as any);
+    super(client, Episode);
   }
 
   /**
