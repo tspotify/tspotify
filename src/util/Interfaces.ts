@@ -9,23 +9,24 @@ import type Track from '../structures/Track.js';
 import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type Episode from '../structures/Episode.js';
 
-export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
-
-export type ArtistResolvable = string | SimplifiedArtist | Artist;
-
 /**
- * Base interface for all fetch options interfaces
+ * Base interface for all fetch options
  */
 export interface BaseFetchOptions {
   /**
-   * Whether to fetch album from the API directly or check the cache first
+   * Whether to fetch from the API directly or check the cache first
    */
   skipCacheCheck?: boolean;
 
   /**
-   * Whether to cache the fetched album or not
+   * Whether to cache the fetched content or not
    */
   cacheAfterFetching?: boolean;
+
+  /**
+   * The market you’d like to request
+   */
+  market?: string;
 }
 
 /**
@@ -43,8 +44,6 @@ export interface ClientCredentials {
   clientSecret: string;
 }
 
-export type EpisodeResolvable = string | SimplifiedEpisode | Episode;
-
 /**
  * Options used for fetching a single album
  */
@@ -53,38 +52,22 @@ export interface FetchAlbumOptions extends BaseFetchOptions {
    * The album to fetch
    */
   album: AlbumResolvable;
-
-  /**
-   * The market you’d like to request
-   */
-  market?: string;
 }
 
 /**
  * Options used for fetching multiple albums
  */
-export interface FetchAlbumsOptions extends Omit<FetchAlbumOptions, 'album'> {
+export interface FetchAlbumsOptions extends BaseFetchOptions {
   /**
    * The album(s) to fetch (max 20)
    */
   albums: Array<AlbumResolvable>;
 }
 
-export type FetchedAlbum<T extends AlbumResolvable | FetchAlbumOptions | FetchAlbumsOptions> = T extends
-  | AlbumResolvable
-  | FetchAlbumOptions
-  ? Album
-  : Collection<string, Album>;
-
 /**
  * Options used for fetching tracks of an album
  */
-export interface FetchAlbumTracksOptions {
-  /**
-   * The market you would like to request
-   */
-  market?: string;
-
+export interface FetchAlbumTracksOptions extends Omit<BaseFetchOptions, 'skipCacheCheck' | 'cacheAfterFetching'> {
   /**
    * The maximum number of tracks to fetch. Must be between 1-50, inclusive
    */
@@ -96,33 +79,21 @@ export interface FetchAlbumTracksOptions {
   offset: number;
 }
 
-export interface FetchArtistOptions extends BaseFetchOptions {
+export interface FetchArtistOptions extends Omit<BaseFetchOptions, 'market'> {
   /**
    * The artist to fetch
    */
   artist: ArtistResolvable;
 }
 
-export interface FetchArtistsOptions extends BaseFetchOptions {
+export interface FetchArtistsOptions extends Omit<BaseFetchOptions, 'market'> {
   /**
    * The artist(s) to fetch
    */
   artists: Array<ArtistResolvable>;
 }
 
-export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | FetchArtistsOptions> = T extends
-  | ArtistResolvable
-  | FetchArtistOptions
-  ? Artist
-  : Collection<string, Artist>;
-
-export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTracksOptions> = T extends
-  | TrackResolvable
-  | FetchTrackOptions
-  ? Track
-  : Collection<string, Track>;
-
-export interface FetchEpisodeOptions extends BaseFetchOptions {
+export interface FetchEpisodeOptions extends Omit<BaseFetchOptions, 'market'> {
   /**
    * The episode to fetch
    */
@@ -141,18 +112,42 @@ export interface FetchEpisodesOptions extends Omit<FetchEpisodeOptions, 'episode
   episodes: Array<EpisodeResolvable>;
 }
 
-export interface FetchTrackOptions extends Omit<FetchAlbumOptions, 'album'> {
+export interface FetchTrackOptions extends BaseFetchOptions {
   /**
    * The track to fetch
    */
   track: TrackResolvable;
 }
 
-export interface FetchTracksOptions extends Omit<FetchAlbumOptions, 'album'> {
+export interface FetchTracksOptions extends BaseFetchOptions {
   /**
    * The tracks(s) to fetch (max 50)
    */
   tracks: Array<TrackResolvable>;
 }
+
+export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
+
+export type ArtistResolvable = string | SimplifiedArtist | Artist;
+
+export type EpisodeResolvable = string | SimplifiedEpisode | Episode;
+
+export type FetchedAlbum<T extends AlbumResolvable | FetchAlbumOptions | FetchAlbumsOptions> = T extends
+  | AlbumResolvable
+  | FetchAlbumOptions
+  ? Album
+  : Collection<string, Album>;
+
+export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | FetchArtistsOptions> = T extends
+  | ArtistResolvable
+  | FetchArtistOptions
+  ? Artist
+  : Collection<string, Artist>;
+
+export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTracksOptions> = T extends
+  | TrackResolvable
+  | FetchTrackOptions
+  ? Track
+  : Collection<string, Track>;
 
 export type TrackResolvable = string | SimplifiedTrack | Track;
