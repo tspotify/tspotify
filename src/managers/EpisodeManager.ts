@@ -15,13 +15,10 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
    * Resolves an EpisodeResolvable to an Episode object
    */
   resolve(episodeResolvable: EpisodeResolvable): Episode | null {
-    let episode = super.resolve(episodeResolvable);
+    const episode = super.resolve(episodeResolvable);
     if (episode) return episode;
-    if ((episodeResolvable as SimplifiedEpisode).id) {
-      const id = (episodeResolvable as SimplifiedEpisode).id;
-      episode = super.resolve(id);
-      if (episode) return episode;
-    }
+    const episodeID = this.resolveID(episodeResolvable);
+    if (episodeID) return super.resolve(episodeID);
     return null;
   }
 

@@ -22,13 +22,10 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
    * Resolves a TrackResolvable to a Track object
    */
   resolve(trackResolvable: TrackResolvable): Track | null {
-    let track = super.resolve(trackResolvable);
+    const track = super.resolve(trackResolvable);
     if (track) return track;
-    if ((trackResolvable as SimplifiedTrack).id) {
-      const id = (trackResolvable as SimplifiedTrack).id;
-      track = super.resolve(id);
-      if (track) return track;
-    }
+    const trackID = this.resolveID(trackResolvable);
+    if (trackID) return super.resolve(trackID);
     return null;
   }
 

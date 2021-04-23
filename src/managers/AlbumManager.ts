@@ -27,13 +27,10 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
    * Resolves an AlbumResolvable to an Album object
    */
   resolve(albumResolvable: AlbumResolvable): Album | null {
-    let album = super.resolve(albumResolvable);
+    const album = super.resolve(albumResolvable);
     if (album) return album;
-    if ((albumResolvable as BaseAlbum | SimplifiedAlbum).id) {
-      const id = (albumResolvable as BaseAlbum | SimplifiedAlbum).id;
-      album = super.resolve(id);
-      if (album) return album;
-    }
+    const albumID = this.resolveID(albumResolvable);
+    if (albumID) return super.resolve(albumID);
     return null;
   }
 

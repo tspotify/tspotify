@@ -24,13 +24,10 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
    * Resolves an ArtistResolvable to an Artist object
    */
   resolve(artistResolvable: ArtistResolvable): Artist | null {
-    let artist = super.resolve(artistResolvable);
+    const artist = super.resolve(artistResolvable);
     if (artist) return artist;
-    if ((artistResolvable as SimplifiedArtist).id) {
-      const id = (artistResolvable as SimplifiedArtist).id;
-      artist = super.resolve(id);
-      if (artist) return artist;
-    }
+    const artistID = this.resolveID(artistResolvable);
+    if (artistID) return super.resolve(artistID);
     return null;
   }
 
