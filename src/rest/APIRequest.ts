@@ -28,17 +28,17 @@ export default class APIRequest {
 
   make(): any {
     const baseURL =
-      this.options.requestType === 'api'
+      this.options.subdomain === 'api'
         ? `${this.client.options.api.baseURL}/v${this.client.options.api.version}`
         : `${this.client.options.api.baseAccountServiceURL}`;
     const url = baseURL + this.path;
 
     const headers: any = {};
-    headers.Authorization = this.options.requestType === 'api' ? this.rest.getBearerToken() : this.rest.getBasicAuth();
+    headers.Authorization = this.options.subdomain === 'api' ? this.rest.getBearerToken() : this.rest.getBasicAuth();
 
     let body;
     if (this.method != 'get' && this.options.body) {
-      if (this.options.requestType === 'api') {
+      if (this.options.subdomain === 'api') {
         body = JSON.stringify(this.options.body);
         headers['Content-Type'] = 'application/json';
       } else {

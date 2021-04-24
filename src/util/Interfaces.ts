@@ -155,4 +155,6 @@ export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTr
   ? Track
   : Collection<string, Track>;
 
+export type SubdomainType = 'api' | 'account';
+
 export type TrackResolvable = string | SimplifiedTrack | Track;
