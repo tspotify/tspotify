@@ -2,9 +2,16 @@ import BaseManager from './BaseManager.js';
 import Episode from '../structures/Episode.js';
 import Client from '../client/Client.js';
 import APIOptions from '../structures/APIOptions.js';
+import Collection from '../util/Collection.js';
 import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
-import type { EpisodeResolvable, FetchEpisodeOptions } from '../util/Interfaces.js';
-import type { GetEpisodeQuery, GetEpisodeResponse } from 'spotify-api-types';
+import type { EpisodeResolvable, FetchEpisodeOptions, FetchEpisodesOptions } from '../util/Interfaces.js';
+import type {
+  GetEpisodeQuery,
+  GetEpisodeResponse,
+  GetMultipleEpisodesQuery,
+  GetMultipleEpisodesResponse,
+  EpisodeObject,
+} from 'spotify-api-types';
 
 export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episode> {
   constructor(client: Client) {
@@ -46,5 +53,32 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
     const apiOptions = new APIOptions('api', query, null);
     const data: GetEpisodeResponse = await this.client._api.episodes(id).get(apiOptions);
     return this.add(data.id, options?.cacheAfterFetching, data);
+  }
+
+  private async _fetchMany(ids: Array<string>, options: FetchEpisodesOptions): Promise<Collection<string, Episode>> {
+    if (!options?.market) throw new Error('No market was provided!');
+    const episodes = new Collection<string, Episode>();
+    if (!options?.skipCacheCheck) {
+      const cachedEpisodes: Array<string> = [];
+      ids.forEach(id => {
+        const episode = this.resolve(id);
+        if (episode) {
+          episodes.set(episode.id, episode);
+          cachedEpisodes.push(id);
+        }
+      });
+      ids = ids.filter(id => !cachedEpisodes.includes(id));
+    }
+    const query: GetMultipleEpisodesQuery = {
+      ids,
+      market: options?.market,
+    };
+    const apiOptions = new APIOptions('api', query, null);
+    const data: GetMultipleEpisodesResponse = await this.client._api.episodes.get(apiOptions);
+    data.episodes.forEach(episodeObject => {
+      const episode = this.add((episodeObject as EpisodeObject)?.id, options?.cacheAfterFetching, episodeObject);
+      episodes.set(episode.id, episode);
+    });
+    return episodes;
   }
 }
