@@ -179,6 +179,10 @@ export type FetchedEpisode<T extends FetchEpisodeOptions | FetchEpisodesOptions>
   ? Episode
   : Collection<string, Episode>;
 
+export type FetchedShow<T extends FetchShowOptions | FetchShowsOptions> = T extends FetchShowOptions
+  ? Show
+  : Collection<string, SimplifiedShow>;
+
 export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTracksOptions> = T extends
   | TrackResolvable
   | FetchTrackOptions

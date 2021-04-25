@@ -4,7 +4,7 @@ import APIOptions from '../structures/APIOptions.js';
 import Collection from '../util/Collection.js';
 import SimplifiedShow from '../structures/SimplifiedShow.js';
 import type Client from '../client/Client.js';
-import type { ShowResolvable, FetchShowOptions, FetchShowsOptions } from '../util/Interfaces.js';
+import type { ShowResolvable, FetchShowOptions, FetchShowsOptions, FetchedShow } from '../util/Interfaces.js';
 import type {
   SimplifiedShowObject,
   GetShowQuery,
@@ -37,6 +37,25 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     if (showID) return showID;
     if ((showResolvable as SimplifiedShow).id) {
       return (showResolvable as SimplifiedShow).id;
+    }
+    return null;
+  }
+
+  async fetch<T extends FetchShowOptions | FetchShowsOptions>(options: T): Promise<FetchedShow<T> | null> {
+    if (!options) throw new Error('No show IDs were provided');
+    const show = (options as FetchShowOptions)?.show;
+    if (show) {
+      const showId = this.resolveID(show);
+      // @ts-ignore
+      if (showId) return this._fetchSingle(showId, options);
+    }
+    const shows = (options as FetchShowsOptions)?.shows;
+    if (shows) {
+      if (Array.isArray(shows)) {
+        const showIds = shows.map(show => this.resolveID(show));
+        // @ts-ignore
+        if (showIds) return this._fetchMany(showIds, options);
+      }
     }
     return null;
   }
