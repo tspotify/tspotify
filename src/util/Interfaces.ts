@@ -8,6 +8,8 @@ import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type Track from '../structures/Track.js';
 import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type Episode from '../structures/Episode.js';
+import type SimplifiedShow from '../structures/SimplifiedShow.js';
+import type Show from '../structures/Show.js';
 
 /**
  * Base interface for all fetch options
@@ -158,6 +160,8 @@ export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTr
   | FetchTrackOptions
   ? Track
   : Collection<string, Track>;
+
+export type ShowResolvable = string | SimplifiedShow | Show;
 
 export type SubdomainType = 'api' | 'account';
 
