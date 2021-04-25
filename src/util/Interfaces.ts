@@ -149,6 +149,10 @@ export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | Fetc
   ? Artist
   : Collection<string, Artist>;
 
+export type FetchedEpisode<T extends FetchEpisodeOptions | FetchEpisodesOptions> = T extends FetchEpisodeOptions
+  ? Episode
+  : Collection<string, Episode>;
+
 export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTracksOptions> = T extends
   | TrackResolvable
   | FetchTrackOptions

@@ -4,7 +4,12 @@ import Client from '../client/Client.js';
 import APIOptions from '../structures/APIOptions.js';
 import Collection from '../util/Collection.js';
 import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
-import type { EpisodeResolvable, FetchEpisodeOptions, FetchEpisodesOptions } from '../util/Interfaces.js';
+import type {
+  EpisodeResolvable,
+  FetchEpisodeOptions,
+  FetchEpisodesOptions,
+  FetchedEpisode,
+} from '../util/Interfaces.js';
 import type {
   GetEpisodeQuery,
   GetEpisodeResponse,
@@ -37,6 +42,28 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
     if (episodeID) return episodeID;
     if ((episodeResolvable as SimplifiedEpisode).id) {
       return (episodeResolvable as SimplifiedEpisode).id;
+    }
+    return null;
+  }
+
+  /**
+   * Fetches episode(s) from Spotify
+   */
+  async fetch<T extends FetchEpisodeOptions | FetchEpisodesOptions>(options: T): Promise<FetchedEpisode<T> | null> {
+    if (!options) throw new Error('No episode IDs were provided');
+    const episode = (options as FetchEpisodeOptions)?.episode;
+    if (episode) {
+      const episodeId = this.resolveID(episode);
+      // @ts-ignore
+      if (episodeId) return this._fetchSingle(episodeId, options);
+    }
+    const episodes = (options as FetchEpisodesOptions)?.episodes;
+    if (episodes) {
+      if (Array.isArray(episodes)) {
+        const episodeIds = episodes.map(episode => this.resolveID(episode));
+        // @ts-ignore
+        if (episodeIds) return this._fetchMany(episodeIds, options);
+      }
     }
     return null;
   }
