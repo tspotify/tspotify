@@ -13,7 +13,7 @@ export default class Show extends SimplifiedShow {
   constructor(client: Client, data: ShowObject) {
     super(client, data);
 
-    this.episodes = this._patchEpisodes(data.episodes);
+    this.episodes = this._patchEpisodes(data.episodes.items);
   }
 
   private _patchEpisodes(data: Array<SimplifiedEpisodeObject>): Collection<string, SimplifiedEpisode> {
