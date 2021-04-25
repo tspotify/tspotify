@@ -114,6 +114,25 @@ export interface FetchEpisodesOptions extends Omit<FetchEpisodeOptions, 'episode
   episodes: Array<EpisodeResolvable>;
 }
 
+export interface FetchShowOptions extends Omit<BaseFetchOptions, 'market'> {
+  /**
+   * The show to fetch
+   */
+  show: ShowResolvable;
+
+  /**
+   * The market you would like to request
+   */
+  market: string;
+}
+
+export interface FetchShowsOptions extends Omit<FetchShowOptions, 'show'> {
+  /**
+   * The show(s) to fetch
+   */
+  shows: Array<ShowResolvable>;
+}
+
 export interface FetchTrackOptions extends BaseFetchOptions {
   /**
    * The track to fetch
