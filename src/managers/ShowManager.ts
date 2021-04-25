@@ -1,10 +1,17 @@
 import Show from '../structures/Show.js';
 import BaseManager from './BaseManager.js';
 import APIOptions from '../structures/APIOptions.js';
+import Collection from '../util/Collection.js';
+import SimplifiedShow from '../structures/SimplifiedShow.js';
 import type Client from '../client/Client.js';
-import type SimplifiedShow from '../structures/SimplifiedShow.js';
-import type { ShowResolvable, FetchShowOptions } from '../util/Interfaces.js';
-import type { GetShowQuery, GetShowResponse } from 'spotify-api-types';
+import type { ShowResolvable, FetchShowOptions, FetchShowsOptions } from '../util/Interfaces.js';
+import type {
+  SimplifiedShowObject,
+  GetShowQuery,
+  GetShowResponse,
+  GetMultipleShowsQuery,
+  GetMultipleShowsResponse,
+} from 'spotify-api-types';
 
 export default class ShowManager extends BaseManager<ShowResolvable, Show> {
   constructor(client: Client) {
@@ -45,5 +52,27 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     const apiOptions = new APIOptions('api', query, null);
     const data: GetShowResponse = await this.client._api.shows(id).get(apiOptions);
     return this.add(data.id, options?.cacheAfterFetching, data);
+  }
+
+  /**
+   * **⚠️Note**: Unlike other bulk endpoints, this one doesn't return a complete object. Since, the object(s) fetched
+   * by this method are `SimplifiedShow`, they aren't cached
+   */
+  private async _fetchMany(
+    ids: Array<string>,
+    options: FetchShowsOptions,
+  ): Promise<Collection<string, SimplifiedShow>> {
+    const query: GetMultipleShowsQuery = {
+      ids,
+      market: options?.market,
+    };
+    const apiOptions = new APIOptions('api', query, null);
+    const data: GetMultipleShowsResponse = await this.client._api.shows.get(apiOptions);
+    const simplifiedShows = new Collection<string, SimplifiedShow>();
+    data.shows.forEach(simplifiedShowObject => {
+      const simplifiedShow = new SimplifiedShow(this.client, simplifiedShowObject as SimplifiedShowObject);
+      simplifiedShows.set(simplifiedShow.id, simplifiedShow);
+    });
+    return simplifiedShows;
   }
 }

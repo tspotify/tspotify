@@ -126,11 +126,16 @@ export interface FetchShowOptions extends Omit<BaseFetchOptions, 'market'> {
   market: string;
 }
 
-export interface FetchShowsOptions extends Omit<FetchShowOptions, 'show'> {
+export interface FetchShowsOptions {
   /**
    * The show(s) to fetch
    */
   shows: Array<ShowResolvable>;
+
+  /**
+   * The market you would like to request
+   */
+  market: string;
 }
 
 export interface FetchTrackOptions extends BaseFetchOptions {
