@@ -1,6 +1,6 @@
 import BaseManager from './BaseManager.js';
 import Track from '../structures/Track.js';
-import APIOptions from '../structures/APIOptions.js';
+import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import type Client from '../client/Client.js';
 import type { TrackResolvable, FetchTrackOptions, FetchTracksOptions, FetchedTrack } from '../util/Interfaces.js';
@@ -76,8 +76,8 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     const query: GetTrackQuery = {
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetTrackResponse = await this.client._api.tracks(id).get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetTrackResponse = await this.client._api.tracks(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
 
@@ -98,8 +98,8 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
       ids,
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetMultipleTracksResponse = await this.client._api.tracks.get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetMultipleTracksResponse = await this.client._api.tracks.get(requestData);
     data.tracks.forEach(trackObject => {
       const track = this.add((trackObject as TrackObject)?.id, options?.cacheAfterFetching, trackObject);
       tracks.set(track.id, track);

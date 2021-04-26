@@ -3,7 +3,7 @@ import SimplifiedArtist from './SimplifiedArtist.js';
 import Client from '../client/Client.js';
 import { ExternalUrl } from './Misc.js';
 import Collection from '../util/Collection.js';
-import APIOptions from './APIOptions.js';
+import { RequestData } from './Misc.js';
 import SimplifiedTrack from './SimplifiedTrack.js';
 import type {
   AlbumObject,
@@ -123,8 +123,8 @@ export default class BaseAlbum extends BaseStructure {
       limit: options?.limit,
       offset: options?.offset,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetAlbumTracksResponse = await this.client._api.albums(this.id).tracks.get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetAlbumTracksResponse = await this.client._api.albums(this.id).tracks.get(requestData);
     const tracksCollection = new Collection<string, SimplifiedTrack>();
     data.items.forEach(item => {
       const track = new SimplifiedTrack(this.client, item);

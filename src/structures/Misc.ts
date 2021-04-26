@@ -1,4 +1,60 @@
 import type { CopyrightObject, ExternalIdObject, ExternalUrlObject } from 'spotify-api-types';
+import type { SubdomainType } from '../util/Interfaces.js';
+
+/**
+ * The details about the access token returned by the API after logging in
+ */
+export class AccessTokenDetails {
+  /**
+   * The access token for the client
+   */
+  accessToken: string;
+
+  /**
+   * The type of the token
+   */
+  tokenType: string;
+
+  /**
+   * The time of expiry of the token in seconds
+   */
+  expiresIn: number;
+
+  /* eslint-disable */
+  constructor(data: any) {
+    this.accessToken = data?.access_token ?? null;
+
+    this.tokenType = data?.token_type ?? null;
+
+    this.expiresIn = data?.expires_in ?? null;
+  }
+}
+
+/**
+ * Data used for generating an API request
+ */
+export class RequestData<Q, B> {
+  /**
+   * The subdomain of the endpoint being requested
+   */
+  subdomain: SubdomainType;
+
+  /**
+   * The query object for the request
+   */
+  query: Q;
+
+  /**
+   * The body of the request
+   */
+  body: B;
+
+  constructor(subdomain: SubdomainType, query: Q, body: B) {
+    this.subdomain = subdomain;
+    this.query = query;
+    this.body = body;
+  }
+}
 
 /**
  * Holds copyright details for a content on Spotify

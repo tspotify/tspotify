@@ -1,7 +1,7 @@
 import BaseManager from './BaseManager.js';
 import Client from '../client/Client.js';
 import Artist from '../structures/Artist.js';
-import APIOptions from '../structures/APIOptions.js';
+import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
 import type { ArtistResolvable, FetchArtistOptions, FetchArtistsOptions, FetchedArtist } from '../util/Interfaces.js';
@@ -75,8 +75,8 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
       const cachedArtist = this.cache.get(id);
       if (cachedArtist) return cachedArtist;
     }
-    const apiOptions = new APIOptions('api', null, null);
-    const data: GetArtistResponse = await this.client._api.artists(id).get(apiOptions);
+    const requestData = new RequestData('api', null, null);
+    const data: GetArtistResponse = await this.client._api.artists(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
 
@@ -96,8 +96,8 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
     const query: GetMultipleArtistsQuery = {
       ids,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetMultipleArtistsResponse = await this.client._api.artists.get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetMultipleArtistsResponse = await this.client._api.artists.get(requestData);
     data.artists.forEach(artistObject => {
       const artist = this.add((artistObject as ArtistObject).id, options?.cacheAfterFetching, artistObject);
       artists.set(artist.id, artist);

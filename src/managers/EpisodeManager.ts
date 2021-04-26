@@ -1,7 +1,7 @@
 import BaseManager from './BaseManager.js';
 import Episode from '../structures/Episode.js';
 import Client from '../client/Client.js';
-import APIOptions from '../structures/APIOptions.js';
+import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type {
@@ -77,8 +77,8 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
     const query: GetEpisodeQuery = {
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetEpisodeResponse = await this.client._api.episodes(id).get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetEpisodeResponse = await this.client._api.episodes(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
 
@@ -100,8 +100,8 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
       ids,
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetMultipleEpisodesResponse = await this.client._api.episodes.get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetMultipleEpisodesResponse = await this.client._api.episodes.get(requestData);
     data.episodes.forEach(episodeObject => {
       const episode = this.add((episodeObject as EpisodeObject)?.id, options?.cacheAfterFetching, episodeObject);
       episodes.set(episode.id, episode);

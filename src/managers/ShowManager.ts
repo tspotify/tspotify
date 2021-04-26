@@ -1,6 +1,6 @@
 import Show from '../structures/Show.js';
 import BaseManager from './BaseManager.js';
-import APIOptions from '../structures/APIOptions.js';
+import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedShow from '../structures/SimplifiedShow.js';
 import type Client from '../client/Client.js';
@@ -68,8 +68,8 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     const query: GetShowQuery = {
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetShowResponse = await this.client._api.shows(id).get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetShowResponse = await this.client._api.shows(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
 
@@ -85,8 +85,8 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
       ids,
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetMultipleShowsResponse = await this.client._api.shows.get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetMultipleShowsResponse = await this.client._api.shows.get(requestData);
     const simplifiedShows = new Collection<string, SimplifiedShow>();
     data.shows.forEach(simplifiedShowObject => {
       const simplifiedShow = new SimplifiedShow(this.client, simplifiedShowObject as SimplifiedShowObject);

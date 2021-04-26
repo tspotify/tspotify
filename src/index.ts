@@ -7,9 +7,7 @@ import BaseManager from './managers/BaseManager.js';
 import EpisodeManager from './managers/EpisodeManager.js';
 import TrackManager from './managers/TrackManager.js';
 
-import AccessTokenDetails from './structures/AccessTokenDetails.js';
 import Album from './structures/Album.js';
-import APIOptions from './structures/APIOptions.js';
 import Artist from './structures/Artist.js';
 import BaseAlbum from './structures/BaseAlbum.js';
 import BaseStructure from './structures/BaseStructure.js';
@@ -33,9 +31,7 @@ export {
   BaseManager,
   EpisodeManager,
   TrackManager,
-  AccessTokenDetails,
   Album,
-  APIOptions,
   Artist,
   BaseAlbum,
   BaseStructure,

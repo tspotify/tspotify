@@ -1,7 +1,6 @@
 import BaseClient from './BaseClient.js';
 import RESTManager from '../rest/RESTManager.js';
-import APIOptions from '../structures/APIOptions.js';
-import AccessTokenDetails from '../structures/AccessTokenDetails.js';
+import { RequestData, AccessTokenDetails } from '../structures/Misc.js';
 import AlbumManager from '../managers/AlbumManager.js';
 import ArtistManager from '../managers/ArtistManager.js';
 import TrackManager from '../managers/TrackManager.js';
@@ -93,10 +92,10 @@ export default class Client extends BaseClient {
    */
   async login(credentials: ClientCredentials): Promise<AccessTokenDetails> {
     this.credentials = credentials;
-    const apiOptions = new APIOptions('account', null, {
+    const requestData = new RequestData('account', null, {
       grant_type: 'client_credentials',
     });
-    const data = await this._api.api.token.post(apiOptions);
+    const data = await this._api.api.token.post(requestData);
     this.accessTokenDetails = new AccessTokenDetails(data);
     if (!this.accessTokenDetails) throw new Error('Invalid client credentials');
     this.readyAt = new Date();

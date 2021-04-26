@@ -1,4 +1,4 @@
-import APIOptions from '../structures/APIOptions.js';
+import { RequestData } from '../structures/Misc.js';
 import Album from '../structures/Album.js';
 import BaseManager from './BaseManager.js';
 import Collection from '../util/Collection.js';
@@ -82,8 +82,8 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     const query: GetAlbumQuery = {
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetAlbumResponse = await this.client._api.albums(id).get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetAlbumResponse = await this.client._api.albums(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
 
@@ -104,8 +104,8 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
       ids,
       market: options?.market,
     };
-    const apiOptions = new APIOptions('api', query, null);
-    const data: GetMultipleAlbumsResponse = await this.client._api.albums.get(apiOptions);
+    const requestData = new RequestData('api', query, null);
+    const data: GetMultipleAlbumsResponse = await this.client._api.albums.get(requestData);
     data.albums.forEach(albumObject => {
       const album = this.add((albumObject as AlbumObject).id, options?.cacheAfterFetching, albumObject);
       albums.set(album.id, album);
