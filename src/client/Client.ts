@@ -9,6 +9,7 @@ import ShowManager from '../managers/ShowManager.js';
 import { Events } from '../util/Constants.js';
 import type { ClientOptions } from '../util/Constants.js';
 import type { ClientCredentials } from '../util/Interfaces.js';
+import type { GetAvailableMarketsResponse } from 'spotify-api-types';
 
 /**
  * The core of the library
@@ -101,5 +102,14 @@ export default class Client extends BaseClient {
     this.readyAt = new Date();
     this.emit(Events.READY);
     return this.accessTokenDetails;
+  }
+
+  /**
+   * Fetch the list of markets where Spotify is available
+   */
+  async fetchAvailableMarkets(): Promise<Array<string>> {
+    const requestData = new RequestData('api', null, null);
+    const data: GetAvailableMarketsResponse = await this._api.markets.get(requestData);
+    return data.markets;
   }
 }
