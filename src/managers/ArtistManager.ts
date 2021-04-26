@@ -3,6 +3,7 @@ import Client from '../client/Client.js';
 import Artist from '../structures/Artist.js';
 import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
+import Track from '../structures/Track.js';
 import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
 import type { ArtistResolvable, FetchArtistOptions, FetchArtistsOptions, FetchedArtist } from '../util/Interfaces.js';
 import type {
@@ -10,6 +11,9 @@ import type {
   GetMultipleArtistsQuery,
   GetMultipleArtistsResponse,
   ArtistObject,
+  GetArtistTopTracksQuery,
+  GetArtistTopTracksResponse,
+  GetRelatedArtistsResponse,
 } from 'spotify-api-types';
 
 /**
@@ -100,6 +104,49 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
     const data: GetMultipleArtistsResponse = await this.client._api.artists.get(requestData);
     data.artists.forEach(artistObject => {
       const artist = this.add((artistObject as ArtistObject).id, options?.cacheAfterFetching, artistObject);
+      artists.set(artist.id, artist);
+    });
+    return artists;
+  }
+
+  /**
+   * Fetches top ten tracks of an artist from a given market
+   * @param artist The artist whose top tracks are to be fetched
+   * @param market The market to consider for the top tracks
+   * @returns A collection of `Track` objects as a Promise
+   */
+  async fetchTopTracks(artist: ArtistResolvable, market: string): Promise<Collection<string, Track>> {
+    if (!market || typeof market !== 'string') throw new Error('Invalid market');
+    const artistID = this.resolveID(artist);
+    if (!artistID) throw new Error('Invalid artist');
+    const query: GetArtistTopTracksQuery = {
+      market,
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetArtistTopTracksResponse = await this.client._api.artists(artistID, 'top-tracks').get(requestData);
+    const tracks = new Collection<string, Track>();
+    data.tracks.forEach(trackObject => {
+      const track = new Track(this.client, trackObject);
+      tracks.set(track.id, track);
+    });
+    return tracks;
+  }
+
+  /**
+   * Fetches artists similar to a given artist
+   * @param artist The artist whose relation are to be fetched
+   * @returns A collection of `Artist` objects as a Promise
+   */
+  async fetchRelatedArtist(artist: ArtistResolvable): Promise<Collection<string, Artist>> {
+    const artistID = this.resolveID(artist);
+    if (!artistID) throw new Error('Invalid artist');
+    const requestData = new RequestData('api', null, null);
+    const data: GetRelatedArtistsResponse = await this.client._api
+      .artists(artistID, 'related-artists')
+      .get(requestData);
+    const artists = new Collection<string, Artist>();
+    data.artists.forEach(artistObject => {
+      const artist = new Artist(this.client, artistObject);
       artists.set(artist.id, artist);
     });
     return artists;
