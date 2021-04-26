@@ -2,8 +2,15 @@ import { RequestData } from '../structures/Misc.js';
 import Album from '../structures/Album.js';
 import BaseManager from './BaseManager.js';
 import Collection from '../util/Collection.js';
+import SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type Client from '../client/Client.js';
-import type { AlbumResolvable, FetchAlbumOptions, FetchAlbumsOptions } from '../util/Interfaces.js';
+import type {
+  AlbumResolvable,
+  FetchAlbumOptions,
+  FetchAlbumsOptions,
+  FetchedAlbum,
+  FetchAlbumTracksOptions,
+} from '../util/Interfaces.js';
 import type SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type BaseAlbum from '../structures/BaseAlbum.js';
 import type {
@@ -12,8 +19,9 @@ import type {
   GetAlbumResponse,
   GetMultipleAlbumsQuery,
   GetMultipleAlbumsResponse,
+  GetAlbumTracksQuery,
+  GetAlbumTracksResponse,
 } from 'spotify-api-types';
-import type { FetchedAlbum } from '../util/Interfaces.js';
 
 /**
  * Stores cache for albums and holds their API methods
@@ -111,5 +119,32 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
       albums.set(album.id, album);
     });
     return albums;
+  }
+
+  /**
+   * Fetches track(s) of an album
+   * @param album The album whose tracks are to be fetched
+   * @param options Options for fetching the tracks
+   * @returns A collection of `SimplifiedTrack` objects as a Promise
+   */
+  async fetchTracks(
+    album: AlbumResolvable,
+    options?: FetchAlbumTracksOptions,
+  ): Promise<Collection<string, SimplifiedTrack>> {
+    const albumID = this.resolveID(album);
+    if (!albumID) throw new Error('No album IDs were provided!');
+    const query: GetAlbumTracksQuery = {
+      market: options?.market,
+      limit: options?.limit,
+      offset: options?.offset,
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetAlbumTracksResponse = await this.client._api.albums(albumID).tracks.get(requestData);
+    const tracksCollection = new Collection<string, SimplifiedTrack>();
+    data.items.forEach(item => {
+      const track = new SimplifiedTrack(this.client, item);
+      tracksCollection.set(track.id, track);
+    });
+    return tracksCollection;
   }
 }

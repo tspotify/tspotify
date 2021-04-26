@@ -114,21 +114,9 @@ export default class BaseAlbum extends BaseStructure {
   }
 
   /**
-   * Fetches tracks of the album
+   * Fetches track(s) of the album
    */
   async fetchTracks(options?: FetchAlbumTracksOptions): Promise<Collection<string, SimplifiedTrack>> {
-    const query: GetAlbumTracksQuery = {
-      market: options?.market,
-      limit: options?.limit,
-      offset: options?.offset,
-    };
-    const requestData = new RequestData('api', query, null);
-    const data: GetAlbumTracksResponse = await this.client._api.albums(this.id).tracks.get(requestData);
-    const tracksCollection = new Collection<string, SimplifiedTrack>();
-    data.items.forEach(item => {
-      const track = new SimplifiedTrack(this.client, item);
-      tracksCollection.set(track.id, track);
-    });
-    return tracksCollection;
+    return this.client.albums.fetchTracks(this.id, options);
   }
 }
