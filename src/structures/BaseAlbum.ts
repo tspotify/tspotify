@@ -1,9 +1,8 @@
 import BaseStructure from './BaseStructure.js';
 import SimplifiedArtist from './SimplifiedArtist.js';
 import Client from '../client/Client.js';
-import { ExternalUrl } from './Misc.js';
+import { ExternalUrl, RequestData } from './Misc.js';
 import Collection from '../util/Collection.js';
-import { RequestData } from './Misc.js';
 import SimplifiedTrack from './SimplifiedTrack.js';
 import type {
   AlbumObject,
