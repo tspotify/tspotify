@@ -3,14 +3,23 @@ import BaseManager from './BaseManager.js';
 import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedShow from '../structures/SimplifiedShow.js';
+import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type Client from '../client/Client.js';
-import type { ShowResolvable, FetchShowOptions, FetchShowsOptions, FetchedShow } from '../util/Interfaces.js';
+import type {
+  ShowResolvable,
+  FetchShowOptions,
+  FetchShowsOptions,
+  FetchedShow,
+  FetchShowEpisodesOptions,
+} from '../util/Interfaces.js';
 import type {
   SimplifiedShowObject,
   GetShowQuery,
   GetShowResponse,
   GetMultipleShowsQuery,
   GetMultipleShowsResponse,
+  GetShowEpisodesQuery,
+  GetShowEpisodesResponse,
 } from 'spotify-api-types';
 
 export default class ShowManager extends BaseManager<ShowResolvable, Show> {
@@ -93,5 +102,29 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
       simplifiedShows.set(simplifiedShow.id, simplifiedShow);
     });
     return simplifiedShows;
+  }
+
+  /**
+   * Fetches episode(s) of a show
+   * @param options The options for fetching episode(s) of a show
+   * @returns A collection of `SimplifiedEpisode` objects of a show
+   */
+  async fetchEpisodes(options: FetchShowEpisodesOptions): Promise<Collection<string, SimplifiedEpisode>> {
+    if (!options) throw new Error('No options were provided');
+    const showID = this.resolveID(options?.show);
+    if (!showID) throw new Error('Invalid show');
+    const query: GetShowEpisodesQuery = {
+      market: options?.market,
+      limit: options?.limit,
+      offset: options?.offset,
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetShowEpisodesResponse = await this.client._api.shows(showID).episodes.get(requestData);
+    const simplifiedEpisodes = new Collection<string, SimplifiedEpisode>();
+    data.items.forEach(simplifiedEpisodeObject => {
+      const simplifiedEpisode = new SimplifiedEpisode(this.client, simplifiedEpisodeObject);
+      simplifiedEpisodes.set(simplifiedEpisode.id, simplifiedEpisode);
+    });
+    return simplifiedEpisodes;
   }
 }

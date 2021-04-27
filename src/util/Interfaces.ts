@@ -140,6 +140,25 @@ export interface FetchEpisodesOptions extends Omit<FetchEpisodeOptions, 'episode
   episodes: Array<EpisodeResolvable>;
 }
 
+export interface FetchShowEpisodesOptions {
+  show: ShowResolvable;
+
+  /**
+   * The maximum number of episodes to fetch
+   */
+  limit?: number;
+
+  /**
+   * The market to request
+   */
+  market: string;
+
+  /**
+   * The index of the first episode to fetch. Use this with limit to fetch the next set of episodes
+   */
+  offset?: number;
+}
+
 export interface FetchShowOptions extends Omit<BaseFetchOptions, 'market'> {
   /**
    * The show to fetch
