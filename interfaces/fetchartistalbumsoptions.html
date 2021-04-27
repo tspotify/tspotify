@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BaseStructure | tspotify</title>
+	<title>FetchArtistAlbumsOptions | tspotify</title>
 	<meta name="description" content="Documentation for tspotify">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2704,17 +2704,20 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class="current tsd-kind-class">
-			<a href="basestructure.html" class="tsd-kind-icon">Base<wbr>Structure</a>
+		<li class="current tsd-kind-interface">
+			<a href="fetchartistalbumsoptions.html" class="tsd-kind-icon">Fetch<wbr>Artist<wbr>Albums<wbr>Options</a>
 			<ul>
-				<li class=" tsd-kind-constructor tsd-parent-kind-class">
-					<a href="basestructure.html#constructor" class="tsd-kind-icon">constructor</a>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="fetchartistalbumsoptions.html#includegroups" class="tsd-kind-icon">include<wbr>Groups</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="basestructure.html#client" class="tsd-kind-icon">client</a>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="fetchartistalbumsoptions.html#limit" class="tsd-kind-icon">limit</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="basestructure.html#id" class="tsd-kind-icon">id</a>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="fetchartistalbumsoptions.html#market" class="tsd-kind-icon">market</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="fetchartistalbumsoptions.html#offset" class="tsd-kind-icon">offset</a>
 				</li>
 			</ul>
 		</li>
@@ -2725,7 +2728,7 @@ img {
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<p>Base class for all structures</p>
+					<p>Options used for fetching a collection of <code>SimplifiedAlbum</code> objects of an artist</p>
 				</div>
 			</div>
 		</section>
@@ -2733,18 +2736,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">BaseStructure</span>
-					<ul class="tsd-hierarchy">
-						<li>
-							<a href="basealbum.html" class="tsd-signature-type" data-tsd-kind="Class">BaseAlbum</a>
-						</li>
-						<li>
-							<a href="linkedtrack.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedTrack</a>
-						</li>
-						<li>
-							<a href="simplifiedartist.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedArtist</a>
-						</li>
-					</ul>
+					<span class="target">FetchArtistAlbumsOptions</span>
 				</li>
 			</ul>
 		</section>
@@ -2753,85 +2745,76 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Constructors</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="basestructure.html#constructor" class="tsd-kind-icon">constructor</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="basestructure.html#client" class="tsd-kind-icon">client</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="basestructure.html#id" class="tsd-kind-icon">id</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchartistalbumsoptions.html#includegroups" class="tsd-kind-icon">include<wbr>Groups</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchartistalbumsoptions.html#limit" class="tsd-kind-icon">limit</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchartistalbumsoptions.html#market" class="tsd-kind-icon">market</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchartistalbumsoptions.html#offset" class="tsd-kind-icon">offset</a></li>
 						</ul>
 					</section>
 				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Constructors</h2>
-			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-				<a name="constructor" class="tsd-anchor"></a>
-				<h3>constructor</h3>
-				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Base<wbr>Structure<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="basestructure.html" class="tsd-signature-type" data-tsd-kind="Class">BaseStructure</a></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/625f6dd/src/structures/BaseStructure.ts#L15">src/structures/BaseStructure.ts:15</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>client: <a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>The client that instantiated this class</p>
-								</div>
-							</li>
-							<li>
-								<h5>id: <span class="tsd-signature-type">string</span></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>The Spotify ID of the structure</p>
-								</div>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="basestructure.html" class="tsd-signature-type" data-tsd-kind="Class">BaseStructure</a></h4>
-					</li>
-				</ul>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="client" class="tsd-anchor"></a>
-				<h3>client</h3>
-				<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="client.html" class="tsd-signature-type" data-tsd-kind="Class">Client</a></div>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="includegroups" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> include<wbr>Groups</h3>
+				<div class="tsd-signature tsd-kind-icon">include<wbr>Groups<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AlbumGroupType</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/625f6dd/src/structures/BaseStructure.ts#L10">src/structures/BaseStructure.ts:10</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/625f6dd/src/util/Interfaces.ts#L92">src/util/Interfaces.ts:92</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The client that instantiated this class</p>
+						<p>The types of album groups to inlcude in the result</p>
 					</div>
 				</div>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="id" class="tsd-anchor"></a>
-				<h3>id</h3>
-				<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="limit" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> limit</h3>
+				<div class="tsd-signature tsd-kind-icon">limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/625f6dd/src/structures/BaseStructure.ts#L15">src/structures/BaseStructure.ts:15</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/625f6dd/src/util/Interfaces.ts#L97">src/util/Interfaces.ts:97</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The Spotify ID of the structure</p>
+						<p>The maximum number of albums to fetch</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="market" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> market</h3>
+				<div class="tsd-signature tsd-kind-icon">market<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/625f6dd/src/util/Interfaces.ts#L102">src/util/Interfaces.ts:102</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The market to request</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="offset" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> offset</h3>
+				<div class="tsd-signature tsd-kind-icon">offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/625f6dd/src/util/Interfaces.ts#L107">src/util/Interfaces.ts:107</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The index of the first album to fetch. Use this with limit to fetch the next set of albums</p>
 					</div>
 				</div>
 			</section>
