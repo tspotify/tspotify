@@ -10,6 +10,7 @@ import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type Episode from '../structures/Episode.js';
 import type SimplifiedShow from '../structures/SimplifiedShow.js';
 import type Show from '../structures/Show.js';
+import type { AlbumGroupType } from 'spotify-api-types';
 
 /**
  * Base interface for all fetch options
@@ -79,6 +80,31 @@ export interface FetchAlbumTracksOptions extends Omit<BaseFetchOptions, 'skipCac
    * The index of the first track to fetch. Use this with limit to fetch the next set of tracks
    */
   offset: number;
+}
+
+/**
+ * Options used for fetching a collection of `SimplifiedAlbum` objects of an artist
+ */
+export interface FetchArtistAlbumsOptions {
+  /**
+   * The types of album groups to inlcude in the result
+   */
+  includeGroups?: Array<AlbumGroupType>;
+
+  /**
+   * The maximum number of albums to fetch
+   */
+  limit?: number;
+
+  /**
+   * The market to request
+   */
+  market?: string;
+
+  /**
+   * The index of the first album to fetch. Use this with limit to fetch the next set of albums
+   */
+  offset?: number;
 }
 
 export interface FetchArtistOptions extends Omit<BaseFetchOptions, 'market'> {

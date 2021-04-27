@@ -4,8 +4,15 @@ import Artist from '../structures/Artist.js';
 import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import Track from '../structures/Track.js';
+import SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
-import type { ArtistResolvable, FetchArtistOptions, FetchArtistsOptions, FetchedArtist } from '../util/Interfaces.js';
+import type {
+  ArtistResolvable,
+  FetchArtistOptions,
+  FetchArtistsOptions,
+  FetchedArtist,
+  FetchArtistAlbumsOptions,
+} from '../util/Interfaces.js';
 import type {
   GetArtistResponse,
   GetMultipleArtistsQuery,
@@ -14,6 +21,8 @@ import type {
   GetArtistTopTracksQuery,
   GetArtistTopTracksResponse,
   GetRelatedArtistsResponse,
+  GetArtistAlbumsQuery,
+  GetArtistAlbumsResponse,
 } from 'spotify-api-types';
 
 /**
@@ -150,5 +159,33 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
       artists.set(artist.id, artist);
     });
     return artists;
+  }
+
+  /**
+   * Fetches albums of an artist
+   * @param artist The artist whose albums are to be fetched
+   * @param options Options for fetching the albums
+   * @returns A collection of `SimplifiedAlbum` objects as a Promise
+   */
+  async fetchAlbums(
+    artist: ArtistResolvable,
+    options?: FetchArtistAlbumsOptions,
+  ): Promise<Collection<string, SimplifiedAlbum>> {
+    const artistID = this.resolveID(artist);
+    if (!artistID) throw new Error('Invalid artist');
+    const query: GetArtistAlbumsQuery = {
+      include_groups: options?.includeGroups,
+      limit: options?.limit,
+      market: options?.market,
+      offset: options?.offset,
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetArtistAlbumsResponse = await this.client._api.artists(artistID).albums.get(requestData);
+    const simplifiedAlbums = new Collection<string, SimplifiedAlbum>();
+    data.items.forEach(simplifiedAlbumObject => {
+      const simplifiedAlbum = new SimplifiedAlbum(this.client, simplifiedAlbumObject);
+      simplifiedAlbums.set(simplifiedAlbum.id, simplifiedAlbum);
+    });
+    return simplifiedAlbums;
   }
 }
