@@ -10,6 +10,8 @@ import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type Episode from '../structures/Episode.js';
 import type SimplifiedShow from '../structures/SimplifiedShow.js';
 import type Show from '../structures/Show.js';
+import type PublicUser from '../structures/PublicUser.js';
+import type PrivateUser from '../structures/PrivateUser.js';
 import type { AlbumGroupType } from 'spotify-api-types';
 
 /**
@@ -183,6 +185,13 @@ export interface FetchShowsOptions {
   market: string;
 }
 
+/**
+ * Options used for fetching a user from Spotify
+ */
+export interface FetchUserOptions extends Omit<BaseFetchOptions, 'market'> {
+  user: UserResolvable;
+}
+
 export interface FetchTrackOptions extends BaseFetchOptions {
   /**
    * The track to fetch
@@ -237,5 +246,7 @@ export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTr
 export type ShowResolvable = string | SimplifiedShow | Show;
 
 export type SubdomainType = 'api' | 'account';
+
+export type UserResolvable = string | PublicUser | PrivateUser;
 
 export type TrackResolvable = string | SimplifiedTrack | Track;
