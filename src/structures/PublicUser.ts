@@ -1,7 +1,7 @@
 import BaseStructure from './BaseStructure.js';
-import { ExternalUrl } from './Misc.js';
+import { ExternalUrl, Followers, Image } from './Misc.js';
 import type Client from '../client/Client.js';
-import type { PublicUserObject } from 'spotify-api-types';
+import type { PublicUserObject, ImageObject } from 'spotify-api-types';
 
 export default class PublicUser extends BaseStructure {
   /**
@@ -17,7 +17,7 @@ export default class PublicUser extends BaseStructure {
   /**
    * Information about the followers of this user
    */
-  followers: any;
+  followers: Followers;
 
   /**
    * A link to the Web API endpoint for this user
@@ -27,7 +27,7 @@ export default class PublicUser extends BaseStructure {
   /**
    * The user’s profile image
    */
-  images: Array<any>;
+  images: Array<Image>;
 
   /**
    * The raw object type returned by the api: `user`
@@ -46,14 +46,22 @@ export default class PublicUser extends BaseStructure {
 
     this.externalUrls = new ExternalUrl(data.external_urls);
 
-    this.followers = data.followers;
+    this.followers = new Followers(data.followers);
 
     this.href = data.href;
 
-    this.images = data.images;
+    this.images = this._patchImages(data.images);
 
     this.rawObjectType = data.type;
 
     this.uri = data.uri;
+  }
+
+  private _patchImages(data: Array<ImageObject>): Array<Image> {
+    const imagesArray: Array<Image> = [];
+    data.forEach(imageObject => {
+      imagesArray.push(new Image(imageObject));
+    });
+    return imagesArray;
   }
 }

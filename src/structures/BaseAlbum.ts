@@ -1,16 +1,10 @@
 import BaseStructure from './BaseStructure.js';
 import SimplifiedArtist from './SimplifiedArtist.js';
 import Client from '../client/Client.js';
-import { ExternalUrl, RequestData } from './Misc.js';
+import { ExternalUrl, Image, AlbumRestriction } from './Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedTrack from './SimplifiedTrack.js';
-import type {
-  AlbumObject,
-  SimplifiedArtistObject,
-  SimplifiedAlbumObject,
-  GetAlbumTracksQuery,
-  GetAlbumTracksResponse,
-} from 'spotify-api-types';
+import type { AlbumObject, SimplifiedArtistObject, SimplifiedAlbumObject, ImageObject } from 'spotify-api-types';
 import type { FetchAlbumTracksOptions } from '../util/Interfaces.js';
 
 /**
@@ -45,7 +39,7 @@ export default class BaseAlbum extends BaseStructure {
   /**
    * The cover art for the album in various sizes, widest first
    */
-  images: Array<object>;
+  images: Array<Image>;
 
   /**
    * The name of the album
@@ -65,7 +59,7 @@ export default class BaseAlbum extends BaseStructure {
   /**
    * Included in the response when a content restriction is applied
    */
-  restrictions: object | null;
+  restrictions: AlbumRestriction | null;
 
   /**
    * The raw object type returned by the api: `album`
@@ -90,7 +84,7 @@ export default class BaseAlbum extends BaseStructure {
 
     this.href = data.href;
 
-    this.images = data.images;
+    this.images = this._patchImages(data.images);
 
     this.name = data.name;
 
@@ -98,7 +92,7 @@ export default class BaseAlbum extends BaseStructure {
 
     this.releaseDatePrecision = data.release_date_precision;
 
-    this.restrictions = data?.restrictions ?? null;
+    this.restrictions = data?.restrictions ? new AlbumRestriction(data?.restrictions) : null;
 
     this.rawObjectType = data.type;
 
@@ -111,6 +105,14 @@ export default class BaseAlbum extends BaseStructure {
       artistsCollection.set(artistObject.id, new SimplifiedArtist(this.client, artistObject));
     });
     return artistsCollection;
+  }
+
+  private _patchImages(data: Array<ImageObject>): Array<Image> {
+    const imagesArray: Array<Image> = [];
+    data.forEach(imageObject => {
+      imagesArray.push(new Image(imageObject));
+    });
+    return imagesArray;
   }
 
   /**

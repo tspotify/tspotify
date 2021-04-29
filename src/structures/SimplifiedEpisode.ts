@@ -1,6 +1,7 @@
 import Client from '../client/Client.js';
 import BaseStructure from './BaseStructure.js';
-import type { SimplifiedEpisodeObject } from 'spotify-api-types';
+import { ExternalUrl, Image, EpisodeRestriction } from './Misc.js';
+import type { SimplifiedEpisodeObject, ImageObject } from 'spotify-api-types';
 
 export default class SimplifiedEpisode extends BaseStructure {
   /**
@@ -26,7 +27,7 @@ export default class SimplifiedEpisode extends BaseStructure {
   /**
    * External URLs for this episode
    */
-  externalUrls: any;
+  externalUrls: ExternalUrl;
 
   /**
    * A link to the Web API endpoint providing full details of the episode
@@ -41,7 +42,7 @@ export default class SimplifiedEpisode extends BaseStructure {
   /**
    * The cover art for the episode in various sizes, widest first
    */
-  images: Array<any>;
+  images: Array<Image>;
 
   /**
    * True if the episode is hosted outside of Spotify’s CDN
@@ -83,7 +84,7 @@ export default class SimplifiedEpisode extends BaseStructure {
   /**
    * Included in the response when a content restriction is applied
    */
-  restrictions: any;
+  restrictions: EpisodeRestriction | null;
 
   /**
    * The user’s most recent position in the episode. Set if the supplied access token is a user token and has the scope `user-read-playback-position`
@@ -111,13 +112,13 @@ export default class SimplifiedEpisode extends BaseStructure {
 
     this.explicit = data.explicit;
 
-    this.externalUrls = data.external_urls;
+    this.externalUrls = new ExternalUrl(data.external_urls);
 
     this.href = data.href;
 
     this.htmlDescription = data.html_description;
 
-    this.images = data.images;
+    this.images = this._patchImages(data.images);
 
     this.isExternallyHosted = data.is_externally_hosted;
 
@@ -133,12 +134,20 @@ export default class SimplifiedEpisode extends BaseStructure {
 
     this.releaseDatePrecision = data.release_date_precision;
 
-    this.restrictions = data?.restrictions ?? null;
+    this.restrictions = data?.restrictions ? new EpisodeRestriction(data?.restrictions) : null;
 
     this.resumePoint = data.resume_point;
 
     this.rawObjectType = data.type;
 
     this.uri = data.uri;
+  }
+
+  private _patchImages(data: Array<ImageObject>): Array<Image> {
+    const imagesArray: Array<Image> = [];
+    data.forEach(imageObject => {
+      imagesArray.push(new Image(imageObject));
+    });
+    return imagesArray;
   }
 }

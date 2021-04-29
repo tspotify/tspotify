@@ -1,6 +1,7 @@
 import LinkedTrack from './LinkedTrack.js';
 import SimplifiedArtist from './SimplifiedArtist.js';
 import Collection from '../util/Collection.js';
+import { TrackRestriction } from './Misc.js';
 import type Client from '../client/Client.js';
 import type { SimplifiedTrackObject, SimplifiedArtistObject } from 'spotify-api-types';
 
@@ -58,7 +59,7 @@ export default class SimplifiedTrack extends LinkedTrack {
   /**
    * Details about restrictions if any on the track
    */
-  restrictions: any;
+  restrictions: TrackRestriction | null;
 
   /**
    * The number of the track. If an album has several discs, the track number is the number on the specified disc
@@ -88,7 +89,7 @@ export default class SimplifiedTrack extends LinkedTrack {
 
     this.previewUrl = data?.preview_url ?? null;
 
-    this.restrictions = data?.restrictions ?? null;
+    this.restrictions = data?.restrictions ? new TrackRestriction(data?.restrictions) : null;
 
     this.trackNumber = data.track_number;
   }

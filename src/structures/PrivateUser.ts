@@ -1,4 +1,5 @@
 import PublicUser from './PublicUser.js';
+import { ExplicitContentSettings } from './Misc.js';
 import type Client from '../client/Client.js';
 import type { PrivateUserObject } from 'spotify-api-types';
 
@@ -18,7 +19,7 @@ export default class PrivateUser extends PublicUser {
   /**
    * The user’s explicit content settings. This field is only available when the current user has granted access to the `user-read-private` scope.
    */
-  explicitContent: any;
+  explicitContent: ExplicitContentSettings | null;
 
   /**
    * The user’s Spotify subscription level: `premium`, `free`, etc. This field is only available when the current user has granted access to the `user-read-private` scope.
@@ -34,7 +35,7 @@ export default class PrivateUser extends PublicUser {
 
     this.email = data?.email ?? null;
 
-    this.explicitContent = data?.explicit_content ?? null;
+    this.explicitContent = data?.explicit_content ? new ExplicitContentSettings(data?.explicit_content) : null;
 
     this.product = data.product;
   }

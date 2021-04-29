@@ -1,7 +1,8 @@
 import Client from '../client/Client.js';
 import BaseStructure from './BaseStructure.js';
+import { ExternalUrl, Image } from './Misc.js';
 import type { Copyright } from './Misc.js';
-import type { SimplifiedShowObject } from 'spotify-api-types';
+import type { SimplifiedShowObject, ImageObject } from 'spotify-api-types';
 
 export default class SimplifiedShow extends BaseStructure {
   /**
@@ -27,7 +28,7 @@ export default class SimplifiedShow extends BaseStructure {
   /**
    * External URLs for this show
    */
-  externalUrls: any;
+  externalUrls: ExternalUrl;
 
   /**
    * A link to the Web API endpoint providing full details of the show
@@ -37,7 +38,7 @@ export default class SimplifiedShow extends BaseStructure {
   /**
    * The cover art for the show in various sizes, widest first
    */
-  images: Array<any>;
+  images: Array<Image>;
 
   /**
    * Whether all of the show’s episodes are hosted outside of Spotify’s CDN
@@ -85,11 +86,11 @@ export default class SimplifiedShow extends BaseStructure {
 
     this.explicit = data.explicit;
 
-    this.externalUrls = data.external_urls;
+    this.externalUrls = new ExternalUrl(data.external_urls);
 
     this.href = data.href;
 
-    this.images = data.images;
+    this.images = this._patchImages(data.images);
 
     this.isExternallyHosted = data.is_externally_hosted;
 
@@ -104,5 +105,13 @@ export default class SimplifiedShow extends BaseStructure {
     this.rawObjectType = data.type;
 
     this.uri = data.uri;
+  }
+
+  private _patchImages(data: Array<ImageObject>): Array<Image> {
+    const imagesArray: Array<Image> = [];
+    data.forEach(imageObject => {
+      imagesArray.push(new Image(imageObject));
+    });
+    return imagesArray;
   }
 }
