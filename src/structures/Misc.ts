@@ -1,3 +1,6 @@
+import PublicUser from './PublicUser.js';
+import Track from './Track.js';
+import Episode from './Episode.js';
 import type {
   CopyrightObject,
   ExternalIdObject,
@@ -9,7 +12,12 @@ import type {
   AlbumRestrictionObject,
   EpisodeRestrictionObject,
   TrackRestrictionObject,
+  PlaylistTracksRefObject,
+  PlaylistTrackObject,
+  TrackObject,
+  EpisodeObject,
 } from 'spotify-api-types';
+import type Client from '../client/Client.js';
 import type { SubdomainType } from '../util/Interfaces.js';
 
 /**
@@ -227,5 +235,59 @@ export class Image {
     this.url = data.url;
 
     this.width = data?.width ?? null;
+  }
+}
+
+export class PlaylistTrack {
+  /**
+   * The date and time the track or episode was added
+   * 
+   * **⚠️Note**: Some very old playlists may return `null` in this field
+   */
+  addedAt: Date | null;
+
+  /**
+   * The Spotify user who added the track or episode
+   * 
+   * **⚠️Note**: Some very old playlists may return `null` in this field
+   */
+  addedBy: PublicUser | null;
+
+  /**
+   * Whether this track or episode is a local file or not
+   */
+  isLocal: boolean;
+
+  /**
+  * Information about the track or episode
+  */
+  track: Track | Episode;
+
+  constructor(client: Client, data: PlaylistTrackObject) {
+    this.addedAt = data.added_at;
+
+    this.addedBy = data.added_by?.id ? new PublicUser(client, data.added_by) : null;
+
+    this.isLocal = data.is_local;
+
+    this.track = data.track.type === 'track' ? new Track(client, data.track as TrackObject) : new Episode(client, data.track as EpisodeObject);
+  }
+}
+
+export class PlaylistTracksRef {
+  /**
+   * A link to the Web API endpoint where full details of the playlist’s tracks can be retrieved
+   */
+  href: string;
+
+  /**
+   * Number of tracks in the playlist
+   */
+  total: number;
+
+  constructor(data: PlaylistTracksRefObject) {
+    this.href = data.href;
+
+    this.total = data.total;
   }
 }

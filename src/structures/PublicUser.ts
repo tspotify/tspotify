@@ -17,7 +17,7 @@ export default class PublicUser extends BaseStructure {
   /**
    * Information about the followers of this user
    */
-  followers: Followers;
+  followers: Followers | null;
 
   /**
    * A link to the Web API endpoint for this user
@@ -27,7 +27,7 @@ export default class PublicUser extends BaseStructure {
   /**
    * The user’s profile image
    */
-  images: Array<Image>;
+  images: Array<Image> | null;
 
   /**
    * The raw object type returned by the api: `user`
@@ -42,15 +42,15 @@ export default class PublicUser extends BaseStructure {
   constructor(client: Client, data: PublicUserObject) {
     super(client, data.id);
 
-    this.displayName = data.display_name;
+    this.displayName = data.display_name ?? null;
 
     this.externalUrls = new ExternalUrl(data.external_urls);
 
-    this.followers = new Followers(data.followers);
+    this.followers = data.followers ? new Followers(data.followers) : null;
 
     this.href = data.href;
 
-    this.images = this._patchImages(data.images);
+    this.images = data.images ? this._patchImages(data.images) : null;
 
     this.rawObjectType = data.type;
 

@@ -11,14 +11,19 @@ import TrackManager from './managers/TrackManager.js';
 import Album from './structures/Album.js';
 import Artist from './structures/Artist.js';
 import BaseAlbum from './structures/BaseAlbum.js';
+import BasePlaylist from './structures/BasePlaylist.js';
 import BaseStructure from './structures/BaseStructure.js';
 import Episode from './structures/Episode.js';
 import LinkedTrack from './structures/LinkedTrack.js';
 export * from './structures/Misc.js';
+import Playlist from './structures/Playlist.js';
+import PrivateUser from './structures/PrivateUser.js';
+import PublicUser from './structures/PublicUser.js';
 import Show from './structures/Show.js';
 import SimplifiedAlbum from './structures/SimplifiedAlbum.js';
 import SimplifiedArtist from './structures/SimplifiedArtist.js';
 import SimplifiedEpisode from './structures/SimplifiedEpisode.js';
+import SimplifiedPlaylist from './structures/SimplifiedPlaylist.js';
 import SimplifiedShow from './structures/SimplifiedShow.js';
 import SimplifiedTrack from './structures/SimplifiedTrack.js';
 import Track from './structures/Track.js';
@@ -40,13 +45,18 @@ export {
   Album,
   Artist,
   BaseAlbum,
+  BasePlaylist,
   BaseStructure,
   Episode,
   LinkedTrack,
+  Playlist,
+  PrivateUser,
+  PublicUser,
   Show,
   SimplifiedAlbum,
   SimplifiedArtist,
   SimplifiedEpisode,
+  SimplifiedPlaylist,
   SimplifiedShow,
   SimplifiedTrack,
   Track,
