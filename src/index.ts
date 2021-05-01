@@ -5,6 +5,7 @@ import AlbumManager from './managers/AlbumManager.js';
 import ArtistManager from './managers/ArtistManager.js';
 import BaseManager from './managers/BaseManager.js';
 import EpisodeManager from './managers/EpisodeManager.js';
+import PlaylistManager from './managers/PlaylistManager.js';
 import ShowManager from './managers/ShowManager.js';
 import TrackManager from './managers/TrackManager.js';
 
@@ -40,6 +41,7 @@ export {
   ArtistManager,
   BaseManager,
   EpisodeManager,
+  PlaylistManager,
   ShowManager,
   TrackManager,
   Album,

@@ -7,6 +7,7 @@ import TrackManager from '../managers/TrackManager.js';
 import EpisodeManager from '../managers/EpisodeManager.js';
 import ShowManager from '../managers/ShowManager.js';
 import UserManager from '../managers/UserManager.js';
+import PlaylistManager from '../managers/PlaylistManager.js';
 import { Events } from '../util/Constants.js';
 import type { ClientOptions } from '../util/Constants.js';
 import type { ClientCredentials } from '../util/Interfaces.js';
@@ -66,6 +67,11 @@ export default class Client extends BaseClient {
    */
   users: UserManager;
 
+  /**
+   * The manager class that holds cache and API methods of playlists
+   */
+  playlists: PlaylistManager;
+
   constructor(options?: ClientOptions) {
     super(options);
 
@@ -90,6 +96,8 @@ export default class Client extends BaseClient {
     this.shows = new ShowManager(this);
 
     this.users = new UserManager(this);
+
+    this.playlists = new PlaylistManager(this);
   }
 
   get _api(): any {

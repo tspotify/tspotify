@@ -13,6 +13,9 @@ import type Show from '../structures/Show.js';
 import type PublicUser from '../structures/PublicUser.js';
 import type PrivateUser from '../structures/PrivateUser.js';
 import type { AlbumGroupType } from 'spotify-api-types';
+import type SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
+import type Playlist from '../structures/Playlist.js';
+import type BasePlaylist from '../structures/BasePlaylist.js';
 
 /**
  * Base interface for all fetch options
@@ -242,6 +245,8 @@ export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTr
   | FetchTrackOptions
   ? Track
   : Collection<string, Track>;
+
+export type PlaylistResolvable = string | BasePlaylist | SimplifiedPlaylist | Playlist;
 
 export type ShowResolvable = string | SimplifiedShow | Show;
 
