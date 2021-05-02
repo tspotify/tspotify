@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FetchArtistOptions | tspotify</title>
+	<title>FetchPlaylistOptions | tspotify</title>
 	<meta name="description" content="Documentation for tspotify">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2705,16 +2705,19 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface">
-			<a href="fetchartistoptions.html" class="tsd-kind-icon">Fetch<wbr>Artist<wbr>Options</a>
+			<a href="fetchplaylistoptions.html" class="tsd-kind-icon">Fetch<wbr>Playlist<wbr>Options</a>
 			<ul>
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a href="fetchplaylistoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a>
+				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="fetchartistoptions.html#artist" class="tsd-kind-icon">artist</a>
+					<a href="fetchplaylistoptions.html#market" class="tsd-kind-icon">market</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="fetchplaylistoptions.html#playlist" class="tsd-kind-icon">playlist</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="fetchartistoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="fetchartistoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a>
+					<a href="fetchplaylistoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a>
 				</li>
 			</ul>
 		</li>
@@ -2729,7 +2732,7 @@ img {
 					<span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="basefetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseFetchOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;market&quot;</span><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
-							<span class="target">FetchArtistOptions</span>
+							<span class="target">FetchPlaylistOptions</span>
 						</li>
 					</ul>
 				</li>
@@ -2742,9 +2745,10 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchartistoptions.html#artist" class="tsd-kind-icon">artist</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchartistoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchartistoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchplaylistoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchplaylistoptions.html#market" class="tsd-kind-icon">market</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchplaylistoptions.html#playlist" class="tsd-kind-icon">playlist</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchplaylistoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2752,21 +2756,6 @@ img {
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="artist" class="tsd-anchor"></a>
-				<h3>artist</h3>
-				<div class="tsd-signature tsd-kind-icon">artist<span class="tsd-signature-symbol">:</span> <a href="../modules.html#artistresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">ArtistResolvable</a></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/d0b9f5e/src/util/Interfaces.ts#L119">src/util/Interfaces.ts:119</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The artist to fetch</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="cacheafterfetching" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> cache<wbr>After<wbr>Fetching</h3>
@@ -2780,6 +2769,36 @@ img {
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>Whether to cache the fetched content or not</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="market" class="tsd-anchor"></a>
+				<h3>market</h3>
+				<div class="tsd-signature tsd-kind-icon">market<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/d0b9f5e/src/util/Interfaces.ts#L176">src/util/Interfaces.ts:176</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The market to request</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="playlist" class="tsd-anchor"></a>
+				<h3>playlist</h3>
+				<div class="tsd-signature tsd-kind-icon">playlist<span class="tsd-signature-symbol">:</span> <a href="../modules.html#playlistresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">PlaylistResolvable</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/d0b9f5e/src/util/Interfaces.ts#L171">src/util/Interfaces.ts:171</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The playlist to fetch</p>
 					</div>
 				</div>
 			</section>
