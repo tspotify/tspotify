@@ -164,6 +164,18 @@ export interface FetchShowEpisodesOptions {
   offset?: number;
 }
 
+export interface FetchPlaylistOptions extends Omit<BaseFetchOptions, 'market'> {
+  /**
+   * The playlist to fetch
+   */
+  playlist: PlaylistResolvable;
+
+  /**
+   * The market to request
+   */
+  market: string;
+}
+
 export interface FetchShowOptions extends Omit<BaseFetchOptions, 'market'> {
   /**
    * The show to fetch

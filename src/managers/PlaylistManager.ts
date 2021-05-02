@@ -3,7 +3,7 @@ import Playlist from '../structures/Playlist.js';
 import { RequestData } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
-import type { PlaylistResolvable } from '../util/Interfaces.js';
+import type { PlaylistResolvable, FetchPlaylistOptions } from '../util/Interfaces.js';
 import type { GetPlaylistQuery, GetPlaylistResponse } from 'spotify-api-types';
 
 /**
@@ -41,13 +41,24 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
     return null;
   }
 
-  private async _fetchSigle(id: string): Promise<Playlist> {
+  async fetch(options: FetchPlaylistOptions): Promise<Playlist> {
+    if (!options) throw new Error('Provide valid options');
+    const playlistId = this.resolveID(options?.playlist);
+    if (!playlistId) throw new Error('Invalid playlist');
+    return this._fetchSigle(playlistId, options);
+  }
+
+  private async _fetchSigle(id: string, options: FetchPlaylistOptions): Promise<Playlist> {
+    if (!options?.skipCacheCheck) {
+      const cachedPlaylist = this.cache.get(id);
+      if (cachedPlaylist) return cachedPlaylist;
+    }
     const query: GetPlaylistQuery = {
-      market: 'IN',
+      market: options?.market,
       additional_types: 'episode',
     };
     const requestData = new RequestData('api', query, null);
     const data: GetPlaylistResponse = await this.client._api.playlists(id).get(requestData);
-    return this.add(data.id, true, data);
+    return this.add(data.id, options?.cacheAfterFetching, data);
   }
 }
