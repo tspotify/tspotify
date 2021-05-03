@@ -5,6 +5,7 @@ import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import Track from '../structures/Track.js';
 import SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
+import { Page } from '../structures/Misc.js';
 import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
 import type {
   ArtistResolvable,
@@ -23,6 +24,7 @@ import type {
   GetRelatedArtistsResponse,
   GetArtistAlbumsQuery,
   GetArtistAlbumsResponse,
+  SimplifiedAlbumObject,
 } from 'spotify-api-types';
 
 /**
@@ -165,12 +167,12 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
    * Fetches albums of an artist
    * @param artist The artist whose albums are to be fetched
    * @param options Options for fetching the albums
-   * @returns A collection of `SimplifiedAlbum` objects as a Promise
+   * @returns A Page of `SimplifiedAlbum` objects as a Promise
    */
   async fetchAlbums(
     artist: ArtistResolvable,
     options?: FetchArtistAlbumsOptions,
-  ): Promise<Collection<string, SimplifiedAlbum>> {
+  ): Promise<Page<SimplifiedAlbumObject, SimplifiedAlbum>> {
     const artistID = this.resolveID(artist);
     if (!artistID) throw new Error('Invalid artist');
     const query: GetArtistAlbumsQuery = {
@@ -181,11 +183,6 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
     };
     const requestData = new RequestData('api', query, null);
     const data: GetArtistAlbumsResponse = await this.client._api.artists(artistID).albums.get(requestData);
-    const simplifiedAlbums = new Collection<string, SimplifiedAlbum>();
-    data.items.forEach(simplifiedAlbumObject => {
-      const simplifiedAlbum = new SimplifiedAlbum(this.client, simplifiedAlbumObject);
-      simplifiedAlbums.set(simplifiedAlbum.id, simplifiedAlbum);
-    });
-    return simplifiedAlbums;
+    return new Page(this.client, data, SimplifiedAlbum);
   }
 }

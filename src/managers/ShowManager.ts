@@ -4,6 +4,7 @@ import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedShow from '../structures/SimplifiedShow.js';
 import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
+import { Page } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
 import type {
   ShowResolvable,
@@ -20,6 +21,7 @@ import type {
   GetMultipleShowsResponse,
   GetShowEpisodesQuery,
   GetShowEpisodesResponse,
+  SimplifiedEpisodeObject,
 } from 'spotify-api-types';
 
 export default class ShowManager extends BaseManager<ShowResolvable, Show> {
@@ -107,9 +109,9 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
   /**
    * Fetches episode(s) of a show
    * @param options The options for fetching episode(s) of a show
-   * @returns A collection of `SimplifiedEpisode` objects of a show
+   * @returns A Page of `SimplifiedEpisode` objects as a Promise
    */
-  async fetchEpisodes(options: FetchShowEpisodesOptions): Promise<Collection<string, SimplifiedEpisode>> {
+  async fetchEpisodes(options: FetchShowEpisodesOptions): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
     if (!options) throw new Error('No options were provided');
     const showID = this.resolveID(options?.show);
     if (!showID) throw new Error('Invalid show');
@@ -120,11 +122,6 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     };
     const requestData = new RequestData('api', query, null);
     const data: GetShowEpisodesResponse = await this.client._api.shows(showID).episodes.get(requestData);
-    const simplifiedEpisodes = new Collection<string, SimplifiedEpisode>();
-    data.items.forEach(simplifiedEpisodeObject => {
-      const simplifiedEpisode = new SimplifiedEpisode(this.client, simplifiedEpisodeObject);
-      simplifiedEpisodes.set(simplifiedEpisode.id, simplifiedEpisode);
-    });
-    return simplifiedEpisodes;
+    return new Page(this.client, data, SimplifiedEpisode);
   }
 }

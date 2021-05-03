@@ -3,6 +3,7 @@ import Album from '../structures/Album.js';
 import BaseManager from './BaseManager.js';
 import Collection from '../util/Collection.js';
 import SimplifiedTrack from '../structures/SimplifiedTrack.js';
+import { Page } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
 import type {
   AlbumResolvable,
@@ -21,6 +22,7 @@ import type {
   GetMultipleAlbumsResponse,
   GetAlbumTracksQuery,
   GetAlbumTracksResponse,
+  SimplifiedTrackObject,
 } from 'spotify-api-types';
 
 /**
@@ -125,12 +127,12 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
    * Fetches track(s) of an album
    * @param album The album whose tracks are to be fetched
    * @param options Options for fetching the tracks
-   * @returns A collection of `SimplifiedTrack` objects as a Promise
+   * @returns A Page of `SimplifiedTrack` objects as a Promise
    */
   async fetchTracks(
     album: AlbumResolvable,
     options?: FetchAlbumTracksOptions,
-  ): Promise<Collection<string, SimplifiedTrack>> {
+  ): Promise<Page<SimplifiedTrackObject, SimplifiedTrack>> {
     const albumID = this.resolveID(album);
     if (!albumID) throw new Error('No album IDs were provided!');
     const query: GetAlbumTracksQuery = {
@@ -140,11 +142,6 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     };
     const requestData = new RequestData('api', query, null);
     const data: GetAlbumTracksResponse = await this.client._api.albums(albumID).tracks.get(requestData);
-    const tracksCollection = new Collection<string, SimplifiedTrack>();
-    data.items.forEach(item => {
-      const track = new SimplifiedTrack(this.client, item);
-      tracksCollection.set(track.id, track);
-    });
-    return tracksCollection;
+    return new Page(this.client, data, SimplifiedTrack);
   }
 }

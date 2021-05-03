@@ -1,6 +1,7 @@
 import PublicUser from './PublicUser.js';
 import Track from './Track.js';
 import Episode from './Episode.js';
+import Collection from '../util/Collection.js';
 import type {
   CopyrightObject,
   ExternalIdObject,
@@ -16,9 +17,10 @@ import type {
   PlaylistTrackObject,
   TrackObject,
   EpisodeObject,
+  PagingObject,
 } from 'spotify-api-types';
 import type Client from '../client/Client.js';
-import type { SubdomainType } from '../util/Interfaces.js';
+import type { SubdomainType, StructureConstructable } from '../util/Interfaces.js';
 
 /**
  * The details about the access token returned by the API after logging in
@@ -235,6 +237,56 @@ export class Image {
     this.url = data.url;
 
     this.width = data?.width ?? null;
+  }
+}
+
+export class Page<R extends { id: string }, T> {
+  private _holds: StructureConstructable<T>;
+
+  client: Client;
+
+  href: string;
+
+  items: Collection<string, T>;
+
+  limit: number;
+
+  next: string | null;
+
+  offset: number;
+
+  previous: string;
+
+  total: number;
+
+  constructor(client: Client, data: PagingObject<R>, structureType: StructureConstructable<T>) {
+    Object.defineProperty(this, '_holds', { writable: true });
+    this._holds = structureType;
+
+    Object.defineProperty(this, 'client', { writable: true });
+    this.client = client;
+
+    this.href = data.href;
+
+    this.items = this._patchItems(data.items);
+
+    this.limit = data.limit;
+
+    this.next = data.next;
+
+    this.offset = data.offset;
+
+    this.previous = data.previous;
+
+    this.total = data.total;
+  }
+
+  private _patchItems(data: Array<R>): Collection<string, T> {
+    const patchedItems = new Collection<string, T>();
+    data.forEach(item => {
+      patchedItems.set(item.id, new this._holds(this.client, item))
+    });
+    return patchedItems;
   }
 }
 

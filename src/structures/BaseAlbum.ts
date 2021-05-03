@@ -4,7 +4,14 @@ import Client from '../client/Client.js';
 import { ExternalUrl, Image, AlbumRestriction } from './Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedTrack from './SimplifiedTrack.js';
-import type { AlbumObject, SimplifiedArtistObject, SimplifiedAlbumObject, ImageObject } from 'spotify-api-types';
+import type { Page } from './Misc.js';
+import type {
+  AlbumObject,
+  SimplifiedArtistObject,
+  SimplifiedAlbumObject,
+  ImageObject,
+  SimplifiedTrackObject,
+} from 'spotify-api-types';
 import type { FetchAlbumTracksOptions } from '../util/Interfaces.js';
 
 /**
@@ -118,7 +125,7 @@ export default class BaseAlbum extends BaseStructure {
   /**
    * Fetches track(s) of the album
    */
-  async fetchTracks(options?: FetchAlbumTracksOptions): Promise<Collection<string, SimplifiedTrack>> {
+  async fetchTracks(options?: FetchAlbumTracksOptions): Promise<Page<SimplifiedTrackObject, SimplifiedTrack>> {
     return this.client.albums.fetchTracks(this.id, options);
   }
 }
