@@ -240,7 +240,7 @@ export class Image {
   }
 }
 
-export class Page<R extends { id: string }, T> {
+export class Page<R, T> {
   private _holds: StructureConstructable<T>;
 
   client: Client;
@@ -284,7 +284,8 @@ export class Page<R extends { id: string }, T> {
   private _patchItems(data: Array<R>): Collection<string, T> {
     const patchedItems = new Collection<string, T>();
     data.forEach(item => {
-      patchedItems.set(item.id, new this._holds(this.client, item))
+      // @ts-ignore
+      patchedItems.set(item?.id ?? item.track.id, new this._holds(this.client, item))
     });
     return patchedItems;
   }
