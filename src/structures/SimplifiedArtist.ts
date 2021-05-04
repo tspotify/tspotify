@@ -1,7 +1,13 @@
 import BaseStructure from './BaseStructure.js';
 import Client from '../client/Client.js';
 import { ExternalUrl } from './Misc.js';
-import type { SimplifiedArtistObject } from 'spotify-api-types';
+import type Collection from '../util/Collection.js';
+import type Track from './Track.js';
+import type Artist from './Artist.js';
+import type { Page } from './Misc.js';
+import type SimplifiedAlbum from './SimplifiedAlbum.js';
+import type { FetchArtistAlbumsOptions } from '../util/Interfaces.js';
+import type { SimplifiedArtistObject, SimplifiedAlbumObject } from 'spotify-api-types';
 
 export default class SimplifiedArtist extends BaseStructure {
   /**
@@ -41,5 +47,31 @@ export default class SimplifiedArtist extends BaseStructure {
     this.rawObjectType = data.type;
 
     this.uri = data.uri;
+  }
+
+  /**
+   * Fetches top ten tracks of the artist from a given market
+   * @param market The market to consider for the top tracks
+   * @returns A collection of `Track` objects as a Promise
+   */
+  async fetchTopTracks(market: string): Promise<Collection<string, Track>> {
+    return this.client.artists.fetchTopTracks(this.id, market);
+  }
+
+  /**
+   * Fetches artists similar to the artist
+   * @returns A collection of `Artist` objects as a Promise
+   */
+  async fetchRelatedArtist(): Promise<Collection<string, Artist>> {
+    return this.client.artists.fetchRelatedArtist(this.id);
+  }
+
+  /**
+   * Fetches albums of the artist
+   * @param options Options for fetching the albums
+   * @returns A Page of `SimplifiedAlbum` objects as a Promise
+   */
+  async fetchAlbums(options?: FetchArtistAlbumsOptions): Promise<Page<SimplifiedAlbumObject, SimplifiedAlbum>> {
+    return this.client.artists.fetchAlbums(this.id, options);
   }
 }
