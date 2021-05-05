@@ -26,7 +26,7 @@ export default class APIRequest {
     }
   }
 
-  make(): any {
+  async make(): Promise<any> {
     const baseURL =
       this.options.subdomain === 'api'
         ? `${this.client.options.api.baseURL}/v${this.client.options.api.version}`
@@ -47,10 +47,15 @@ export default class APIRequest {
       }
     }
 
-    return fetch(url, {
+    const res = await fetch(url, {
       method: this.method,
       headers,
       body,
-    }).then(res => res.json());
+    });
+    const data = await res.json();
+    if (data?.error) {
+      throw new Error(data?.error.message || `${data?.error}: ${data?.error_description}`);
+    }
+    return data;
   }
 }
