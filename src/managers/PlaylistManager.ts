@@ -1,6 +1,6 @@
 import BaseManager from './BaseManager.js';
 import Playlist from '../structures/Playlist.js';
-import { Page, RequestData } from '../structures/Misc.js';
+import { Page, PlaylistTrack, RequestData } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
 import type {
@@ -8,12 +8,16 @@ import type {
   FetchPlaylistOptions,
   UserResolvable,
   FetchUserPlaylistsOptions,
+  FetchPlaylistItemsOptions,
 } from '../util/Interfaces.js';
 import type {
+  GetPlaylistItemsQuery,
+  GetPlaylistItemsResponse,
   GetPlaylistQuery,
   GetPlaylistResponse,
   GetUserPlaylistsQuery,
   GetUserPlaylistsResponse,
+  PlaylistTrackObject,
   SimplifiedPlaylistObject,
 } from 'spotify-api-types';
 import { SimplifiedPlaylist } from '../index.js';
@@ -93,5 +97,24 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
     const requestData = new RequestData('api', query, null);
     const data: GetUserPlaylistsResponse = await this.client._api.users(userId).playlists.get(requestData);
     return new Page(this.client, data, SimplifiedPlaylist);
+  }
+
+  /**
+   * Fetches items of a playlist
+   * @param options Options for fetching items of a playlist
+   * @returns A Page of `PlaylistTrack` objects a Promise
+   */
+  async fetchItems(options: FetchPlaylistItemsOptions): Promise<Page<PlaylistTrackObject, PlaylistTrack>> {
+    const playlistId = this.resolveID(options?.playlist);
+    if (!playlistId) throw new Error('Invalid playlist');
+    const query: GetPlaylistItemsQuery = {
+      limit: options?.limit,
+      market: options?.market,
+      offset: options?.offset,
+      additional_types: 'episode',
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetPlaylistItemsResponse = await this.client._api.playlists(playlistId).tracks.get(requestData);
+    return new Page(this.client, data, PlaylistTrack);
   }
 }

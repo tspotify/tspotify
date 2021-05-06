@@ -145,6 +145,28 @@ export interface FetchEpisodesOptions extends Omit<FetchEpisodeOptions, 'episode
   episodes: Array<EpisodeResolvable>;
 }
 
+export interface FetchPlaylistItemsOptions {
+  /**
+   * The maximum number of items to fetch
+   */
+  limit?: number;
+
+  /**
+   * The playlist whose items are to be fetched
+   */
+  playlist: PlaylistResolvable;
+
+  /**
+   * The market to request
+   */
+  market: string;
+
+  /**
+   * The index of the first item to fetch. Use this with limit to fetch the next set of items
+   */
+  offset?: number;
+}
+
 export interface FetchShowEpisodesOptions {
   show: ShowResolvable;
 
