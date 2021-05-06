@@ -1,6 +1,6 @@
 import BaseManager from './BaseManager.js';
 import Playlist from '../structures/Playlist.js';
-import { Page, PlaylistTrack, RequestData } from '../structures/Misc.js';
+import { Image, Page, PlaylistTrack, RequestData } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
 import type {
@@ -11,6 +11,7 @@ import type {
   FetchPlaylistItemsOptions,
 } from '../util/Interfaces.js';
 import type {
+  GetPlaylistCoverImageResponse,
   GetPlaylistItemsQuery,
   GetPlaylistItemsResponse,
   GetPlaylistQuery,
@@ -116,5 +117,22 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
     const requestData = new RequestData('api', query, null);
     const data: GetPlaylistItemsResponse = await this.client._api.playlists(playlistId).tracks.get(requestData);
     return new Page(this.client, data, PlaylistTrack);
+  }
+
+  /**
+   * Fetches cover image of a playlist
+   * @param playlist The playlist whose cover image is to be fetched
+   * @returns An array of `Image` object
+   */
+  async fetchCoverImage(playlist: PlaylistResolvable): Promise<Array<Image>> {
+    const playlistId = this.resolveID(playlist);
+    if (!playlistId) throw new Error('Invalid Playlist');
+    const requestData = new RequestData('api', null, null);
+    const data: GetPlaylistCoverImageResponse = await this.client._api.playlists(playlistId).images.get(requestData);
+    const images: Array<Image> = [];
+    data.forEach(imageObject => {
+      images.push(new Image(imageObject));
+    });
+    return images;
   }
 }
