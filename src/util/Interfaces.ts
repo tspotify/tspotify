@@ -221,6 +221,21 @@ export interface FetchTracksOptions extends BaseFetchOptions {
   tracks: Array<TrackResolvable>;
 }
 
+/**
+ * Options used for fetching playlists of a user
+ */
+export interface FetchUserPlaylistsOptions {
+  /**
+   * The maximum number of tracks to fetch. Must be between 1-50, inclusive
+   */
+  limit?: number;
+
+  /**
+   * The index of the first track to fetch. Use this with limit to fetch the next set of tracks
+   */
+  offset?: number;
+}
+
 export interface StructureConstructable<T> {
   // @ts-ignore
   new(...args: any[]): T;
