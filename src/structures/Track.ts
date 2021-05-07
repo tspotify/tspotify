@@ -3,6 +3,7 @@ import SimplifiedAlbum from './SimplifiedAlbum.js';
 import { ExternalId } from './Misc.js';
 import type Client from '../client/Client.js';
 import type { TrackObject } from 'spotify-api-types';
+import type AudioFeatures from './AudioFeatures.js';
 
 export default class Track extends SimplifiedTrack {
   /**
@@ -20,6 +21,13 @@ export default class Track extends SimplifiedTrack {
    */
   popularity: number;
 
+  /**
+   * Audio features of the track
+   *
+   * **Note**: Only available if the `AudioFeatures` for the track has been fetched and cached
+   */
+  features: AudioFeatures | null;
+
   constructor(client: Client, data: TrackObject) {
     super(client, data);
 
@@ -28,5 +36,7 @@ export default class Track extends SimplifiedTrack {
     this.externalIds = new ExternalId(data.external_ids);
 
     this.popularity = data.popularity;
+
+    this.features = null;
   }
 }

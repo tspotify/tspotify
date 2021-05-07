@@ -16,6 +16,7 @@ import type { AlbumGroupType } from 'spotify-api-types';
 import type SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
 import type Playlist from '../structures/Playlist.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
+import type AudioFeatures from '../structures/AudioFeatures.js';
 
 /**
  * Base interface for all fetch options
@@ -258,6 +259,14 @@ export interface FetchUserPlaylistsOptions {
   offset?: number;
 }
 
+export interface FetchSingleAudioFeaturesOptions extends Omit<BaseFetchOptions, 'market'> {
+  track: TrackResolvable;
+}
+
+export interface FetchMultipleAudioFeaturesOptions extends Omit<BaseFetchOptions, 'market'> {
+  tracks: Array<TrackResolvable>;
+}
+
 export interface StructureConstructable<T> {
   // @ts-ignore
   new(...args: any[]): T;
@@ -280,6 +289,10 @@ export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | Fetc
   | FetchArtistOptions
   ? Artist
   : Collection<string, Artist>;
+
+export type FetchedAudioFeatures<
+  T extends TrackResolvable | FetchSingleAudioFeaturesOptions | FetchMultipleAudioFeaturesOptions
+  > = T extends TrackResolvable | FetchSingleAudioFeaturesOptions ? AudioFeatures : Array<AudioFeatures>;
 
 export type FetchedEpisode<T extends FetchEpisodeOptions | FetchEpisodesOptions> = T extends FetchEpisodeOptions
   ? Episode
