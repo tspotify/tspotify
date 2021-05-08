@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FetchUserOptions | tspotify</title>
+	<title>FetchCategoryOptions | tspotify</title>
 	<meta name="description" content="Documentation for tspotify">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2705,16 +2705,19 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface">
-			<a href="fetchuseroptions.html" class="tsd-kind-icon">Fetch<wbr>User<wbr>Options</a>
+			<a href="fetchcategoryoptions.html" class="tsd-kind-icon">Fetch<wbr>Category<wbr>Options</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="fetchuseroptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="fetchuseroptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a>
+					<a href="fetchcategoryoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="fetchuseroptions.html#user" class="tsd-kind-icon">user</a>
+					<a href="fetchcategoryoptions.html#country" class="tsd-kind-icon">country</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="fetchcategoryoptions.html#locale" class="tsd-kind-icon">locale</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a href="fetchcategoryoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a>
 				</li>
 			</ul>
 		</li>
@@ -2722,13 +2725,6 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
-		<section class="tsd-panel tsd-comment">
-			<div class="tsd-comment tsd-typography">
-				<div class="lead">
-					<p>Options used for fetching a user from Spotify</p>
-				</div>
-			</div>
-		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2736,7 +2732,7 @@ img {
 					<span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="basefetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseFetchOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;market&quot;</span><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
-							<span class="target">FetchUserOptions</span>
+							<span class="target">FetchCategoryOptions</span>
 						</li>
 					</ul>
 				</li>
@@ -2749,9 +2745,10 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchuseroptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchuseroptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchuseroptions.html#user" class="tsd-kind-icon">user</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchcategoryoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchcategoryoptions.html#country" class="tsd-kind-icon">country</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchcategoryoptions.html#locale" class="tsd-kind-icon">locale</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchcategoryoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2775,6 +2772,26 @@ img {
 					</div>
 				</div>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="country" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> country</h3>
+				<div class="tsd-signature tsd-kind-icon">country<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L132">src/util/Interfaces.ts:132</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="locale" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> locale</h3>
+				<div class="tsd-signature tsd-kind-icon">locale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L134">src/util/Interfaces.ts:134</a></li>
+					</ul>
+				</aside>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="skipcachecheck" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> skip<wbr>Cache<wbr>Check</h3>
@@ -2790,16 +2807,6 @@ img {
 						<p>Whether to fetch from the API directly or check the cache first</p>
 					</div>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="user" class="tsd-anchor"></a>
-				<h3>user</h3>
-				<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <a href="../modules.html#userresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">UserResolvable</a></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L237">src/util/Interfaces.ts:237</a></li>
-					</ul>
-				</aside>
 			</section>
 		</section>
 		<footer class="with-border-bottom">

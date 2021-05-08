@@ -2741,6 +2741,12 @@ img {
 			<a href="classes/basestructure.html" class="tsd-kind-icon">Base<wbr>Structure</a>
 		</li>
 		<li class=" tsd-kind-class">
+			<a href="classes/category.html" class="tsd-kind-icon">Category</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="classes/categorymanager.html" class="tsd-kind-icon">Category<wbr>Manager</a>
+		</li>
+		<li class=" tsd-kind-class">
 			<a href="classes/client.html" class="tsd-kind-icon">Client</a>
 		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter">
@@ -2864,6 +2870,9 @@ img {
 			<a href="interfaces/fetchartistsoptions.html" class="tsd-kind-icon">Fetch<wbr>Artists<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="interfaces/fetchcategoryoptions.html" class="tsd-kind-icon">Fetch<wbr>Category<wbr>Options</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="interfaces/fetchepisodeoptions.html" class="tsd-kind-icon">Fetch<wbr>Episode<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-interface">
@@ -2910,6 +2919,9 @@ img {
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="modules.html#artistresolvable" class="tsd-kind-icon">Artist<wbr>Resolvable</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="modules.html#categoryresolvable" class="tsd-kind-icon">Category<wbr>Resolvable</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="modules.html#episoderesolvable" class="tsd-kind-icon">Episode<wbr>Resolvable</a>
@@ -3001,6 +3013,8 @@ img {
 							<li class="tsd-kind-class"><a href="classes/baseplaylist.html" class="tsd-kind-icon">Base<wbr>Playlist</a></li>
 							<li class="tsd-kind-class"><a href="classes/baserestriction.html" class="tsd-kind-icon">Base<wbr>Restriction</a></li>
 							<li class="tsd-kind-class"><a href="classes/basestructure.html" class="tsd-kind-icon">Base<wbr>Structure</a></li>
+							<li class="tsd-kind-class"><a href="classes/category.html" class="tsd-kind-icon">Category</a></li>
+							<li class="tsd-kind-class"><a href="classes/categorymanager.html" class="tsd-kind-icon">Category<wbr>Manager</a></li>
 							<li class="tsd-kind-class"><a href="classes/client.html" class="tsd-kind-icon">Client</a></li>
 							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/collection.html" class="tsd-kind-icon">Collection</a></li>
 							<li class="tsd-kind-class"><a href="classes/copyright.html" class="tsd-kind-icon">Copyright</a></li>
@@ -3047,6 +3061,7 @@ img {
 							<li class="tsd-kind-interface"><a href="interfaces/fetchartistalbumsoptions.html" class="tsd-kind-icon">Fetch<wbr>Artist<wbr>Albums<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/fetchartistoptions.html" class="tsd-kind-icon">Fetch<wbr>Artist<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/fetchartistsoptions.html" class="tsd-kind-icon">Fetch<wbr>Artists<wbr>Options</a></li>
+							<li class="tsd-kind-interface"><a href="interfaces/fetchcategoryoptions.html" class="tsd-kind-icon">Fetch<wbr>Category<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/fetchepisodeoptions.html" class="tsd-kind-icon">Fetch<wbr>Episode<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/fetchepisodesoptions.html" class="tsd-kind-icon">Fetch<wbr>Episodes<wbr>Options</a></li>
 							<li class="tsd-kind-interface"><a href="interfaces/fetchmultipleaudiofeaturesoptions.html" class="tsd-kind-icon">Fetch<wbr>Multiple<wbr>Audio<wbr>Features<wbr>Options</a></li>
@@ -3068,6 +3083,7 @@ img {
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-type-alias"><a href="modules.html#albumresolvable" class="tsd-kind-icon">Album<wbr>Resolvable</a></li>
 							<li class="tsd-kind-type-alias"><a href="modules.html#artistresolvable" class="tsd-kind-icon">Artist<wbr>Resolvable</a></li>
+							<li class="tsd-kind-type-alias"><a href="modules.html#categoryresolvable" class="tsd-kind-icon">Category<wbr>Resolvable</a></li>
 							<li class="tsd-kind-type-alias"><a href="modules.html#episoderesolvable" class="tsd-kind-icon">Episode<wbr>Resolvable</a></li>
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#fetchedalbum" class="tsd-kind-icon">Fetched<wbr>Album</a></li>
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#fetchedartist" class="tsd-kind-icon">Fetched<wbr>Artist</a></li>
@@ -3106,7 +3122,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Album<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/basealbum.html" class="tsd-signature-type" data-tsd-kind="Class">BaseAlbum</a><span class="tsd-signature-symbol"> | </span><a href="classes/simplifiedalbum.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedAlbum</a><span class="tsd-signature-symbol"> | </span><a href="classes/album.html" class="tsd-signature-type" data-tsd-kind="Class">Album</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L275">src/util/Interfaces.ts:275</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L282">src/util/Interfaces.ts:282</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3116,7 +3132,17 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Artist<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/simplifiedartist.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedArtist</a><span class="tsd-signature-symbol"> | </span><a href="classes/artist.html" class="tsd-signature-type" data-tsd-kind="Class">Artist</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L277">src/util/Interfaces.ts:277</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L284">src/util/Interfaces.ts:284</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+				<a name="categoryresolvable" class="tsd-anchor"></a>
+				<h3>Category<wbr>Resolvable</h3>
+				<div class="tsd-signature tsd-kind-icon">Category<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/category.html" class="tsd-signature-type" data-tsd-kind="Class">Category</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L286">src/util/Interfaces.ts:286</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3126,7 +3152,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Episode<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/simplifiedepisode.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedEpisode</a><span class="tsd-signature-symbol"> | </span><a href="classes/episode.html" class="tsd-signature-type" data-tsd-kind="Class">Episode</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L279">src/util/Interfaces.ts:279</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L288">src/util/Interfaces.ts:288</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3136,7 +3162,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Fetched<wbr>Album&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><a href="modules.html#albumresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">AlbumResolvable</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/fetchalbumoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchAlbumOptions</a><span class="tsd-signature-symbol"> ? </span><a href="classes/album.html" class="tsd-signature-type" data-tsd-kind="Class">Album</a><span class="tsd-signature-symbol"> : </span><a href="classes/collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="classes/album.html" class="tsd-signature-type" data-tsd-kind="Class">Album</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L281">src/util/Interfaces.ts:281</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L290">src/util/Interfaces.ts:290</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3152,7 +3178,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Fetched<wbr>Artist&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><a href="modules.html#artistresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">ArtistResolvable</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/fetchartistoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchArtistOptions</a><span class="tsd-signature-symbol"> ? </span><a href="classes/artist.html" class="tsd-signature-type" data-tsd-kind="Class">Artist</a><span class="tsd-signature-symbol"> : </span><a href="classes/collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="classes/artist.html" class="tsd-signature-type" data-tsd-kind="Class">Artist</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L287">src/util/Interfaces.ts:287</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L296">src/util/Interfaces.ts:296</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3168,7 +3194,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Fetched<wbr>Audio<wbr>Features&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><a href="modules.html#trackresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">TrackResolvable</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/fetchsingleaudiofeaturesoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchSingleAudioFeaturesOptions</a><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">AudioFeatures</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">AudioFeatures</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L293">src/util/Interfaces.ts:293</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L302">src/util/Interfaces.ts:302</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3184,7 +3210,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Fetched<wbr>Episode&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><a href="interfaces/fetchepisodeoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchEpisodeOptions</a><span class="tsd-signature-symbol"> ? </span><a href="classes/episode.html" class="tsd-signature-type" data-tsd-kind="Class">Episode</a><span class="tsd-signature-symbol"> : </span><a href="classes/collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="classes/episode.html" class="tsd-signature-type" data-tsd-kind="Class">Episode</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L297">src/util/Interfaces.ts:297</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L306">src/util/Interfaces.ts:306</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3200,7 +3226,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Fetched<wbr>Show&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><a href="interfaces/fetchshowoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchShowOptions</a><span class="tsd-signature-symbol"> ? </span><a href="classes/show.html" class="tsd-signature-type" data-tsd-kind="Class">Show</a><span class="tsd-signature-symbol"> : </span><a href="classes/collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="classes/simplifiedshow.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedShow</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L301">src/util/Interfaces.ts:301</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L310">src/util/Interfaces.ts:310</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3216,7 +3242,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Fetched<wbr>Track&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><a href="modules.html#trackresolvable" class="tsd-signature-type" data-tsd-kind="Type alias">TrackResolvable</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/fetchtrackoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchTrackOptions</a><span class="tsd-signature-symbol"> ? </span><a href="classes/track.html" class="tsd-signature-type" data-tsd-kind="Class">Track</a><span class="tsd-signature-symbol"> : </span><a href="classes/collection.html" class="tsd-signature-type" data-tsd-kind="Class">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="classes/track.html" class="tsd-signature-type" data-tsd-kind="Class">Track</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L305">src/util/Interfaces.ts:305</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L314">src/util/Interfaces.ts:314</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3232,7 +3258,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Playlist<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/baseplaylist.html" class="tsd-signature-type" data-tsd-kind="Class">BasePlaylist</a><span class="tsd-signature-symbol"> | </span><a href="classes/simplifiedplaylist.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedPlaylist</a><span class="tsd-signature-symbol"> | </span><a href="classes/playlist.html" class="tsd-signature-type" data-tsd-kind="Class">Playlist</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L311">src/util/Interfaces.ts:311</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L320">src/util/Interfaces.ts:320</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3242,7 +3268,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Show<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/simplifiedshow.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedShow</a><span class="tsd-signature-symbol"> | </span><a href="classes/show.html" class="tsd-signature-type" data-tsd-kind="Class">Show</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L313">src/util/Interfaces.ts:313</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L322">src/util/Interfaces.ts:322</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3252,7 +3278,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Subdomain<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;api&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;account&quot;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L315">src/util/Interfaces.ts:315</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L324">src/util/Interfaces.ts:324</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3262,7 +3288,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Track<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/simplifiedtrack.html" class="tsd-signature-type" data-tsd-kind="Class">SimplifiedTrack</a><span class="tsd-signature-symbol"> | </span><a href="classes/track.html" class="tsd-signature-type" data-tsd-kind="Class">Track</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L319">src/util/Interfaces.ts:319</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L328">src/util/Interfaces.ts:328</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3272,7 +3298,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">User<wbr>Resolvable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="classes/publicuser.html" class="tsd-signature-type" data-tsd-kind="Class">PublicUser</a><span class="tsd-signature-symbol"> | </span><a href="classes/privateuser.html" class="tsd-signature-type" data-tsd-kind="Class">PrivateUser</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Interfaces.ts#L317">src/util/Interfaces.ts:317</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Interfaces.ts#L326">src/util/Interfaces.ts:326</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3285,7 +3311,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Default<wbr>Client<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="interfaces/clientoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ClientOptions</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Constants.ts#L34">src/util/Constants.ts:34</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Constants.ts#L34">src/util/Constants.ts:34</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3300,7 +3326,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>READY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Constants.ts#L45">src/util/Constants.ts:45</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Constants.ts#L45">src/util/Constants.ts:45</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3330,7 +3356,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/de9d48c/src/util/Util.ts#L6">src/util/Util.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/882c47a/src/util/Util.ts#L6">src/util/Util.ts:6</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
