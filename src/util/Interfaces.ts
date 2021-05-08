@@ -17,6 +17,7 @@ import type SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
 import type Playlist from '../structures/Playlist.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
 import type AudioFeatures from '../structures/AudioFeatures.js';
+import type Category from '../structures/Category.js';
 
 /**
  * Base interface for all fetch options
@@ -125,6 +126,12 @@ export interface FetchArtistsOptions extends Omit<BaseFetchOptions, 'market'> {
    * The artist(s) to fetch
    */
   artists: Array<ArtistResolvable>;
+}
+
+export interface FetchCategoryOptions extends Omit<BaseFetchOptions, 'market'> {
+  country?: string;
+
+  locale?: string;
 }
 
 export interface FetchEpisodeOptions extends Omit<BaseFetchOptions, 'market'> {
@@ -275,6 +282,8 @@ export interface StructureConstructable<T> {
 export type AlbumResolvable = string | BaseAlbum | SimplifiedAlbum | Album;
 
 export type ArtistResolvable = string | SimplifiedArtist | Artist;
+
+export type CategoryResolvable = string | Category;
 
 export type EpisodeResolvable = string | SimplifiedEpisode | Episode;
 

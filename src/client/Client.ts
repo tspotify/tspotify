@@ -9,6 +9,7 @@ import ShowManager from '../managers/ShowManager.js';
 import UserManager from '../managers/UserManager.js';
 import PlaylistManager from '../managers/PlaylistManager.js';
 import { Events } from '../util/Constants.js';
+import CategoryManager from '../managers/CategoryManager.js';
 import type { ClientOptions } from '../util/Constants.js';
 import type { ClientCredentials } from '../util/Interfaces.js';
 import type { GetAvailableMarketsResponse } from 'spotify-api-types';
@@ -72,6 +73,11 @@ export default class Client extends BaseClient {
    */
   playlists: PlaylistManager;
 
+  /**
+   * The manager class that holds cache and API methods of categories
+   */
+  categories: CategoryManager;
+
   constructor(options?: ClientOptions) {
     super(options);
 
@@ -98,6 +104,8 @@ export default class Client extends BaseClient {
     this.users = new UserManager(this);
 
     this.playlists = new PlaylistManager(this);
+
+    this.categories = new CategoryManager(this);
   }
 
   get _api(): any {

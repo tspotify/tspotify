@@ -4,6 +4,7 @@ import Client from './client/Client.js';
 import AlbumManager from './managers/AlbumManager.js';
 import ArtistManager from './managers/ArtistManager.js';
 import BaseManager from './managers/BaseManager.js';
+import CategoryManager from './managers/CategoryManager.js';
 import EpisodeManager from './managers/EpisodeManager.js';
 import PlaylistManager from './managers/PlaylistManager.js';
 import ShowManager from './managers/ShowManager.js';
@@ -14,6 +15,7 @@ import Artist from './structures/Artist.js';
 import BaseAlbum from './structures/BaseAlbum.js';
 import BasePlaylist from './structures/BasePlaylist.js';
 import BaseStructure from './structures/BaseStructure.js';
+import Category from './structures/Category.js';
 import Episode from './structures/Episode.js';
 import LinkedTrack from './structures/LinkedTrack.js';
 export * from './structures/Misc.js';
@@ -40,6 +42,7 @@ export {
   AlbumManager,
   ArtistManager,
   BaseManager,
+  CategoryManager,
   EpisodeManager,
   PlaylistManager,
   ShowManager,
@@ -49,6 +52,7 @@ export {
   BaseAlbum,
   BasePlaylist,
   BaseStructure,
+  Category,
   Episode,
   LinkedTrack,
   Playlist,
