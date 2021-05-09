@@ -6,30 +6,41 @@ import type {
   CategoryResolvable,
   FetchCategoriesOptions,
   FetchCategoryOptions,
+  FetchCategoryPlaylistsOptions,
   FetchedCategory,
 } from '../util/Interfaces.js';
 import type {
   CategoryObject,
+  GetCategoryPlaylistQuery,
+  GetCategoryPlaylistResponse,
   GetCategoryQuery,
   GetCategoryResponse,
   GetMultipleCategoriesQuery,
   GetMultipleCategoriesResponse,
+  SimplifiedPlaylistObject,
 } from 'spotify-api-types';
+import SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
 
 export default class CategoryManager extends BaseManager<CategoryResolvable, Category> {
   constructor(client: Client) {
     super(client, Category);
   }
 
+  /**
+   * Fetches one or more categories from Spotify
+   * @param options Options for fetching categories
+   * @returns A `Category` or a Page of `Category` objects as a Promise
+   */
   async fetch<T extends CategoryResolvable | FetchCategoryOptions | FetchCategoriesOptions>(
     options: T,
   ): Promise<FetchedCategory<T>> {
+    if (!options) throw new Error('No options were provided');
     const categoryId = this.resolveID(options as CategoryResolvable);
     // @ts-ignore
     if (categoryId) return this._fetchSingle(categoryId, options);
-    const category = (options as FetchCategoryOptions)?.categoryResolvable;
-    if (category) {
-      const categoryId = this.resolveID(category);
+    const categoryResolvable = (options as FetchCategoryOptions)?.categoryResolvable;
+    if (categoryResolvable) {
+      const categoryId = this.resolveID(categoryResolvable);
       // @ts-ignore
       if (categoryId) return this._fetchSingle(categoryId, options);
     }
@@ -61,5 +72,29 @@ export default class CategoryManager extends BaseManager<CategoryResolvable, Cat
     const requestData = new RequestData('api', query, null);
     const data: GetMultipleCategoriesResponse = await this.client._api.browse.categories.get(requestData);
     return new Page(this.client, data.categories, Category);
+  }
+
+  /**
+   * Fetches playlists listed under a specific category
+   * @param categoryResolvable The category from which playlists are to be fetched
+   * @param options Options for fetching the playlists
+   * @returns A Page of `SimplifiedPlaylist` objects as a Promise
+   */
+  async fetchPlaylists(
+    categoryResolvable: CategoryResolvable,
+    options?: FetchCategoryPlaylistsOptions,
+  ): Promise<Page<SimplifiedPlaylistObject, SimplifiedPlaylist>> {
+    const categoryId = this.resolveID(categoryResolvable);
+    if (!categoryId) throw new Error('Invalid category');
+    const query: GetCategoryPlaylistQuery = {
+      country: options?.country,
+      limit: options?.limit,
+      offset: options?.offset,
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetCategoryPlaylistResponse = await this.client._api.browse
+      .categories(categoryId)
+      .playlists.get(requestData);
+    return new Page(this.client, data.playlists, SimplifiedPlaylist);
   }
 }

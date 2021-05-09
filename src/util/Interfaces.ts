@@ -147,6 +147,14 @@ export interface FetchCategoriesOptions {
   offset?: number;
 }
 
+export interface FetchCategoryPlaylistsOptions {
+  country?: string;
+
+  limit?: number;
+
+  offset?: number;
+}
+
 export interface FetchEpisodeOptions extends Omit<BaseFetchOptions, 'market'> {
   /**
    * The episode to fetch
