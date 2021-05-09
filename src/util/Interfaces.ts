@@ -12,12 +12,13 @@ import type SimplifiedShow from '../structures/SimplifiedShow.js';
 import type Show from '../structures/Show.js';
 import type PublicUser from '../structures/PublicUser.js';
 import type PrivateUser from '../structures/PrivateUser.js';
-import type { AlbumGroupType } from 'spotify-api-types';
+import type { AlbumGroupType, CategoryObject } from 'spotify-api-types';
 import type SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
 import type Playlist from '../structures/Playlist.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
 import type AudioFeatures from '../structures/AudioFeatures.js';
 import type Category from '../structures/Category.js';
+import type { Page } from '../structures/Misc.js';
 
 /**
  * Base interface for all fetch options
@@ -129,9 +130,21 @@ export interface FetchArtistsOptions extends Omit<BaseFetchOptions, 'market'> {
 }
 
 export interface FetchCategoryOptions extends Omit<BaseFetchOptions, 'market'> {
+  categoryResolvable: CategoryResolvable;
+
   country?: string;
 
   locale?: string;
+}
+
+export interface FetchCategoriesOptions {
+  country?: string;
+
+  locale?: string;
+
+  limit?: number;
+
+  offset?: number;
 }
 
 export interface FetchEpisodeOptions extends Omit<BaseFetchOptions, 'market'> {
@@ -302,6 +315,12 @@ export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | Fetc
 export type FetchedAudioFeatures<
   T extends TrackResolvable | FetchSingleAudioFeaturesOptions | FetchMultipleAudioFeaturesOptions
   > = T extends TrackResolvable | FetchSingleAudioFeaturesOptions ? AudioFeatures : Array<AudioFeatures>;
+
+export type FetchedCategory<T extends CategoryResolvable | FetchCategoryOptions | FetchCategoriesOptions> = T extends
+  | CategoryResolvable
+  | FetchCategoryOptions
+  ? Category
+  : Page<CategoryObject, Category>;
 
 export type FetchedEpisode<T extends FetchEpisodeOptions | FetchEpisodesOptions> = T extends FetchEpisodeOptions
   ? Episode
