@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FetchAlbumTracksOptions | tspotify</title>
+	<title>FetchCategoryPlaylistsOptions | tspotify</title>
 	<meta name="description" content="Documentation for tspotify">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2705,16 +2705,16 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface">
-			<a href="fetchalbumtracksoptions.html" class="tsd-kind-icon">Fetch<wbr>Album<wbr>Tracks<wbr>Options</a>
+			<a href="fetchcategoryplaylistsoptions.html" class="tsd-kind-icon">Fetch<wbr>Category<wbr>Playlists<wbr>Options</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="fetchalbumtracksoptions.html#limit" class="tsd-kind-icon">limit</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="fetchalbumtracksoptions.html#market" class="tsd-kind-icon">market</a>
+					<a href="fetchcategoryplaylistsoptions.html#country" class="tsd-kind-icon">country</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="fetchalbumtracksoptions.html#offset" class="tsd-kind-icon">offset</a>
+					<a href="fetchcategoryplaylistsoptions.html#limit" class="tsd-kind-icon">limit</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="fetchcategoryplaylistsoptions.html#offset" class="tsd-kind-icon">offset</a>
 				</li>
 			</ul>
 		</li>
@@ -2722,23 +2722,11 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
-		<section class="tsd-panel tsd-comment">
-			<div class="tsd-comment tsd-typography">
-				<div class="lead">
-					<p>Options used for fetching tracks of an album</p>
-				</div>
-			</div>
-		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="basefetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseFetchOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;skipCacheCheck&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cacheAfterFetching&quot;</span><span class="tsd-signature-symbol">&gt;</span>
-					<ul class="tsd-hierarchy">
-						<li>
-							<span class="target">FetchAlbumTracksOptions</span>
-						</li>
-					</ul>
+					<span class="target">FetchCategoryPlaylistsOptions</span>
 				</li>
 			</ul>
 		</section>
@@ -2749,9 +2737,9 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchalbumtracksoptions.html#limit" class="tsd-kind-icon">limit</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchalbumtracksoptions.html#market" class="tsd-kind-icon">market</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchalbumtracksoptions.html#offset" class="tsd-kind-icon">offset</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchcategoryplaylistsoptions.html#country" class="tsd-kind-icon">country</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchcategoryplaylistsoptions.html#limit" class="tsd-kind-icon">limit</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchcategoryplaylistsoptions.html#offset" class="tsd-kind-icon">offset</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2760,50 +2748,34 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="country" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> country</h3>
+				<div class="tsd-signature tsd-kind-icon">country<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ca7fccf/src/util/Interfaces.ts#L151">src/util/Interfaces.ts:151</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="limit" class="tsd-anchor"></a>
-				<h3>limit</h3>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> limit</h3>
 				<div class="tsd-signature tsd-kind-icon">limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ca7fccf/src/util/Interfaces.ts#L85">src/util/Interfaces.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ca7fccf/src/util/Interfaces.ts#L153">src/util/Interfaces.ts:153</a></li>
 					</ul>
 				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The maximum number of tracks to fetch. Must be between 1-50, inclusive</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="market" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> market</h3>
-				<div class="tsd-signature tsd-kind-icon">market<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from Omit.market</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ca7fccf/src/util/Interfaces.ts#L40">src/util/Interfaces.ts:40</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The market you’d like to request</p>
-					</div>
-				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="offset" class="tsd-anchor"></a>
-				<h3>offset</h3>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> offset</h3>
 				<div class="tsd-signature tsd-kind-icon">offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ca7fccf/src/util/Interfaces.ts#L90">src/util/Interfaces.ts:90</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ca7fccf/src/util/Interfaces.ts#L155">src/util/Interfaces.ts:155</a></li>
 					</ul>
 				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The index of the first track to fetch. Use this with limit to fetch the next set of tracks</p>
-					</div>
-				</div>
 			</section>
 		</section>
 		<footer class="with-border-bottom">
