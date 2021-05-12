@@ -155,6 +155,8 @@ export interface FetchCategoryPlaylistsOptions {
   offset?: number;
 }
 
+export type FetchNewReleasesOptions = FetchCategoryPlaylistsOptions;
+
 export interface FetchEpisodeOptions extends Omit<BaseFetchOptions, 'market'> {
   /**
    * The episode to fetch

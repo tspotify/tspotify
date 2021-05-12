@@ -4,6 +4,7 @@ import BaseManager from './BaseManager.js';
 import Collection from '../util/Collection.js';
 import SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import { Page } from '../structures/Misc.js';
+import SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type Client from '../client/Client.js';
 import type {
   AlbumResolvable,
@@ -11,8 +12,8 @@ import type {
   FetchAlbumsOptions,
   FetchedAlbum,
   FetchAlbumTracksOptions,
+  FetchNewReleasesOptions,
 } from '../util/Interfaces.js';
-import type SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type BaseAlbum from '../structures/BaseAlbum.js';
 import type {
   AlbumObject,
@@ -23,6 +24,9 @@ import type {
   GetAlbumTracksQuery,
   GetAlbumTracksResponse,
   SimplifiedTrackObject,
+  SimplifiedAlbumObject,
+  GetNewReleasesQuery,
+  GetNewReleasesResponse,
 } from 'spotify-api-types';
 
 /**
@@ -143,5 +147,21 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     const requestData = new RequestData('api', query, null);
     const data: GetAlbumTracksResponse = await this.client._api.albums(albumID).tracks.get(requestData);
     return new Page(this.client, data, SimplifiedTrack);
+  }
+
+  /**
+   * Fetches recently released albums
+   * @param options Options for fetching new releases
+   * @returns A Page of `SimplifiedAlbum` objects as a Promise
+   */
+  async fetchNewReleases(options?: FetchNewReleasesOptions): Promise<Page<SimplifiedAlbumObject, SimplifiedAlbum>> {
+    const query: GetNewReleasesQuery = {
+      country: options?.country,
+      limit: options?.limit,
+      offset: options?.offset,
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetNewReleasesResponse = await this.client._api.browse('new-releases').get(requestData);
+    return new Page(this.client, data.albums, SimplifiedAlbum);
   }
 }
