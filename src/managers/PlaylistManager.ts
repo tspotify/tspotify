@@ -9,8 +9,11 @@ import type {
   UserResolvable,
   FetchUserPlaylistsOptions,
   FetchPlaylistItemsOptions,
+  FetchFeaturedPlaylistsOptions,
 } from '../util/Interfaces.js';
 import type {
+  GetFeaturedPlaylistsQuery,
+  GetFeaturedPlaylistsResponse,
   GetPlaylistCoverImageResponse,
   GetPlaylistItemsQuery,
   GetPlaylistItemsResponse,
@@ -134,5 +137,25 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
       images.push(new Image(imageObject));
     });
     return images;
+  }
+
+  /**
+   * Fetches playlists that are featured by Spotify
+   * @param options Options for fetching the featured playlists
+   * @returns A Page of `SimplifiedPlaylist` objects as a Promise
+   */
+  async fetchFeaturedPlaylists(
+    options?: FetchFeaturedPlaylistsOptions,
+  ): Promise<Page<SimplifiedPlaylistObject, SimplifiedPlaylist>> {
+    const query: GetFeaturedPlaylistsQuery = {
+      country: options?.country,
+      limit: options?.limit,
+      locale: options?.locale,
+      offset: options?.offset,
+      timestamp: options?.timestamp,
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetFeaturedPlaylistsResponse = await this.client._api.browse('featured-playlists').get(requestData);
+    return new Page(this.client, data.playlists, SimplifiedPlaylist);
   }
 }

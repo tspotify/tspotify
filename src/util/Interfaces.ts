@@ -174,6 +174,10 @@ export interface FetchEpisodesOptions extends Omit<FetchEpisodeOptions, 'episode
   episodes: Array<EpisodeResolvable>;
 }
 
+export interface FetchFeaturedPlaylistsOptions extends FetchCategoriesOptions {
+  timestamp?: string;
+}
+
 export interface FetchPlaylistItemsOptions {
   /**
    * The maximum number of items to fetch
