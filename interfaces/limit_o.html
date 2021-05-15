@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BaseFetchOptions | tspotify</title>
+	<title>Limit_O | tspotify</title>
 	<meta name="description" content="Documentation for tspotify">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2705,16 +2705,10 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface">
-			<a href="basefetchoptions.html" class="tsd-kind-icon">Base<wbr>Fetch<wbr>Options</a>
+			<a href="limit_o.html" class="tsd-kind-icon">Limit_<wbr>O</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="basefetchoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="basefetchoptions.html#market" class="tsd-kind-icon">market</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="basefetchoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a>
+					<a href="limit_o.html#limit" class="tsd-kind-icon">limit</a>
 				</li>
 			</ul>
 		</li>
@@ -2722,30 +2716,35 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
-		<section class="tsd-panel tsd-comment">
-			<div class="tsd-comment tsd-typography">
-				<div class="lead">
-					<p>Base interface for all fetch options</p>
-				</div>
-			</div>
-		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">BaseFetchOptions</span>
+					<span class="target">Limit_O</span>
 					<ul class="tsd-hierarchy">
 						<li>
-							<a href="fetchalbumoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchAlbumOptions</a>
+							<a href="fetchartistalbumsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchArtistAlbumsOptions</a>
 						</li>
 						<li>
-							<a href="fetchalbumsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchAlbumsOptions</a>
+							<a href="fetchcategoriesoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchCategoriesOptions</a>
 						</li>
 						<li>
-							<a href="fetchtrackoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchTrackOptions</a>
+							<a href="fetchcategoryplaylistsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchCategoryPlaylistsOptions</a>
 						</li>
 						<li>
-							<a href="fetchtracksoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchTracksOptions</a>
+							<a href="fetchnewreleasesoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchNewReleasesOptions</a>
+						</li>
+						<li>
+							<a href="fetchfeaturedplaylistsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchFeaturedPlaylistsOptions</a>
+						</li>
+						<li>
+							<a href="fetchplaylistitemsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchPlaylistItemsOptions</a>
+						</li>
+						<li>
+							<a href="fetchshowepisodesoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchShowEpisodesOptions</a>
+						</li>
+						<li>
+							<a href="fetchuserplaylistsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchUserPlaylistsOptions</a>
 						</li>
 					</ul>
 				</li>
@@ -2758,9 +2757,7 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="basefetchoptions.html#cacheafterfetching" class="tsd-kind-icon">cache<wbr>After<wbr>Fetching</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="basefetchoptions.html#market" class="tsd-kind-icon">market</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="basefetchoptions.html#skipcachecheck" class="tsd-kind-icon">skip<wbr>Cache<wbr>Check</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="limit_o.html#limit" class="tsd-kind-icon">limit</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2769,47 +2766,17 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="cacheafterfetching" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> cache<wbr>After<wbr>Fetching</h3>
-				<div class="tsd-signature tsd-kind-icon">cache<wbr>After<wbr>Fetching<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<a name="limit" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> limit</h3>
+				<div class="tsd-signature tsd-kind-icon">limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L35">src/interfaces/Interfaces.ts:35</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ced6f9a/src/interfaces/Util.ts#L21">src/interfaces/Util.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Whether to cache the fetched content or not</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="market" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> market</h3>
-				<div class="tsd-signature tsd-kind-icon">market<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L40">src/interfaces/Interfaces.ts:40</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The market you’d like to request</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="skipcachecheck" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> skip<wbr>Cache<wbr>Check</h3>
-				<div class="tsd-signature tsd-kind-icon">skip<wbr>Cache<wbr>Check<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L30">src/interfaces/Interfaces.ts:30</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to fetch from the API directly or check the cache first</p>
+						<p>The maximum number of items to fetch</p>
 					</div>
 				</div>
 			</section>

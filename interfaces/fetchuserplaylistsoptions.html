@@ -2707,10 +2707,10 @@ img {
 		<li class="current tsd-kind-interface">
 			<a href="fetchuserplaylistsoptions.html" class="tsd-kind-icon">Fetch<wbr>User<wbr>Playlists<wbr>Options</a>
 			<ul>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="fetchuserplaylistsoptions.html#limit" class="tsd-kind-icon">limit</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="fetchuserplaylistsoptions.html#offset" class="tsd-kind-icon">offset</a>
 				</li>
 			</ul>
@@ -2730,7 +2730,15 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">FetchUserPlaylistsOptions</span>
+					<a href="limit_o.html" class="tsd-signature-type" data-tsd-kind="Interface">Limit_O</a>
+				</li>
+				<li>
+					<a href="offset_o.html" class="tsd-signature-type" data-tsd-kind="Interface">Offset_O</a>
+					<ul class="tsd-hierarchy">
+						<li>
+							<span class="target">FetchUserPlaylistsOptions</span>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</section>
@@ -2738,45 +2746,47 @@ img {
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
-					<section class="tsd-index-section ">
+					<section class="tsd-index-section tsd-is-inherited">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchuserplaylistsoptions.html#limit" class="tsd-kind-icon">limit</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchuserplaylistsoptions.html#offset" class="tsd-kind-icon">offset</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchuserplaylistsoptions.html#limit" class="tsd-kind-icon">limit</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchuserplaylistsoptions.html#offset" class="tsd-kind-icon">offset</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
-		<section class="tsd-panel-group tsd-member-group ">
+		<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="limit" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> limit</h3>
 				<div class="tsd-signature tsd-kind-icon">limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
+					<p>Inherited from <a href="limit_o.html">Limit_O</a>.<a href="limit_o.html#limit">limit</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L288">src/interfaces/Interfaces.ts:288</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ced6f9a/src/interfaces/Util.ts#L21">src/interfaces/Util.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The maximum number of tracks to fetch. Must be between 1-50, inclusive</p>
+						<p>The maximum number of items to fetch</p>
 					</div>
 				</div>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="offset" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> offset</h3>
 				<div class="tsd-signature tsd-kind-icon">offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
+					<p>Inherited from <a href="offset_o.html">Offset_O</a>.<a href="offset_o.html#offset">offset</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L293">src/interfaces/Interfaces.ts:293</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ced6f9a/src/interfaces/Util.ts#L53">src/interfaces/Util.ts:53</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The index of the first track to fetch. Use this with limit to fetch the next set of tracks</p>
+						<p>The index of the first item to fetch. Use this with <code>limit</code> to fetch the next set of items</p>
 					</div>
 				</div>
 			</section>

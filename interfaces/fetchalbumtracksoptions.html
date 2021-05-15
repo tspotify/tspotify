@@ -2707,13 +2707,13 @@ img {
 		<li class="current tsd-kind-interface">
 			<a href="fetchalbumtracksoptions.html" class="tsd-kind-icon">Fetch<wbr>Album<wbr>Tracks<wbr>Options</a>
 			<ul>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="fetchalbumtracksoptions.html#limit" class="tsd-kind-icon">limit</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="fetchalbumtracksoptions.html#market" class="tsd-kind-icon">market</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="fetchalbumtracksoptions.html#offset" class="tsd-kind-icon">offset</a>
 				</li>
 			</ul>
@@ -2733,7 +2733,13 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="basefetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BaseFetchOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;skipCacheCheck&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cacheAfterFetching&quot;</span><span class="tsd-signature-symbol">&gt;</span>
+					<a href="limit_r.html" class="tsd-signature-type" data-tsd-kind="Interface">Limit_R</a>
+				</li>
+				<li>
+					<a href="market_o.html" class="tsd-signature-type" data-tsd-kind="Interface">Market_O</a>
+				</li>
+				<li>
+					<a href="offset_r.html" class="tsd-signature-type" data-tsd-kind="Interface">Offset_R</a>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">FetchAlbumTracksOptions</span>
@@ -2746,31 +2752,32 @@ img {
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
-					<section class="tsd-index-section ">
+					<section class="tsd-index-section tsd-is-inherited">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchalbumtracksoptions.html#limit" class="tsd-kind-icon">limit</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchalbumtracksoptions.html#limit" class="tsd-kind-icon">limit</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchalbumtracksoptions.html#market" class="tsd-kind-icon">market</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="fetchalbumtracksoptions.html#offset" class="tsd-kind-icon">offset</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="fetchalbumtracksoptions.html#offset" class="tsd-kind-icon">offset</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
-		<section class="tsd-panel-group tsd-member-group ">
+		<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="limit" class="tsd-anchor"></a>
 				<h3>limit</h3>
 				<div class="tsd-signature tsd-kind-icon">limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
+					<p>Inherited from <a href="limit_r.html">Limit_R</a>.<a href="limit_r.html#limit">limit</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L85">src/interfaces/Interfaces.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ced6f9a/src/interfaces/Util.ts#L28">src/interfaces/Util.ts:28</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The maximum number of tracks to fetch. Must be between 1-50, inclusive</p>
+						<p>The maximum number of items to fetch</p>
 					</div>
 				</div>
 			</section>
@@ -2779,9 +2786,9 @@ img {
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> market</h3>
 				<div class="tsd-signature tsd-kind-icon">market<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
-					<p>Inherited from Omit.market</p>
+					<p>Inherited from <a href="market_o.html">Market_O</a>.<a href="market_o.html#market">market</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L40">src/interfaces/Interfaces.ts:40</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ced6f9a/src/interfaces/Util.ts#L39">src/interfaces/Util.ts:39</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2790,18 +2797,19 @@ img {
 					</div>
 				</div>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="offset" class="tsd-anchor"></a>
 				<h3>offset</h3>
 				<div class="tsd-signature tsd-kind-icon">offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
+					<p>Inherited from <a href="offset_r.html">Offset_R</a>.<a href="offset_r.html#offset">offset</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/1de9128/src/interfaces/Interfaces.ts#L90">src/interfaces/Interfaces.ts:90</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/ced6f9a/src/interfaces/Util.ts#L60">src/interfaces/Util.ts:60</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The index of the first track to fetch. Use this with limit to fetch the next set of tracks</p>
+						<p>The index of the first item to fetch. Use this with <code>limit</code> to fetch the next set of items</p>
 					</div>
 				</div>
 			</section>
