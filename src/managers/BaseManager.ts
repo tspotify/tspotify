@@ -1,7 +1,7 @@
 import Client from '../client/Client.js';
 import Collection from '../util/Collection.js';
 import type BaseStructure from '../structures/BaseStructure.js';
-import type { StructureConstructable } from '../util/Interfaces.js';
+import type { StructureConstructable } from '../interfaces/Interfaces.js';
 
 /**
  * Base class for all managers

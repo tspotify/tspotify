@@ -13,7 +13,7 @@ import type {
   FetchArtistsOptions,
   FetchedArtist,
   FetchArtistAlbumsOptions,
-} from '../util/Interfaces.js';
+} from '../interfaces/Interfaces.js';
 import type {
   GetArtistResponse,
   GetMultipleArtistsQuery,

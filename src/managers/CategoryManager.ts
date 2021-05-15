@@ -8,7 +8,7 @@ import type {
   FetchCategoryOptions,
   FetchCategoryPlaylistsOptions,
   FetchedCategory,
-} from '../util/Interfaces.js';
+} from '../interfaces/Interfaces.js';
 import type {
   CategoryObject,
   GetCategoryPlaylistQuery,

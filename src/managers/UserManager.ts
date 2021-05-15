@@ -2,7 +2,7 @@ import BaseManager from './BaseManager.js';
 import PublicUser from '../structures/PublicUser.js';
 import { RequestData } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
-import type { UserResolvable, FetchUserOptions } from '../util/Interfaces.js';
+import type { UserResolvable, FetchUserOptions } from '../interfaces/Interfaces.js';
 import type { GetUserResponse } from 'spotify-api-types';
 
 export default class UserManager extends BaseManager<UserResolvable, PublicUser> {

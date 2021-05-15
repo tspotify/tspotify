@@ -10,7 +10,7 @@ import type {
   FetchUserPlaylistsOptions,
   FetchPlaylistItemsOptions,
   FetchFeaturedPlaylistsOptions,
-} from '../util/Interfaces.js';
+} from '../interfaces/Interfaces.js';
 import type {
   GetFeaturedPlaylistsQuery,
   GetFeaturedPlaylistsResponse,

@@ -12,7 +12,7 @@ import type {
   ImageObject,
   SimplifiedTrackObject,
 } from 'spotify-api-types';
-import type { FetchAlbumTracksOptions } from '../util/Interfaces.js';
+import type { FetchAlbumTracksOptions } from '../interfaces/Interfaces.js';
 
 /**
  * Base class for all album-like structures

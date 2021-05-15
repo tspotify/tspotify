@@ -13,7 +13,7 @@ import type {
   FetchedAlbum,
   FetchAlbumTracksOptions,
   FetchNewReleasesOptions,
-} from '../util/Interfaces.js';
+} from '../interfaces/Interfaces.js';
 import type BaseAlbum from '../structures/BaseAlbum.js';
 import type {
   AlbumObject,

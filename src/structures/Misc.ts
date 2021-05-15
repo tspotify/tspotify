@@ -20,7 +20,7 @@ import type {
   PagingObject,
 } from 'spotify-api-types';
 import type Client from '../client/Client.js';
-import type { SubdomainType, StructureConstructable } from '../util/Interfaces.js';
+import type { SubdomainType, StructureConstructable } from '../interfaces/Interfaces.js';
 
 /**
  * The details about the access token returned by the API after logging in

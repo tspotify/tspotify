@@ -11,7 +11,7 @@ import PlaylistManager from '../managers/PlaylistManager.js';
 import { Events } from '../util/Constants.js';
 import CategoryManager from '../managers/CategoryManager.js';
 import type { ClientOptions } from '../util/Constants.js';
-import type { ClientCredentials } from '../util/Interfaces.js';
+import type { ClientCredentials } from '../interfaces/Interfaces.js';
 import type { GetAvailableMarketsResponse } from 'spotify-api-types';
 
 /**

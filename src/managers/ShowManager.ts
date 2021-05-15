@@ -12,7 +12,7 @@ import type {
   FetchShowsOptions,
   FetchedShow,
   FetchShowEpisodesOptions,
-} from '../util/Interfaces.js';
+} from '../interfaces/Interfaces.js';
 import type {
   SimplifiedShowObject,
   GetShowQuery,

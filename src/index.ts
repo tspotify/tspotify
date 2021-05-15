@@ -33,7 +33,7 @@ import Track from './structures/Track.js';
 
 import Collection from './util/Collection.js';
 export * from './util/Constants.js';
-export * from './util/Interfaces.js';
+export * from './interfaces/Interfaces.js';
 export * from './util/Util.js';
 
 export {

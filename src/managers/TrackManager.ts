@@ -11,7 +11,7 @@ import type {
   FetchSingleAudioFeaturesOptions,
   FetchMultipleAudioFeaturesOptions,
   FetchedAudioFeatures,
-} from '../util/Interfaces.js';
+} from '../interfaces/Interfaces.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type {
   TrackObject,

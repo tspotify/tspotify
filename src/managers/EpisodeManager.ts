@@ -9,7 +9,7 @@ import type {
   FetchEpisodeOptions,
   FetchEpisodesOptions,
   FetchedEpisode,
-} from '../util/Interfaces.js';
+} from '../interfaces/Interfaces.js';
 import type {
   GetEpisodeQuery,
   GetEpisodeResponse,

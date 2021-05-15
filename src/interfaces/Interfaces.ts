@@ -1,7 +1,7 @@
 import type BaseAlbum from '../structures/BaseAlbum.js';
 import type SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type Album from '../structures/Album.js';
-import type Collection from './Collection.js';
+import type Collection from '../util/Collection.js';
 import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
 import type Artist from '../structures/Artist.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
