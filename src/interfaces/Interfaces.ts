@@ -19,26 +19,18 @@ import type BasePlaylist from '../structures/BasePlaylist.js';
 import type AudioFeatures from '../structures/AudioFeatures.js';
 import type Category from '../structures/Category.js';
 import type { Page } from '../structures/Misc.js';
-
-/**
- * Base interface for all fetch options
- */
-export interface BaseFetchOptions {
-  /**
-   * Whether to fetch from the API directly or check the cache first
-   */
-  skipCacheCheck?: boolean;
-
-  /**
-   * Whether to cache the fetched content or not
-   */
-  cacheAfterFetching?: boolean;
-
-  /**
-   * The market you’d like to request
-   */
-  market?: string;
-}
+import {
+  CacheAfterFetching_O,
+  Country_O,
+  Limit_O,
+  Limit_R,
+  Locale_O,
+  Market_O,
+  Market_R,
+  Offset_O,
+  Offset_R,
+  SkipCacheCheck_O,
+} from './Util.js';
 
 /**
  * The object containing client id and secret
@@ -58,7 +50,7 @@ export interface ClientCredentials {
 /**
  * Options used for fetching a single album
  */
-export interface FetchAlbumOptions extends BaseFetchOptions {
+export interface FetchAlbumOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
   /**
    * The album to fetch
    */
@@ -68,7 +60,7 @@ export interface FetchAlbumOptions extends BaseFetchOptions {
 /**
  * Options used for fetching multiple albums
  */
-export interface FetchAlbumsOptions extends BaseFetchOptions {
+export interface FetchAlbumsOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
   /**
    * The album(s) to fetch (max 20)
    */
@@ -78,200 +70,107 @@ export interface FetchAlbumsOptions extends BaseFetchOptions {
 /**
  * Options used for fetching tracks of an album
  */
-export interface FetchAlbumTracksOptions extends Omit<BaseFetchOptions, 'skipCacheCheck' | 'cacheAfterFetching'> {
-  /**
-   * The maximum number of tracks to fetch. Must be between 1-50, inclusive
-   */
-  limit: number;
-
-  /**
-   * The index of the first track to fetch. Use this with limit to fetch the next set of tracks
-   */
-  offset: number;
-}
+export interface FetchAlbumTracksOptions extends Limit_R, Market_O, Offset_R { }
 
 /**
  * Options used for fetching a collection of `SimplifiedAlbum` objects of an artist
  */
-export interface FetchArtistAlbumsOptions {
+export interface FetchArtistAlbumsOptions extends Limit_O, Market_O, Offset_O {
   /**
    * The types of album groups to inlcude in the result
    */
   includeGroups?: Array<AlbumGroupType>;
-
-  /**
-   * The maximum number of albums to fetch
-   */
-  limit?: number;
-
-  /**
-   * The market to request
-   */
-  market?: string;
-
-  /**
-   * The index of the first album to fetch. Use this with limit to fetch the next set of albums
-   */
-  offset?: number;
 }
 
-export interface FetchArtistOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchArtistOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
   /**
    * The artist to fetch
    */
   artist: ArtistResolvable;
 }
 
-export interface FetchArtistsOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchArtistsOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
   /**
    * The artist(s) to fetch
    */
   artists: Array<ArtistResolvable>;
 }
 
-export interface FetchCategoryOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchCategoryOptions extends CacheAfterFetching_O, Country_O, Locale_O, SkipCacheCheck_O {
   categoryResolvable: CategoryResolvable;
-
-  country?: string;
-
-  locale?: string;
 }
 
-export interface FetchCategoriesOptions {
-  country?: string;
+export interface FetchCategoriesOptions extends Country_O, Locale_O, Limit_O, Offset_O { }
 
-  locale?: string;
+export interface FetchCategoryPlaylistsOptions extends Country_O, Limit_O, Offset_O { }
 
-  limit?: number;
+export interface FetchNewReleasesOptions extends Country_O, Limit_O, Offset_O { }
 
-  offset?: number;
-}
-
-export interface FetchCategoryPlaylistsOptions {
-  country?: string;
-
-  limit?: number;
-
-  offset?: number;
-}
-
-export type FetchNewReleasesOptions = FetchCategoryPlaylistsOptions;
-
-export interface FetchEpisodeOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchEpisodeOptions extends CacheAfterFetching_O, SkipCacheCheck_O, Market_R {
   /**
    * The episode to fetch
    */
   episode: EpisodeResolvable;
-
-  /**
-   * The market you’d like to request
-   */
-  market: string;
 }
 
-export interface FetchEpisodesOptions extends Omit<FetchEpisodeOptions, 'episode'> {
+export interface FetchEpisodesOptions extends CacheAfterFetching_O, SkipCacheCheck_O, Market_R {
   /**
    * The episode(s) to fetch
    */
   episodes: Array<EpisodeResolvable>;
 }
 
-export interface FetchFeaturedPlaylistsOptions extends FetchCategoriesOptions {
+export interface FetchFeaturedPlaylistsOptions extends Country_O, Locale_O, Limit_O, Offset_O {
   timestamp?: string;
 }
 
-export interface FetchPlaylistItemsOptions {
-  /**
-   * The maximum number of items to fetch
-   */
-  limit?: number;
-
+export interface FetchPlaylistItemsOptions extends Limit_O, Market_R, Offset_O {
   /**
    * The playlist whose items are to be fetched
    */
   playlist: PlaylistResolvable;
-
-  /**
-   * The market to request
-   */
-  market: string;
-
-  /**
-   * The index of the first item to fetch. Use this with limit to fetch the next set of items
-   */
-  offset?: number;
 }
 
-export interface FetchShowEpisodesOptions {
+export interface FetchShowEpisodesOptions extends Limit_O, Market_R, Offset_O {
   show: ShowResolvable;
-
-  /**
-   * The maximum number of episodes to fetch
-   */
-  limit?: number;
-
-  /**
-   * The market to request
-   */
-  market: string;
-
-  /**
-   * The index of the first episode to fetch. Use this with limit to fetch the next set of episodes
-   */
-  offset?: number;
 }
 
-export interface FetchPlaylistOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchPlaylistOptions extends CacheAfterFetching_O, Market_R, SkipCacheCheck_O {
   /**
    * The playlist to fetch
    */
   playlist: PlaylistResolvable;
-
-  /**
-   * The market to request
-   */
-  market: string;
 }
 
-export interface FetchShowOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchShowOptions extends CacheAfterFetching_O, Market_R, SkipCacheCheck_O {
   /**
    * The show to fetch
    */
   show: ShowResolvable;
-
-  /**
-   * The market you would like to request
-   */
-  market: string;
 }
 
-export interface FetchShowsOptions {
+export interface FetchShowsOptions extends Market_R {
   /**
    * The show(s) to fetch
    */
   shows: Array<ShowResolvable>;
-
-  /**
-   * The market you would like to request
-   */
-  market: string;
 }
 
 /**
  * Options used for fetching a user from Spotify
  */
-export interface FetchUserOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchUserOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
   user: UserResolvable;
 }
 
-export interface FetchTrackOptions extends BaseFetchOptions {
+export interface FetchTrackOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
   /**
    * The track to fetch
    */
   track: TrackResolvable;
 }
 
-export interface FetchTracksOptions extends BaseFetchOptions {
+export interface FetchTracksOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
   /**
    * The tracks(s) to fetch (max 50)
    */
@@ -281,23 +180,13 @@ export interface FetchTracksOptions extends BaseFetchOptions {
 /**
  * Options used for fetching playlists of a user
  */
-export interface FetchUserPlaylistsOptions {
-  /**
-   * The maximum number of tracks to fetch. Must be between 1-50, inclusive
-   */
-  limit?: number;
+export interface FetchUserPlaylistsOptions extends Limit_O, Offset_O { }
 
-  /**
-   * The index of the first track to fetch. Use this with limit to fetch the next set of tracks
-   */
-  offset?: number;
-}
-
-export interface FetchSingleAudioFeaturesOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchSingleAudioFeaturesOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
   track: TrackResolvable;
 }
 
-export interface FetchMultipleAudioFeaturesOptions extends Omit<BaseFetchOptions, 'market'> {
+export interface FetchMultipleAudioFeaturesOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
   tracks: Array<TrackResolvable>;
 }
 

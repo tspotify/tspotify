@@ -22,7 +22,6 @@ import type {
   GetTrackAudioFeaturesResponse,
   GetMultipleTracksAudioFeaturesQuery,
   GetMultipleTracksAudioFeaturesResponse,
-  AudioFeaturesObject,
 } from 'spotify-api-types';
 import AudioFeatures from '../structures/AudioFeatures.js';
 

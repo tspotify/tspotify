@@ -1,6 +1,9 @@
 import BaseClient from './client/BaseClient.js';
 import Client from './client/Client.js';
 
+export * from './interfaces/Util.js';
+export * from './interfaces/Interfaces.js';
+
 import AlbumManager from './managers/AlbumManager.js';
 import ArtistManager from './managers/ArtistManager.js';
 import BaseManager from './managers/BaseManager.js';
@@ -33,7 +36,6 @@ import Track from './structures/Track.js';
 
 import Collection from './util/Collection.js';
 export * from './util/Constants.js';
-export * from './interfaces/Interfaces.js';
 export * from './util/Util.js';
 
 export {
