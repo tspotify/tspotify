@@ -12,7 +12,7 @@ import { Events } from '../util/Constants.js';
 import CategoryManager from '../managers/CategoryManager.js';
 import type { ClientOptions } from '../util/Constants.js';
 import type { ClientCredentials } from '../interfaces/Interfaces.js';
-import type { GetAvailableMarketsResponse } from 'spotify-api-types';
+import type { GetAvailableMarketsResponse, GetRecommendationGenresResponse } from 'spotify-api-types';
 
 /**
  * The core of the library
@@ -135,5 +135,17 @@ export default class Client extends BaseClient {
     const requestData = new RequestData('api', null, null);
     const data: GetAvailableMarketsResponse = await this._api.markets.get(requestData);
     return data.markets;
+  }
+
+  /**
+   * Fetches a list of available genres
+   * @returns An array containing genres as a Promise
+   */
+  async fetchRecommendationGenres(): Promise<Array<string>> {
+    const requestData = new RequestData('api', null, null);
+    const data: GetRecommendationGenresResponse = await this._api
+      .recommendations('available-genre-seeds')
+      .get(requestData);
+    return data.genres;
   }
 }
