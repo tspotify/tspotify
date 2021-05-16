@@ -15,7 +15,7 @@ import TrackManager from './managers/TrackManager.js';
 
 import Album from './structures/Album.js';
 import Artist from './structures/Artist.js';
-import AudioFeatures from './structures/AudioFeatures';
+import AudioFeatures from './structures/AudioFeatures.js';
 import BaseAlbum from './structures/BaseAlbum.js';
 import BasePlaylist from './structures/BasePlaylist.js';
 import BaseStructure from './structures/BaseStructure.js';
