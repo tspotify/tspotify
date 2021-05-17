@@ -18,9 +18,13 @@ import type {
   TrackObject,
   EpisodeObject,
   PagingObject,
+  RecommendationSeedObject,
+  RecommendationsObject,
+  SimplifiedTrackObject,
 } from 'spotify-api-types';
 import type Client from '../client/Client.js';
 import type { SubdomainType, StructureConstructable } from '../interfaces/Interfaces.js';
+import SimplifiedTrack from './SimplifiedTrack.js';
 
 /**
  * The details about the access token returned by the API after logging in
@@ -342,5 +346,95 @@ export class PlaylistTracksRef {
     this.href = data.href;
 
     this.total = data.total;
+  }
+}
+
+export class RecommendationSeed {
+  /**
+   * The number of tracks available after `min_*` and `max_*` filters have been applied
+   */
+  afterFilteringSize: number;
+
+  /**
+   * The number of tracks available after relinking for regional availability
+   */
+  afterRelinkingSize: number;
+
+  /**
+   * A link to the full track or artist data for this seed. For tracks this will be a link to a `Track`. For artists a link to an `Artist`. For genre seeds, this value will be `null`
+   */
+  href: string | null;
+
+  /**
+   * The id used to select this seed. This will be same as the string used in `seed` parameter of `SeedData`
+   */
+  id: string;
+
+  /**
+   * The number of recommended tracks available for this seed
+   */
+  initialPoolSize: number;
+
+  /**
+   * The entity type of this seed
+   * 
+   * One of `ARTIST`, `TRACK` or `GENRE`
+   */
+  type: string;
+
+  constructor(data: RecommendationSeedObject) {
+    this.afterFilteringSize = data.afterFilteringSize;
+
+    this.afterRelinkingSize = data.afterRelinkingSize;
+
+    this.href = data.href;
+
+    this.id = data.id;
+
+    this.initialPoolSize = data.initialPoolSize;
+
+    this.type = data.type;
+  }
+}
+
+export class Recommendation {
+  /**
+   * The client that instantiated this
+   */
+  client: Client;
+
+  /**
+   * An array of recommendation seed objects
+   */
+  seeds: Array<RecommendationSeed>;
+
+  /**
+   * A collection of simplified track objects, ordered according to the parameters supplied
+   */
+  tracks: Collection<string, SimplifiedTrack>;
+
+  constructor(client: Client, data: RecommendationsObject) {
+    Object.defineProperty(this, 'client', { writable: true });
+    this.client = client;
+
+    this.seeds = this._patchSeeds(data.seeds);
+
+    this.tracks = this._patchTracks(data.tracks);
+  }
+
+  private _patchSeeds(data: Array<RecommendationSeedObject>): Array<RecommendationSeed> {
+    const patchedSeeds: Array<RecommendationSeed> = [];
+    data.forEach(recommendationSeedObject => {
+      patchedSeeds.push(new RecommendationSeed(recommendationSeedObject));
+    });
+    return patchedSeeds;
+  }
+
+  private _patchTracks(data: Array<SimplifiedTrackObject>): Collection<string, SimplifiedTrack> {
+    const patchedTracks = new Collection<string, SimplifiedTrack>();
+    data.forEach(simplifiedTrackObject => {
+      patchedTracks.set(simplifiedTrackObject.id, new SimplifiedTrack(this.client, simplifiedTrackObject));
+    });
+    return patchedTracks;
   }
 }

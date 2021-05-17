@@ -1,6 +1,6 @@
 import BaseManager from './BaseManager.js';
 import Track from '../structures/Track.js';
-import { RequestData } from '../structures/Misc.js';
+import { Recommendation, RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import type Client from '../client/Client.js';
 import type {
@@ -11,6 +11,8 @@ import type {
   FetchSingleAudioFeaturesOptions,
   FetchMultipleAudioFeaturesOptions,
   FetchedAudioFeatures,
+  FetchRecommendationsOptions,
+  ArtistResolvable,
 } from '../interfaces/Interfaces.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type {
@@ -22,6 +24,7 @@ import type {
   GetTrackAudioFeaturesResponse,
   GetMultipleTracksAudioFeaturesQuery,
   GetMultipleTracksAudioFeaturesResponse,
+  GetRecommendationsQuery,
 } from 'spotify-api-types';
 import AudioFeatures from '../structures/AudioFeatures.js';
 
@@ -193,5 +196,82 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
       audioFeaturesList.push(audioFeatures);
     });
     return audioFeaturesList;
+  }
+
+  /**
+   * Fetches recommended tracks on the basis of options provided
+   * @param options The options for fetching recommendations
+   * @returns A `Recommendation` object as a Promise
+   */
+  async fetchRecommendations(options: FetchRecommendationsOptions): Promise<Recommendation> {
+    const query: GetRecommendationsQuery = {
+      limit: options?.limit,
+      market: options?.market,
+      seed_artists: [],
+      seed_genres: [],
+      seed_tracks: [],
+      max_acousticness: options?.acousticness?.max,
+      min_acousticness: options?.acousticness?.min,
+      target_acousticness: options?.acousticness?.target,
+      max_danceability: options?.danceability?.max,
+      min_danceability: options?.danceability?.min,
+      target_danceability: options?.danceability?.target,
+      max_duration_ms: options?.duration?.max,
+      min_duration_ms: options?.duration?.min,
+      target_duration_ms: options?.duration?.target,
+      max_energy: options?.energy?.max,
+      min_energy: options?.energy?.min,
+      target_energy: options?.energy?.target,
+      max_instrumentalness: options?.instrumentalness?.max,
+      min_instrumentalness: options?.instrumentalness?.min,
+      target_instrumentalness: options?.instrumentalness?.target,
+      max_key: options?.key?.max,
+      min_key: options?.key?.min,
+      target_key: options?.key?.target,
+      max_liveness: options?.liveness?.max,
+      min_liveness: options?.liveness?.min,
+      target_liveness: options?.liveness?.target,
+      max_loudness: options?.loudness?.max,
+      min_loudness: options?.loudness?.min,
+      target_loudnes: options?.loudness?.target,
+      max_mode: options?.mode?.max,
+      min_mode: options?.mode?.min,
+      target_mode: options?.mode?.target,
+      max_popularity: options?.popularity?.max,
+      min_popularity: options?.popularity?.min,
+      target_popularity: options?.popularity?.target,
+      max_speechiness: options?.speechiness?.max,
+      min_speechiness: options?.speechiness?.min,
+      target_speechiness: options?.speechiness?.target,
+      max_tempo: options?.tempo?.max,
+      min_tempo: options?.tempo?.min,
+      target_tempo: options?.tempo?.target,
+      max_time_signature: options?.timeSignature?.max,
+      min_time_signature: options?.timeSignature?.min,
+      target_time_signature: options?.timeSignature?.target,
+      max_valence: options?.valence?.max,
+      min_valence: options?.valence?.min,
+      target_valence: options?.valence?.target,
+    };
+    if (!options?.seeds) throw new Error('No seeds were provided');
+    options.seeds.forEach(seedData => {
+      if (seedData?.type === 'ARTIST') {
+        const artistId = this.client.artists.resolveID(seedData.seed as ArtistResolvable);
+        if (artistId) query.seed_artists.push(artistId);
+      } else if (seedData?.type === 'GENRE') {
+        const genre = seedData?.seed;
+        if (genre && typeof genre === 'string') query.seed_genres.push(genre);
+      } else if (seedData?.type === 'TRACK') {
+        const trackId = this.resolveID(seedData?.seed as TrackResolvable);
+        if (trackId) query.seed_tracks.push(trackId);
+      }
+    });
+    const { seed_artists, seed_genres, seed_tracks } = query;
+    const totalSeeds = seed_artists.length + seed_genres.length + seed_tracks.length;
+    if (totalSeeds < 1) throw new Error('Atleast one seed should be provided');
+    if (totalSeeds > 5) throw new Error('Only upto 5 seeds can be provided');
+    const requestData = new RequestData('api', query, null);
+    const data = await this.client._api.recommendations.get(requestData);
+    return new Recommendation(this.client, data);
   }
 }
