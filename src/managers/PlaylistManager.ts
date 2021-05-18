@@ -9,7 +9,7 @@ import type {
   FetchUserPlaylistsOptions,
   FetchPlaylistItemsOptions,
   FetchFeaturedPlaylistsOptions,
-  SearchOptions,
+  SearchPlaylistsOptions,
 } from '../interfaces/Interfaces.js';
 import type {
   GetFeaturedPlaylistsQuery,
@@ -165,8 +165,8 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
    * @param options The options provided for searching playlists
    * @returns A `Page` of `SimplifiedPlaylist` objects as a Promise
    */
-  async search(options: SearchOptions): Promise<Page<SimplifiedPlaylistObject, SimplifiedPlaylist>> {
-    const data: GetSearchResponse = await super._search(options, 'playlist');
+  async search(options: SearchPlaylistsOptions): Promise<Page<SimplifiedPlaylistObject, SimplifiedPlaylist>> {
+    const data: GetSearchResponse = await super._search(options, 'playlist', options?.market);
     return new Page(this.client, data.playlists, SimplifiedPlaylist);
   }
 }

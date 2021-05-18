@@ -321,7 +321,7 @@ export interface StructureConstructable<T> {
   new(...args: any[]): T;
 }
 
-export interface SearchOptions extends Market_O, Limit_O, Offset_O {
+export interface SearchOptions extends Limit_O, Offset_O {
   /**
    * The query for the search
    */
@@ -329,6 +329,18 @@ export interface SearchOptions extends Market_O, Limit_O, Offset_O {
 
   includeExternal?: string;
 }
+
+export interface SearchAlbumsOptions extends Market_O, SearchOptions { }
+
+export interface SearchArtistsOptions extends Market_O, SearchOptions { }
+
+export interface SearchEpisodesOptions extends Market_R, SearchOptions { }
+
+export interface SearchPlaylistsOptions extends Market_O, SearchOptions { }
+
+export interface SearchShowsOptions extends Market_R, SearchOptions { }
+
+export interface SearchTracksOptions extends Market_O, SearchOptions { }
 
 export interface SeedData {
   /**

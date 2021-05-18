@@ -11,7 +11,7 @@ import type {
   FetchAlbumsOptions,
   FetchAlbumTracksOptions,
   FetchNewReleasesOptions,
-  SearchOptions,
+  SearchAlbumsOptions,
 } from '../interfaces/Interfaces.js';
 import type BaseAlbum from '../structures/BaseAlbum.js';
 import type {
@@ -171,8 +171,8 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
    * @param options The options provided for searching albums
    * @returns A `Page` of `SimplifiedAlbum` objects as a Promise
    */
-  async search(options: SearchOptions): Promise<Page<SimplifiedAlbumObject, SimplifiedAlbum>> {
-    const data: GetSearchResponse = await super._search(options, 'album');
+  async search(options: SearchAlbumsOptions): Promise<Page<SimplifiedAlbumObject, SimplifiedAlbum>> {
+    const data: GetSearchResponse = await super._search(options, 'album', options?.market);
     return new Page(this.client, data.albums, SimplifiedAlbum);
   }
 }

@@ -82,7 +82,7 @@ export type FetchedTrack<T extends TrackResolvable | FetchTrackOptions | FetchTr
 
 export type PlaylistResolvable = string | BasePlaylist | SimplifiedPlaylist | Playlist;
 
-export type SearchItemType = 'album' | 'artist' | 'playlist' | 'track' | 'show' | 'episode';
+export type SearchItemType = 'album' | 'artist' | 'episode' | 'playlist' | 'show' | 'track';
 
 export type SeedResolvable = ArtistResolvable | string | TrackResolvable;
 

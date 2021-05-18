@@ -4,7 +4,7 @@ import { Page, RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type Client from '../client/Client.js';
-import type { FetchEpisodeOptions, FetchEpisodesOptions, SearchOptions } from '../interfaces/Interfaces.js';
+import type { FetchEpisodeOptions, FetchEpisodesOptions, SearchEpisodesOptions } from '../interfaces/Interfaces.js';
 import type {
   GetEpisodeQuery,
   GetEpisodeResponse,
@@ -112,8 +112,9 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
    * @param options The options provided for searching episodes
    * @returns A `Page` of `SimplifiedEpisode` objects as a Promise
    */
-  async search(options: SearchOptions): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
-    const data: GetSearchResponse = await super._search(options, 'episode');
+  async search(options: SearchEpisodesOptions): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
+    if (!options?.market) throw new Error('Market was not provided');
+    const data: GetSearchResponse = await super._search(options, 'episode', options.market);
     return new Page(this.client, data.episodes, SimplifiedEpisode);
   }
 }

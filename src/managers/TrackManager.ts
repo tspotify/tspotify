@@ -10,7 +10,7 @@ import type {
   FetchSingleAudioFeaturesOptions,
   FetchMultipleAudioFeaturesOptions,
   FetchRecommendationsOptions,
-  SearchOptions,
+  SearchTracksOptions,
 } from '../interfaces/Interfaces.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type {
@@ -279,8 +279,8 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
    * @param options The options provided for searching tracks
    * @returns A `Page` of `Track` objects as a Promise
    */
-  async search(options: SearchOptions): Promise<Page<TrackObject, Track>> {
-    const data: GetSearchResponse = await super._search(options, 'track');
+  async search(options: SearchTracksOptions): Promise<Page<TrackObject, Track>> {
+    const data: GetSearchResponse = await super._search(options, 'track', options?.market);
     return new Page(this.client, data.tracks, Track);
   }
 }

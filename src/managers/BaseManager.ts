@@ -76,11 +76,11 @@ export default class BaseManager<R, T extends BaseStructure> {
    * @param options The options for searching
    * @param type The type of items to search
    */
-  protected async _search(options: SearchOptions, type: SearchItemType): Promise<GetSearchResponse> {
+  protected async _search(options: SearchOptions, type: SearchItemType, market?: string): Promise<GetSearchResponse> {
     const query: GetSearchQuery = {
       include_external: options?.includeExternal,
       limit: options?.limit,
-      market: options?.market,
+      market,
       offset: options?.offset,
       q: options.query,
       type: [type],

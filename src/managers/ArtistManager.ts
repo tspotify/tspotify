@@ -11,7 +11,7 @@ import type {
   FetchArtistOptions,
   FetchArtistsOptions,
   FetchArtistAlbumsOptions,
-  SearchOptions,
+  SearchArtistsOptions,
 } from '../interfaces/Interfaces.js';
 import type {
   GetArtistResponse,
@@ -192,8 +192,8 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
    * @param options The options provided for searching artists
    * @returns A `Page` of `Artist` objects as a Promise
    */
-  async search(options: SearchOptions): Promise<Page<ArtistObject, Artist>> {
-    const data: GetSearchResponse = await super._search(options, 'artist');
+  async search(options: SearchArtistsOptions): Promise<Page<ArtistObject, Artist>> {
+    const data: GetSearchResponse = await super._search(options, 'artist', options?.market);
     return new Page(this.client, data.artists, Artist);
   }
 }

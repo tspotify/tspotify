@@ -10,7 +10,7 @@ import type {
   FetchShowOptions,
   FetchShowsOptions,
   FetchShowEpisodesOptions,
-  SearchOptions,
+  SearchShowsOptions,
 } from '../interfaces/Interfaces.js';
 import type {
   SimplifiedShowObject,
@@ -131,8 +131,9 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
    * @param options The options provided for searching shows
    * @returns A `Page` of `SimplifiedShow` objects as a Promise
    */
-  async search(options: SearchOptions): Promise<Page<SimplifiedShowObject, SimplifiedShow>> {
-    const data: GetSearchResponse = await super._search(options, 'show');
+  async search(options: SearchShowsOptions): Promise<Page<SimplifiedShowObject, SimplifiedShow>> {
+    if (!options?.market) throw new Error('Market was not provided');
+    const data: GetSearchResponse = await super._search(options, 'show', options.market);
     return new Page(this.client, data.shows, SimplifiedShow);
   }
 }
