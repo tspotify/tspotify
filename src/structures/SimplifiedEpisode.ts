@@ -1,6 +1,6 @@
-import Client from '../client/Client.js';
 import BaseStructure from './BaseStructure.js';
 import { ExternalUrl, Image, EpisodeRestriction } from './Misc.js';
+import type Client from '../client/Client.js';
 import type { SimplifiedEpisodeObject, ImageObject } from 'spotify-api-types';
 
 export default class SimplifiedEpisode extends BaseStructure {

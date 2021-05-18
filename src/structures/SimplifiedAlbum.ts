@@ -1,5 +1,5 @@
 import BaseAlbum from './BaseAlbum.js';
-import Client from '../client/Client.js';
+import type Client from '../client/Client.js';
 import type { SimplifiedAlbumObject, AlbumGroupType } from 'spotify-api-types';
 
 export default class SimplifiedAlbum extends BaseAlbum {

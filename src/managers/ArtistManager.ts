@@ -1,17 +1,15 @@
 import BaseManager from './BaseManager.js';
-import Client from '../client/Client.js';
 import Artist from '../structures/Artist.js';
 import { RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import Track from '../structures/Track.js';
 import SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import { Page } from '../structures/Misc.js';
+import type Client from '../client/Client.js';
 import type SimplifiedArtist from '../structures/SimplifiedArtist.js';
 import type {
-  ArtistResolvable,
   FetchArtistOptions,
   FetchArtistsOptions,
-  FetchedArtist,
   FetchArtistAlbumsOptions,
   SearchOptions,
 } from '../interfaces/Interfaces.js';
@@ -28,6 +26,7 @@ import type {
   SimplifiedAlbumObject,
   GetSearchResponse,
 } from 'spotify-api-types';
+import type { ArtistResolvable, FetchedArtist } from '../interfaces/Types.js';
 
 /**
  * Stores cache for artists and holds their API methods

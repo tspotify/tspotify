@@ -1,4 +1,4 @@
-import type { ClientOptions } from './Constants.js';
+import type { ClientOptions } from '../interfaces/Interfaces.js';
 
 const has = (obj: Record<string, unknown>, key: string) => Object.prototype.hasOwnProperty.call(obj, key);
 

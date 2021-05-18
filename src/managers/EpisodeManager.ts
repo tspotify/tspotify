@@ -1,16 +1,10 @@
 import BaseManager from './BaseManager.js';
 import Episode from '../structures/Episode.js';
-import Client from '../client/Client.js';
 import { Page, RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
-import type {
-  EpisodeResolvable,
-  FetchEpisodeOptions,
-  FetchEpisodesOptions,
-  FetchedEpisode,
-  SearchOptions,
-} from '../interfaces/Interfaces.js';
+import type Client from '../client/Client.js';
+import type { FetchEpisodeOptions, FetchEpisodesOptions, SearchOptions } from '../interfaces/Interfaces.js';
 import type {
   GetEpisodeQuery,
   GetEpisodeResponse,
@@ -20,6 +14,7 @@ import type {
   SimplifiedEpisodeObject,
   GetSearchResponse,
 } from 'spotify-api-types';
+import type { EpisodeResolvable, FetchedEpisode } from '../interfaces/Types.js';
 
 export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episode> {
   constructor(client: Client) {

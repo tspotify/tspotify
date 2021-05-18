@@ -1,12 +1,11 @@
 import BaseManager from './BaseManager.js';
 import Playlist from '../structures/Playlist.js';
 import { Image, Page, PlaylistTrack, RequestData } from '../structures/Misc.js';
+import SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
 import type Client from '../client/Client.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
 import type {
-  PlaylistResolvable,
   FetchPlaylistOptions,
-  UserResolvable,
   FetchUserPlaylistsOptions,
   FetchPlaylistItemsOptions,
   FetchFeaturedPlaylistsOptions,
@@ -26,7 +25,7 @@ import type {
   PlaylistTrackObject,
   SimplifiedPlaylistObject,
 } from 'spotify-api-types';
-import { SimplifiedPlaylist } from '../index.js';
+import type { PlaylistResolvable, UserResolvable } from '../interfaces/Types.js';
 
 /**
  * Stores cache for playlists and holds their API methods

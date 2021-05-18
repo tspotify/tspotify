@@ -1,6 +1,6 @@
 import BaseStructure from './BaseStructure.js';
-import Client from '../client/Client.js';
 import { ExternalUrl } from './Misc.js';
+import type Client from '../client/Client.js';
 import type Collection from '../util/Collection.js';
 import type Track from './Track.js';
 import type Artist from './Artist.js';

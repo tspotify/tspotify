@@ -7,10 +7,8 @@ import { Page } from '../structures/Misc.js';
 import SimplifiedAlbum from '../structures/SimplifiedAlbum.js';
 import type Client from '../client/Client.js';
 import type {
-  AlbumResolvable,
   FetchAlbumOptions,
   FetchAlbumsOptions,
-  FetchedAlbum,
   FetchAlbumTracksOptions,
   FetchNewReleasesOptions,
   SearchOptions,
@@ -30,6 +28,7 @@ import type {
   GetNewReleasesResponse,
   GetSearchResponse,
 } from 'spotify-api-types';
+import type { AlbumResolvable, FetchedAlbum } from '../interfaces/Types.js';
 
 /**
  * Stores cache for albums and holds their API methods

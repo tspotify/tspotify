@@ -2,17 +2,14 @@ import BaseManager from './BaseManager.js';
 import Track from '../structures/Track.js';
 import { Page, Recommendation, RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
+import AudioFeatures from '../structures/AudioFeatures.js';
 import type Client from '../client/Client.js';
 import type {
-  TrackResolvable,
   FetchTrackOptions,
   FetchTracksOptions,
-  FetchedTrack,
   FetchSingleAudioFeaturesOptions,
   FetchMultipleAudioFeaturesOptions,
-  FetchedAudioFeatures,
   FetchRecommendationsOptions,
-  ArtistResolvable,
   SearchOptions,
 } from '../interfaces/Interfaces.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
@@ -28,7 +25,7 @@ import type {
   GetRecommendationsQuery,
   GetSearchResponse,
 } from 'spotify-api-types';
-import AudioFeatures from '../structures/AudioFeatures.js';
+import type { TrackResolvable, FetchedTrack, FetchedAudioFeatures, ArtistResolvable } from '../interfaces/Types.js';
 
 export default class TrackManager extends BaseManager<TrackResolvable, Track> {
   constructor(client: Client) {

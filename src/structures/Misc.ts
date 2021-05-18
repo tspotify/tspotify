@@ -2,6 +2,7 @@ import PublicUser from './PublicUser.js';
 import Track from './Track.js';
 import Episode from './Episode.js';
 import Collection from '../util/Collection.js';
+import SimplifiedTrack from './SimplifiedTrack.js';
 import type {
   CopyrightObject,
   ExternalIdObject,
@@ -23,8 +24,8 @@ import type {
   SimplifiedTrackObject,
 } from 'spotify-api-types';
 import type Client from '../client/Client.js';
-import type { SubdomainType, StructureConstructable } from '../interfaces/Interfaces.js';
-import SimplifiedTrack from './SimplifiedTrack.js';
+import type { StructureConstructable } from '../interfaces/Interfaces.js';
+import type { SubdomainType } from '../interfaces/Types.js';
 
 /**
  * The details about the access token returned by the API after logging in

@@ -1,4 +1,4 @@
-import Client from '../client/Client.js';
+import type Client from '../client/Client.js';
 
 /**
  * Base class for all structures

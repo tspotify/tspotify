@@ -1,9 +1,10 @@
-import Client from '../client/Client.js';
 import Collection from '../util/Collection.js';
-import type BaseStructure from '../structures/BaseStructure.js';
-import type { SearchItemType, SearchOptions, StructureConstructable } from '../interfaces/Interfaces.js';
 import { RequestData } from '../structures/Misc.js';
 import { GetSearchQuery, GetSearchResponse } from 'spotify-api-types';
+import type Client from '../client/Client.js';
+import type BaseStructure from '../structures/BaseStructure.js';
+import type { SearchOptions, StructureConstructable } from '../interfaces/Interfaces.js';
+import type { SearchItemType } from '../interfaces/Types.js';
 
 /**
  * Base class for all managers

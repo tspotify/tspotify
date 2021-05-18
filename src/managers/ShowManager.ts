@@ -7,10 +7,8 @@ import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import { Page } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
 import type {
-  ShowResolvable,
   FetchShowOptions,
   FetchShowsOptions,
-  FetchedShow,
   FetchShowEpisodesOptions,
   SearchOptions,
 } from '../interfaces/Interfaces.js';
@@ -25,6 +23,7 @@ import type {
   SimplifiedEpisodeObject,
   GetSearchResponse,
 } from 'spotify-api-types';
+import type { ShowResolvable, FetchedShow } from '../interfaces/Types.js';
 
 export default class ShowManager extends BaseManager<ShowResolvable, Show> {
   constructor(client: Client) {

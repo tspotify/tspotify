@@ -1,6 +1,6 @@
-import Client from '../client/Client.js';
 import BaseStructure from './BaseStructure.js';
 import { ExternalUrl, Image } from './Misc.js';
+import type Client from '../client/Client.js';
 import type { Copyright } from './Misc.js';
 import type { SimplifiedShowObject, ImageObject } from 'spotify-api-types';
 

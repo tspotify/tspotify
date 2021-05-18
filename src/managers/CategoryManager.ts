@@ -1,13 +1,12 @@
 import BaseManager from './BaseManager.js';
 import Category from '../structures/Category.js';
 import { Page, RequestData } from '../structures/Misc.js';
+import SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
 import type Client from '../client/Client.js';
 import type {
-  CategoryResolvable,
   FetchCategoriesOptions,
   FetchCategoryOptions,
   FetchCategoryPlaylistsOptions,
-  FetchedCategory,
 } from '../interfaces/Interfaces.js';
 import type {
   CategoryObject,
@@ -19,7 +18,7 @@ import type {
   GetMultipleCategoriesResponse,
   SimplifiedPlaylistObject,
 } from 'spotify-api-types';
-import SimplifiedPlaylist from '../structures/SimplifiedPlaylist.js';
+import type { CategoryResolvable, FetchedCategory } from '../interfaces/Types.js';
 
 export default class CategoryManager extends BaseManager<CategoryResolvable, Category> {
   constructor(client: Client) {

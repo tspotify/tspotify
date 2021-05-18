@@ -1,8 +1,9 @@
 import BaseClient from './client/BaseClient.js';
 import Client from './client/Client.js';
 
-export * from './interfaces/Util.js';
 export * from './interfaces/Interfaces.js';
+export * from './interfaces/Types.js';
+export * from './interfaces/Util.js';
 
 import AlbumManager from './managers/AlbumManager.js';
 import ArtistManager from './managers/ArtistManager.js';

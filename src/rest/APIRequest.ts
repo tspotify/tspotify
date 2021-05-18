@@ -1,6 +1,6 @@
+import fetch from 'node-fetch';
 import type RESTManager from './RESTManager.js';
 import type Client from '../client/Client.js';
-import fetch from 'node-fetch';
 
 export default class APIRequest {
   rest: RESTManager;
