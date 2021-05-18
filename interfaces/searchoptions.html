@@ -2714,9 +2714,6 @@ img {
 					<a href="searchoptions.html#limit" class="tsd-kind-icon">limit</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a href="searchoptions.html#market" class="tsd-kind-icon">market</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="searchoptions.html#offset" class="tsd-kind-icon">offset</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -2732,9 +2729,6 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<a href="market_o.html" class="tsd-signature-type" data-tsd-kind="Interface">Market_O</a>
-				</li>
-				<li>
 					<a href="limit_o.html" class="tsd-signature-type" data-tsd-kind="Interface">Limit_O</a>
 				</li>
 				<li>
@@ -2742,6 +2736,26 @@ img {
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">SearchOptions</span>
+							<ul class="tsd-hierarchy">
+								<li>
+									<a href="searchalbumsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchAlbumsOptions</a>
+								</li>
+								<li>
+									<a href="searchartistsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchArtistsOptions</a>
+								</li>
+								<li>
+									<a href="searchepisodesoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchEpisodesOptions</a>
+								</li>
+								<li>
+									<a href="searchplaylistsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchPlaylistsOptions</a>
+								</li>
+								<li>
+									<a href="searchshowsoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchShowsOptions</a>
+								</li>
+								<li>
+									<a href="searchtracksoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SearchTracksOptions</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</li>
@@ -2756,7 +2770,6 @@ img {
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="searchoptions.html#includeexternal" class="tsd-kind-icon">include<wbr>External</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="searchoptions.html#limit" class="tsd-kind-icon">limit</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="searchoptions.html#market" class="tsd-kind-icon">market</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="searchoptions.html#offset" class="tsd-kind-icon">offset</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="searchoptions.html#query" class="tsd-kind-icon">query</a></li>
 						</ul>
@@ -2772,7 +2785,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">include<wbr>External<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/8086987/src/interfaces/Interfaces.ts#L330">src/interfaces/Interfaces.ts:330</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/f65d45a/src/interfaces/Interfaces.ts#L330">src/interfaces/Interfaces.ts:330</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2783,28 +2796,12 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="limit_o.html">Limit_O</a>.<a href="limit_o.html#limit">limit</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/8086987/src/interfaces/Util.ts#L21">src/interfaces/Util.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/f65d45a/src/interfaces/Util.ts#L21">src/interfaces/Util.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>The maximum number of items to fetch</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-				<a name="market" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> market</h3>
-				<div class="tsd-signature tsd-kind-icon">market<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="market_o.html">Market_O</a>.<a href="market_o.html#market">market</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/8086987/src/interfaces/Util.ts#L39">src/interfaces/Util.ts:39</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The market you’d like to request</p>
 					</div>
 				</div>
 			</section>
@@ -2815,7 +2812,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="offset_o.html">Offset_O</a>.<a href="offset_o.html#offset">offset</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/8086987/src/interfaces/Util.ts#L53">src/interfaces/Util.ts:53</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/f65d45a/src/interfaces/Util.ts#L53">src/interfaces/Util.ts:53</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2830,7 +2827,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/8086987/src/interfaces/Interfaces.ts#L328">src/interfaces/Interfaces.ts:328</a></li>
+						<li>Defined in <a href="https://github.com/tspotify/tspotify/blob/f65d45a/src/interfaces/Interfaces.ts#L328">src/interfaces/Interfaces.ts:328</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
