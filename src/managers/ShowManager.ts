@@ -12,6 +12,7 @@ import type {
   FetchShowsOptions,
   FetchedShow,
   FetchShowEpisodesOptions,
+  SearchOptions,
 } from '../interfaces/Interfaces.js';
 import type {
   SimplifiedShowObject,
@@ -22,6 +23,7 @@ import type {
   GetShowEpisodesQuery,
   GetShowEpisodesResponse,
   SimplifiedEpisodeObject,
+  GetSearchResponse,
 } from 'spotify-api-types';
 
 export default class ShowManager extends BaseManager<ShowResolvable, Show> {
@@ -123,5 +125,15 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     const requestData = new RequestData('api', query, null);
     const data: GetShowEpisodesResponse = await this.client._api.shows(showID).episodes.get(requestData);
     return new Page(this.client, data, SimplifiedEpisode);
+  }
+
+  /**
+   * Fetches shows from Spotify by searching
+   * @param options The options provided for searching shows
+   * @returns A `Page` of `SimplifiedShow` objects as a Promise
+   */
+  async search(options: SearchOptions): Promise<Page<SimplifiedShowObject, SimplifiedShow>> {
+    const data: GetSearchResponse = await super._search(options, 'show');
+    return new Page(this.client, data.shows, SimplifiedShow);
   }
 }

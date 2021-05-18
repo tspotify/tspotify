@@ -1,6 +1,6 @@
 import BaseManager from './BaseManager.js';
 import Track from '../structures/Track.js';
-import { Recommendation, RequestData } from '../structures/Misc.js';
+import { Page, Recommendation, RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import type Client from '../client/Client.js';
 import type {
@@ -13,6 +13,7 @@ import type {
   FetchedAudioFeatures,
   FetchRecommendationsOptions,
   ArtistResolvable,
+  SearchOptions,
 } from '../interfaces/Interfaces.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type {
@@ -25,6 +26,7 @@ import type {
   GetMultipleTracksAudioFeaturesQuery,
   GetMultipleTracksAudioFeaturesResponse,
   GetRecommendationsQuery,
+  GetSearchResponse,
 } from 'spotify-api-types';
 import AudioFeatures from '../structures/AudioFeatures.js';
 
@@ -273,5 +275,15 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     const requestData = new RequestData('api', query, null);
     const data = await this.client._api.recommendations.get(requestData);
     return new Recommendation(this.client, data);
+  }
+
+  /**
+   * Fetches tracks from Spotify by searching
+   * @param options The options provided for searching tracks
+   * @returns A `Page` of `Track` objects as a Promise
+   */
+  async search(options: SearchOptions): Promise<Page<TrackObject, Track>> {
+    const data: GetSearchResponse = await super._search(options, 'track');
+    return new Page(this.client, data.tracks, Track);
   }
 }

@@ -368,3 +368,14 @@ export interface FetchRecommendationsOptions extends Limit_O, Market_O {
    */
   valence?: AttributeValues;
 }
+
+export interface SearchOptions extends Market_O, Limit_O, Offset_O {
+  /**
+   * The query for the search
+   */
+  query: string;
+
+  includeExternal?: string;
+}
+
+export type SearchItemType = 'album' | 'artist' | 'playlist' | 'track' | 'show' | 'episode';

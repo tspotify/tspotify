@@ -13,6 +13,7 @@ import type {
   FetchArtistsOptions,
   FetchedArtist,
   FetchArtistAlbumsOptions,
+  SearchOptions,
 } from '../interfaces/Interfaces.js';
 import type {
   GetArtistResponse,
@@ -25,6 +26,7 @@ import type {
   GetArtistAlbumsQuery,
   GetArtistAlbumsResponse,
   SimplifiedAlbumObject,
+  GetSearchResponse,
 } from 'spotify-api-types';
 
 /**
@@ -184,5 +186,15 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
     const requestData = new RequestData('api', query, null);
     const data: GetArtistAlbumsResponse = await this.client._api.artists(artistID).albums.get(requestData);
     return new Page(this.client, data, SimplifiedAlbum);
+  }
+
+  /**
+   * Fetches artists from Spotify by searching
+   * @param options The options provided for searching artists
+   * @returns A `Page` of `Artist` objects as a Promise
+   */
+  async search(options: SearchOptions): Promise<Page<ArtistObject, Artist>> {
+    const data: GetSearchResponse = await super._search(options, 'artist');
+    return new Page(this.client, data.artists, Artist);
   }
 }

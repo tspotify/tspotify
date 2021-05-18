@@ -13,6 +13,7 @@ import type {
   FetchedAlbum,
   FetchAlbumTracksOptions,
   FetchNewReleasesOptions,
+  SearchOptions,
 } from '../interfaces/Interfaces.js';
 import type BaseAlbum from '../structures/BaseAlbum.js';
 import type {
@@ -27,6 +28,7 @@ import type {
   SimplifiedAlbumObject,
   GetNewReleasesQuery,
   GetNewReleasesResponse,
+  GetSearchResponse,
 } from 'spotify-api-types';
 
 /**
@@ -162,6 +164,16 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     };
     const requestData = new RequestData('api', query, null);
     const data: GetNewReleasesResponse = await this.client._api.browse('new-releases').get(requestData);
+    return new Page(this.client, data.albums, SimplifiedAlbum);
+  }
+
+  /**
+   * Fetches albums from Spotify by searching
+   * @param options The options provided for searching albums
+   * @returns A `Page` of `SimplifiedAlbum` objects as a Promise
+   */
+  async search(options: SearchOptions): Promise<Page<SimplifiedAlbumObject, SimplifiedAlbum>> {
+    const data: GetSearchResponse = await super._search(options, 'album');
     return new Page(this.client, data.albums, SimplifiedAlbum);
   }
 }

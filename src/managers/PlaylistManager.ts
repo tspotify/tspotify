@@ -10,6 +10,7 @@ import type {
   FetchUserPlaylistsOptions,
   FetchPlaylistItemsOptions,
   FetchFeaturedPlaylistsOptions,
+  SearchOptions,
 } from '../interfaces/Interfaces.js';
 import type {
   GetFeaturedPlaylistsQuery,
@@ -19,6 +20,7 @@ import type {
   GetPlaylistItemsResponse,
   GetPlaylistQuery,
   GetPlaylistResponse,
+  GetSearchResponse,
   GetUserPlaylistsQuery,
   GetUserPlaylistsResponse,
   PlaylistTrackObject,
@@ -156,6 +158,16 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
     };
     const requestData = new RequestData('api', query, null);
     const data: GetFeaturedPlaylistsResponse = await this.client._api.browse('featured-playlists').get(requestData);
+    return new Page(this.client, data.playlists, SimplifiedPlaylist);
+  }
+
+  /**
+   * Fetches playlists from Spotify by searching
+   * @param options The options provided for searching playlists
+   * @returns A `Page` of `SimplifiedPlaylist` objects as a Promise
+   */
+  async search(options: SearchOptions): Promise<Page<SimplifiedPlaylistObject, SimplifiedPlaylist>> {
+    const data: GetSearchResponse = await super._search(options, 'playlist');
     return new Page(this.client, data.playlists, SimplifiedPlaylist);
   }
 }

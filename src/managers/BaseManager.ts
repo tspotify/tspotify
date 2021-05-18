@@ -1,7 +1,9 @@
 import Client from '../client/Client.js';
 import Collection from '../util/Collection.js';
 import type BaseStructure from '../structures/BaseStructure.js';
-import type { StructureConstructable } from '../interfaces/Interfaces.js';
+import type { SearchItemType, SearchOptions, StructureConstructable } from '../interfaces/Interfaces.js';
+import { RequestData } from '../structures/Misc.js';
+import { GetSearchQuery, GetSearchResponse } from 'spotify-api-types';
 
 /**
  * Base class for all managers
@@ -66,5 +68,24 @@ export default class BaseManager<R, T extends BaseStructure> {
     const entry = new this._holds(this.client, data);
     if (cacheAfterFetching) this.cache.set(id, entry);
     return entry;
+  }
+
+  /**
+   * Searches Spotify
+   * @param options The options for searching
+   * @param type The type of items to search
+   */
+  protected async _search(options: SearchOptions, type: SearchItemType): Promise<GetSearchResponse> {
+    const query: GetSearchQuery = {
+      include_external: options?.includeExternal,
+      limit: options?.limit,
+      market: options?.market,
+      offset: options?.offset,
+      q: options.query,
+      type: [type],
+    };
+    const requestData = new RequestData('api', query, null);
+    const data: GetSearchResponse = await this.client._api.search.get(requestData);
+    return data;
   }
 }

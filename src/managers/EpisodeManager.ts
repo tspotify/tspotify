@@ -1,14 +1,15 @@
 import BaseManager from './BaseManager.js';
 import Episode from '../structures/Episode.js';
 import Client from '../client/Client.js';
-import { RequestData } from '../structures/Misc.js';
+import { Page, RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
-import type SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
+import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import type {
   EpisodeResolvable,
   FetchEpisodeOptions,
   FetchEpisodesOptions,
   FetchedEpisode,
+  SearchOptions,
 } from '../interfaces/Interfaces.js';
 import type {
   GetEpisodeQuery,
@@ -16,6 +17,8 @@ import type {
   GetMultipleEpisodesQuery,
   GetMultipleEpisodesResponse,
   EpisodeObject,
+  SimplifiedEpisodeObject,
+  GetSearchResponse,
 } from 'spotify-api-types';
 
 export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episode> {
@@ -107,5 +110,15 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
       episodes.set(episode.id, episode);
     });
     return episodes;
+  }
+
+  /**
+   * Fetches episodes from Spotify by searching
+   * @param options The options provided for searching episodes
+   * @returns A `Page` of `SimplifiedEpisode` objects as a Promise
+   */
+  async search(options: SearchOptions): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
+    const data: GetSearchResponse = await super._search(options, 'episode');
+    return new Page(this.client, data.episodes, SimplifiedEpisode);
   }
 }
