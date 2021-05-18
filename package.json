@@ -1,7 +1,7 @@
 {
   "name": "tspotify",
-  "version": "0.0.6",
-  "description": "A TypeScript library for interacting with Spotify API",
+  "version": "0.0.7",
+  "description": "A nodejs library for interacting with Spotify API, written in TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc",
