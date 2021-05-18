@@ -44,6 +44,23 @@ export interface ApiOptions {
   baseAccountServiceURL: string;
 }
 
+export interface AttributeValues {
+  /**
+   * The ceiling value for the attribute. It would restrict results to only those tracks with a value of the attribute lower than this value
+   */
+  max?: number;
+
+  /**
+   * The floor value for the attribute. It would restrict results to only those tracks with a value of the attribute greater than this value
+   */
+  min?: number;
+
+  /**
+   * The target value for the attribute. It would return tracks with a value of the attribute nearest to this value
+   */
+  target?: number;
+}
+
 /**
  * The object containing client id and secret
  */
@@ -118,15 +135,13 @@ export interface FetchArtistsOptions extends CacheAfterFetching_O, SkipCacheChec
   artists: Array<ArtistResolvable>;
 }
 
+export interface FetchCategoriesOptions extends Country_O, Locale_O, Limit_O, Offset_O { }
+
 export interface FetchCategoryOptions extends CacheAfterFetching_O, Country_O, Locale_O, SkipCacheCheck_O {
   categoryResolvable: CategoryResolvable;
 }
 
-export interface FetchCategoriesOptions extends Country_O, Locale_O, Limit_O, Offset_O { }
-
 export interface FetchCategoryPlaylistsOptions extends Country_O, Limit_O, Offset_O { }
-
-export interface FetchNewReleasesOptions extends Country_O, Limit_O, Offset_O { }
 
 export interface FetchEpisodeOptions extends CacheAfterFetching_O, SkipCacheCheck_O, Market_R {
   /**
@@ -146,6 +161,12 @@ export interface FetchFeaturedPlaylistsOptions extends Country_O, Locale_O, Limi
   timestamp?: string;
 }
 
+export interface FetchMultipleAudioFeaturesOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
+  tracks: Array<TrackResolvable>;
+}
+
+export interface FetchNewReleasesOptions extends Country_O, Limit_O, Offset_O { }
+
 export interface FetchPlaylistItemsOptions extends Limit_O, Market_R, Offset_O {
   /**
    * The playlist whose items are to be fetched
@@ -153,97 +174,11 @@ export interface FetchPlaylistItemsOptions extends Limit_O, Market_R, Offset_O {
   playlist: PlaylistResolvable;
 }
 
-export interface FetchShowEpisodesOptions extends Limit_O, Market_R, Offset_O {
-  show: ShowResolvable;
-}
-
 export interface FetchPlaylistOptions extends CacheAfterFetching_O, Market_R, SkipCacheCheck_O {
   /**
    * The playlist to fetch
    */
   playlist: PlaylistResolvable;
-}
-
-export interface FetchShowOptions extends CacheAfterFetching_O, Market_R, SkipCacheCheck_O {
-  /**
-   * The show to fetch
-   */
-  show: ShowResolvable;
-}
-
-export interface FetchShowsOptions extends Market_R {
-  /**
-   * The show(s) to fetch
-   */
-  shows: Array<ShowResolvable>;
-}
-
-/**
- * Options used for fetching a user from Spotify
- */
-export interface FetchUserOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
-  user: UserResolvable;
-}
-
-export interface FetchTrackOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
-  /**
-   * The track to fetch
-   */
-  track: TrackResolvable;
-}
-
-export interface FetchTracksOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
-  /**
-   * The tracks(s) to fetch (max 50)
-   */
-  tracks: Array<TrackResolvable>;
-}
-
-/**
- * Options used for fetching playlists of a user
- */
-export interface FetchUserPlaylistsOptions extends Limit_O, Offset_O { }
-
-export interface FetchSingleAudioFeaturesOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
-  track: TrackResolvable;
-}
-
-export interface FetchMultipleAudioFeaturesOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
-  tracks: Array<TrackResolvable>;
-}
-
-export interface StructureConstructable<T> {
-  // @ts-ignore
-  new(...args: any[]): T;
-}
-
-export interface AttributeValues {
-  /**
-   * The floor value for the attribute. It would restrict results to only those tracks with a value of the attribute greater than this value
-   */
-  min?: number;
-
-  /**
-   * The ceiling value for the attribute. It would restrict results to only those tracks with a value of the attribute lower than this value
-   */
-  max?: number;
-
-  /**
-   * The target value for the attribute. It would return tracks with a value of the attribute nearest to this value
-   */
-  target?: number;
-}
-
-export interface SeedData {
-  /**
-   * The seed for generating recommendations
-   */
-  seed: SeedResolvable;
-
-  /**
-   * The type of this seed
-   */
-  type: SeedType;
 }
 
 export interface FetchRecommendationsOptions extends Limit_O, Market_O {
@@ -333,6 +268,59 @@ export interface FetchRecommendationsOptions extends Limit_O, Market_O {
   valence?: AttributeValues;
 }
 
+export interface FetchShowEpisodesOptions extends Limit_O, Market_R, Offset_O {
+  show: ShowResolvable;
+}
+
+export interface FetchShowOptions extends CacheAfterFetching_O, Market_R, SkipCacheCheck_O {
+  /**
+   * The show to fetch
+   */
+  show: ShowResolvable;
+}
+
+export interface FetchShowsOptions extends Market_R {
+  /**
+   * The show(s) to fetch
+   */
+  shows: Array<ShowResolvable>;
+}
+
+export interface FetchSingleAudioFeaturesOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
+  track: TrackResolvable;
+}
+
+export interface FetchTrackOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
+  /**
+   * The track to fetch
+   */
+  track: TrackResolvable;
+}
+
+export interface FetchTracksOptions extends CacheAfterFetching_O, Market_O, SkipCacheCheck_O {
+  /**
+   * The tracks(s) to fetch (max 50)
+   */
+  tracks: Array<TrackResolvable>;
+}
+
+/**
+ * Options used for fetching a user from Spotify
+ */
+export interface FetchUserOptions extends CacheAfterFetching_O, SkipCacheCheck_O {
+  user: UserResolvable;
+}
+
+/**
+ * Options used for fetching playlists of a user
+ */
+export interface FetchUserPlaylistsOptions extends Limit_O, Offset_O { }
+
+export interface StructureConstructable<T> {
+  // @ts-ignore
+  new(...args: any[]): T;
+}
+
 export interface SearchOptions extends Market_O, Limit_O, Offset_O {
   /**
    * The query for the search
@@ -340,4 +328,16 @@ export interface SearchOptions extends Market_O, Limit_O, Offset_O {
   query: string;
 
   includeExternal?: string;
+}
+
+export interface SeedData {
+  /**
+   * The seed for generating recommendations
+   */
+  seed: SeedResolvable;
+
+  /**
+   * The type of this seed
+   */
+  type: SeedType;
 }
