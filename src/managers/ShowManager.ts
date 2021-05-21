@@ -55,6 +55,7 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
 
   async fetch<T extends FetchShowOptions | FetchShowsOptions>(options: T): Promise<FetchedShow<T> | null> {
     if (!options) throw new Error('No show IDs were provided');
+    if (!options?.market) throw new Error('No market was provided');
     const show = (options as FetchShowOptions)?.show;
     if (show) {
       const showId = this.resolveID(show);
@@ -108,21 +109,25 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
   }
 
   /**
-   * Fetches episode(s) of a show
-   * @param options The options for fetching episode(s) of a show
+   * Fetches episodes of a show
+   * @param show The show whose episodes are to be fetched
+   * @param options The options for fetching episodes of a show
    * @returns A Page of `SimplifiedEpisode` objects as a Promise
    */
-  async fetchEpisodes(options: FetchShowEpisodesOptions): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
-    if (!options) throw new Error('No options were provided');
-    const showID = this.resolveID(options?.show);
-    if (!showID) throw new Error('Invalid show');
+  async fetchEpisodes(
+    show: ShowResolvable,
+    options: FetchShowEpisodesOptions,
+  ): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
+    const showId = this.resolveID(show);
+    if (!showId) throw new Error('Invalid show');
+    if (!options?.market) throw new Error('No market was provided');
     const query: GetShowEpisodesQuery = {
-      market: options?.market,
+      market: options.market,
       limit: options?.limit,
       offset: options?.offset,
     };
     const requestData = new RequestData('api', query, null);
-    const data: GetShowEpisodesResponse = await this.client._api.shows(showID).episodes.get(requestData);
+    const data: GetShowEpisodesResponse = await this.client._api.shows(showId).episodes.get(requestData);
     return new Page(this.client, data, SimplifiedEpisode);
   }
 

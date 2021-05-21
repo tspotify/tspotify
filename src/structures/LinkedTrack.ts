@@ -2,6 +2,7 @@ import BaseStructure from './BaseStructure.js';
 import { ExternalUrl } from './Misc.js';
 import type Client from '../client/Client.js';
 import type { LinkedTrackObject } from 'spotify-api-types';
+import type AudioFeatures from './AudioFeatures.js';
 
 export default class LinkedTrack extends BaseStructure {
   /**
@@ -34,5 +35,13 @@ export default class LinkedTrack extends BaseStructure {
     this.rawObjectType = data.type;
 
     this.uri = data.uri;
+  }
+
+  /**
+   * Fetches audio features for this track
+   * @returns An `AudioFeatures` object
+   */
+  async fetchAudioFeatures(): Promise<AudioFeatures | null> {
+    return this.client.tracks.fetchAudioFeatures(this.id);
   }
 }

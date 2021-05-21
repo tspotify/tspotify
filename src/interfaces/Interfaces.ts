@@ -268,9 +268,7 @@ export interface FetchRecommendationsOptions extends Limit_O, Market_O {
   valence?: AttributeValues;
 }
 
-export interface FetchShowEpisodesOptions extends Limit_O, Market_R, Offset_O {
-  show: ShowResolvable;
-}
+export interface FetchShowEpisodesOptions extends Limit_O, Market_R, Offset_O { }
 
 export interface FetchShowOptions extends CacheAfterFetching_O, Market_R, SkipCacheCheck_O {
   /**

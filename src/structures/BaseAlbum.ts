@@ -123,7 +123,9 @@ export default class BaseAlbum extends BaseStructure {
   }
 
   /**
-   * Fetches track(s) of the album
+   * Fetches tracks of this album
+   * @param options The options for fetching tracks of this album
+   * @returns A Page of `SimplifiedTrack` objects as a Promise
    */
   async fetchTracks(options?: FetchAlbumTracksOptions): Promise<Page<SimplifiedTrackObject, SimplifiedTrack>> {
     return this.client.albums.fetchTracks(this.id, options);

@@ -2,7 +2,10 @@ import BaseStructure from './BaseStructure.js';
 import { ExternalUrl, Image } from './Misc.js';
 import type Client from '../client/Client.js';
 import type { Copyright } from './Misc.js';
-import type { SimplifiedShowObject, ImageObject } from 'spotify-api-types';
+import type { SimplifiedShowObject, ImageObject, SimplifiedEpisodeObject } from 'spotify-api-types';
+import type { FetchShowEpisodesOptions } from '../interfaces/Interfaces.js';
+import type { Page } from './Misc.js';
+import type SimplifiedEpisode from './SimplifiedEpisode.js';
 
 export default class SimplifiedShow extends BaseStructure {
   /**
@@ -113,5 +116,14 @@ export default class SimplifiedShow extends BaseStructure {
       imagesArray.push(new Image(imageObject));
     });
     return imagesArray;
+  }
+
+  /**
+   * Fetches episodes of this show
+   * @param options The options for fetching episodes of this show
+   * @returns A Page of `SimplifiedEpisode` objects as a Promise
+   */
+  async fetchEpisodes(options: FetchShowEpisodesOptions): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
+    return this.client.shows.fetchEpisodes(this.id, options);
   }
 }
