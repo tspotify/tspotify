@@ -43,7 +43,7 @@ export default class Client extends BaseClient {
   albums: AlbumManager;
 
   /**
-   * Time at which the client became `READY`
+   * Time at which the client became `ready`
    */
   readyAt: Date | null;
 
@@ -117,7 +117,9 @@ export default class Client extends BaseClient {
   }
 
   /**
-   * Logs the client in and emits the `ready` event on success
+   * Logs in the client and emits `ready` event on success
+   * @param credentials The credentials that were used to log in the bot
+   * @returns An `AccessTokenDetails` object
    */
   async login(credentials: ClientCredentials): Promise<AccessTokenDetails> {
     this.credentials = credentials;
@@ -133,7 +135,8 @@ export default class Client extends BaseClient {
   }
 
   /**
-   * Fetch the list of markets where Spotify is available
+   * Fetches a list of markets where Spotify is available
+   * @returns An array of `ISO 3166-1 alpha-2` strings as a Promise
    */
   async fetchAvailableMarkets(): Promise<Array<string>> {
     const requestData = new RequestData('api', null, null);
@@ -143,7 +146,7 @@ export default class Client extends BaseClient {
 
   /**
    * Fetches a list of available genres
-   * @returns An array containing genres as a Promise
+   * @returns An array of genre strings as a Promise
    */
   async fetchRecommendationGenres(): Promise<Array<string>> {
     const requestData = new RequestData('api', null, null);
