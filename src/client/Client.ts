@@ -82,6 +82,11 @@ export default class Client extends BaseClient {
    */
   categories: CategoryManager;
 
+  /**
+   * Time at which the client last updated the access token
+   */
+  lastTokenUpdateAt: Date | null;
+
   constructor(options?: ClientOptions) {
     super(options);
 
@@ -110,6 +115,8 @@ export default class Client extends BaseClient {
     this.playlists = new PlaylistManager(this);
 
     this.categories = new CategoryManager(this);
+
+    this.lastTokenUpdateAt = null;
   }
 
   get _api(): any {
@@ -129,8 +136,25 @@ export default class Client extends BaseClient {
     const requestData = new RequestData('account', null, body);
     const data: PostClientCredentialsFlowResponse = await this._api.api.token.post(requestData);
     this.accessTokenDetails = new AccessTokenDetails(data);
-    this.readyAt = new Date();
+    this.readyAt = this.lastTokenUpdateAt = new Date();
     this.emit(Events.READY);
+    return this.accessTokenDetails;
+  }
+
+  /**
+   * Updates the access token by making a brand new `Client Credentials Flow` authorization request
+   * and emits `accessTokenUpdate` event on success
+   * @returns An `AccessTokenDetails` object
+   */
+  async _updateAccessToken(): Promise<AccessTokenDetails> {
+    const body: PostClientCredentialsFlowBody = {
+      grant_type: 'client_credentials',
+    };
+    const requestData = new RequestData('account', null, body);
+    const data: PostClientCredentialsFlowResponse = await this._api.api.token.post(requestData);
+    this.accessTokenDetails = new AccessTokenDetails(data);
+    this.lastTokenUpdateAt = new Date();
+    this.emit(Events.ACCESS_TOKEN_UPDATE, this.accessTokenDetails);
     return this.accessTokenDetails;
   }
 

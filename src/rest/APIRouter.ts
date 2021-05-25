@@ -1,4 +1,5 @@
 import type RESTManager from './RESTManager.js';
+import type { RequestData } from '../structures/Misc.js';
 
 /* eslint-disable */
 const noop = () => { };
@@ -11,7 +12,7 @@ export function buildRoute(manager: RESTManager): any {
     get(target: any, property: string): any {
       if (reflectors.includes(property)) return () => route.join('/');
       if (methods.includes(property)) {
-        return (options: any) => manager.request(property, route.join('/'), Object.assign({}, options));
+        return (options: RequestData<unknown, unknown>) => manager.request(property, route.join('/'), Object.assign({}, options));
       }
       route.push(property);
       return new Proxy(noop, handler);

@@ -16,4 +16,5 @@ export const DefaultClientOptions: ClientOptions = {
  */
 export const Events = {
   READY: 'ready',
+  ACCESS_TOKEN_UPDATE: 'accessTokenUpdate',
 };
