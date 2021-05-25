@@ -11,7 +11,12 @@ import PlaylistManager from '../managers/PlaylistManager.js';
 import { Events } from '../util/Constants.js';
 import CategoryManager from '../managers/CategoryManager.js';
 import type { ClientCredentials, ClientOptions } from '../interfaces/Interfaces.js';
-import type { GetAvailableMarketsResponse, GetRecommendationGenresResponse } from 'spotify-api-types';
+import type {
+  GetAvailableMarketsResponse,
+  GetRecommendationGenresResponse,
+  PostClientCredentialsFlowBody,
+  PostClientCredentialsFlowResponse,
+} from 'spotify-api-types';
 
 /**
  * The core of the library
@@ -116,12 +121,12 @@ export default class Client extends BaseClient {
    */
   async login(credentials: ClientCredentials): Promise<AccessTokenDetails> {
     this.credentials = credentials;
-    const requestData = new RequestData('account', null, {
+    const body: PostClientCredentialsFlowBody = {
       grant_type: 'client_credentials',
-    });
-    const data = await this._api.api.token.post(requestData);
+    };
+    const requestData = new RequestData('account', null, body);
+    const data: PostClientCredentialsFlowResponse = await this._api.api.token.post(requestData);
     this.accessTokenDetails = new AccessTokenDetails(data);
-    if (!this.accessTokenDetails) throw new Error('Invalid client credentials');
     this.readyAt = new Date();
     this.emit(Events.READY);
     return this.accessTokenDetails;

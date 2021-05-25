@@ -22,6 +22,7 @@ import type {
   RecommendationSeedObject,
   RecommendationsObject,
   SimplifiedTrackObject,
+  ClientCredentialsFlowAccessTokenObject,
 } from 'spotify-api-types';
 import type Client from '../client/Client.js';
 import type { StructureConstructable } from '../interfaces/Interfaces.js';
@@ -46,26 +47,25 @@ export class AccessTokenDetails {
    */
   expiresIn: number;
 
-  /* eslint-disable */
-  constructor(data: any) {
-    this.accessToken = data?.access_token ?? null;
+  constructor(data: ClientCredentialsFlowAccessTokenObject) {
+    this.accessToken = data.access_token;
 
-    this.tokenType = data?.token_type ?? null;
+    this.tokenType = data.token_type;
 
-    this.expiresIn = data?.expires_in ?? null;
+    this.expiresIn = data.expires_in;
   }
 }
 
 export class BaseRestriction {
   /**
    * The reason for the restriction. Supported values:
-   * 
+   *
    * `market` - The content item is not available in the given market
-   * 
+   *
    * `product` - The content item is not available for the user’s subscription type
-   * 
+   *
    * `explicit` - The content item is explicit and the user’s account is set to not play explicit content
-   * 
+   *
    * **⚠️Note**: Additional reasons may be added in the future. If you use this field, make sure that your application safely handles unknown values
    */
   reason: string;
@@ -184,8 +184,8 @@ export class ExternalUrl {
 
 export class ExplicitContentSettings {
   /**
-  * When `true`, indicates that explicit content should not be played
-  */
+   * When `true`, indicates that explicit content should not be played
+   */
   filterEnabled: boolean;
 
   /**
@@ -203,14 +203,14 @@ export class ExplicitContentSettings {
 export class Followers {
   /**
    * A link to the Web API endpoint providing full details of the followers, `null` if not available.
-   * 
+   *
    * **⚠️Note**: Please note that this will always be set to null, as the Web API does not support it at the moment
    */
   href: string | null;
 
   /**
-  * The total number of followers
-  */
+   * The total number of followers
+   */
   total: number;
 
   constructor(data: FollowersObject) {
@@ -227,8 +227,8 @@ export class Image {
   height: number | null;
 
   /**
-  * The source URL of the image
-  */
+   * The source URL of the image
+   */
   url: string;
 
   /**
@@ -290,7 +290,7 @@ export class Page<R, T> {
     const patchedItems = new Collection<string, T>();
     data.forEach(item => {
       // @ts-ignore
-      patchedItems.set(item?.id ?? item.track.id, new this._holds(this.client, item))
+      patchedItems.set(item?.id ?? item.track.id, new this._holds(this.client, item));
     });
     return patchedItems;
   }
@@ -299,14 +299,14 @@ export class Page<R, T> {
 export class PlaylistTrack {
   /**
    * The date and time the track or episode was added
-   * 
+   *
    * **⚠️Note**: Some very old playlists may return `null` in this field
    */
   addedAt: Date | null;
 
   /**
    * The Spotify user who added the track or episode
-   * 
+   *
    * **⚠️Note**: Some very old playlists may return `null` in this field
    */
   addedBy: PublicUser | null;
@@ -317,8 +317,8 @@ export class PlaylistTrack {
   isLocal: boolean;
 
   /**
-  * Information about the track or episode
-  */
+   * Information about the track or episode
+   */
   track: Track | Episode;
 
   constructor(client: Client, data: PlaylistTrackObject) {
@@ -328,7 +328,10 @@ export class PlaylistTrack {
 
     this.isLocal = data.is_local;
 
-    this.track = data.track.type === 'track' ? new Track(client, data.track as TrackObject) : new Episode(client, data.track as EpisodeObject);
+    this.track =
+      data.track.type === 'track'
+        ? new Track(client, data.track as TrackObject)
+        : new Episode(client, data.track as EpisodeObject);
   }
 }
 
@@ -378,7 +381,7 @@ export class RecommendationSeed {
 
   /**
    * The entity type of this seed
-   * 
+   *
    * One of `ARTIST`, `TRACK` or `GENRE`
    */
   type: string;
