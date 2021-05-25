@@ -4,8 +4,8 @@
   "description": "A nodejs library for interacting with Spotify API, written in TypeScript",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npx tsc",
-    "doc": "npx typedoc",
+    "build": "tsc",
+    "doc": "typedoc",
     "test": "node test/test.js"
   },
   "repository": {
