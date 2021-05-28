@@ -3,6 +3,7 @@ import Episode from '../structures/Episode.js';
 import { Page, RequestData } from '../structures/Misc.js';
 import Collection from '../util/Collection.js';
 import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
+import { CustomTypeError } from '../errors/ErrorIndex.js';
 import type Client from '../client/Client.js';
 import type { FetchEpisodeOptions, FetchEpisodesOptions, SearchEpisodesOptions } from '../interfaces/Interfaces.js';
 import type {
@@ -113,7 +114,7 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
    * @returns A `Page` of `SimplifiedEpisode` objects as a Promise
    */
   async search(options: SearchEpisodesOptions): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
-    if (!options?.market) throw new Error('Market was not provided');
+    if (!options?.market) throw new CustomTypeError('MISSING_MARKET');
     const data: GetSearchResponse = await super._search(options, 'episode', options.market);
     return new Page(this.client, data.episodes, SimplifiedEpisode);
   }
