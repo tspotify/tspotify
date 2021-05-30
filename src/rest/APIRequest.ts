@@ -47,15 +47,10 @@ export default class APIRequest {
       }
     }
 
-    const res = await fetch(url, {
+    return fetch(url, {
       method: this.method,
       headers,
       body,
     });
-    const data = await res.json();
-    if (data?.error) {
-      throw new Error(data?.error.message || `${data?.error}: ${data?.error_description}`);
-    }
-    return data;
   }
 }

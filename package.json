@@ -20,6 +20,7 @@
   "homepage": "https://github.com/tspotify/tspotify#readme",
   "dependencies": {
     "@discordjs/collection": "^0.1.6",
+    "@sapphire/async-queue": "^1.1.2",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
