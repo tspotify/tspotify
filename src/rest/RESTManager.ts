@@ -1,14 +1,25 @@
 import APIRequest from './APIRequest.js';
 import { buildRoute } from './APIRouter.js';
+import RequestHandler from './RequestHandler.js';
+import Collection from '../util/Collection.js';
 import type Client from '../client/Client.js';
 import type { ClientCredentials } from '../interfaces/Interfaces.js';
 import type { RequestData } from '../structures/Misc.js';
 
 export default class RESTManager {
+  /**
+   * The client that initiated this class
+   */
   client: Client;
+
+  /**
+   * The collection of request handlers
+   */
+  requestHandlers: Collection<string, RequestHandler>;
 
   constructor(client: Client) {
     this.client = client;
+    this.requestHandlers = new Collection();
   }
 
   get routeBuilder(): any {
@@ -34,10 +45,15 @@ export default class RESTManager {
   }
 
   async request(method: string, path: string, options: RequestData<unknown, unknown>): Promise<any> {
-    // check whether access token has been expired or not for every non-authorization endpoint request, if yes then re-authorize the client
+    // for every non-authorization endpoint request, check whether access token has expired or not. If yes, then re-authorize the client
     if (options.subdomain !== 'account') await this._checkAccessTokenStatus();
     const apiRequest = new APIRequest(this, method, path, options);
-    return apiRequest.make();
+    let handler = this.requestHandlers.get(apiRequest.route);
+    if (!handler) {
+      handler = new RequestHandler(this);
+      this.requestHandlers.set(apiRequest.route, handler);
+    }
+    return handler.push(apiRequest);
   }
 
   async _checkAccessTokenStatus(): Promise<undefined> {

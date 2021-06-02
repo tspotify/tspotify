@@ -1,4 +1,4 @@
-import { ErrorMessageBuilder } from '../interfaces/Interfaces.js';
+import type { ErrorMessageBuilder } from '../interfaces/Interfaces.js';
 
 const errorMessagesMap = new Map<string, string | ErrorMessageBuilder>();
 

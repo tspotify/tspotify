@@ -7,6 +7,7 @@ export default class APIRequest {
   method: string;
   path: string;
   options: any;
+  route: string;
   client: Client;
 
   constructor(rest: RESTManager, method: string, path: string, options: any) {
@@ -14,6 +15,7 @@ export default class APIRequest {
     this.method = method;
     this.path = path;
     this.options = options;
+    this.route = options.route;
     this.client = rest.client;
 
     if (options.query) {
@@ -47,15 +49,10 @@ export default class APIRequest {
       }
     }
 
-    const res = await fetch(url, {
+    return fetch(url, {
       method: this.method,
       headers,
       body,
     });
-    const data = await res.json();
-    if (data?.error) {
-      throw new Error(data?.error.message || `${data?.error}: ${data?.error_description}`);
-    }
-    return data;
   }
 }
