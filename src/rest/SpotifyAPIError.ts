@@ -27,7 +27,6 @@ export default class SpotifyAPIError extends Error {
   ) {
     super();
     this.message = this._patchErrorMessage(errorObject);
-    this.name = 'SpotifyAPIError';
 
     this.method = method;
     this.path = path;
@@ -37,10 +36,12 @@ export default class SpotifyAPIError extends Error {
   private _patchErrorMessage(errorObject: AuthenticationErrorObject | RegularErrorObject) {
     if (typeof errorObject.error === 'string') {
       const authError = errorObject as AuthenticationErrorObject;
+      this.name = `SpotifyAPIError [${authError.error}]`;
       return authError.error_description;
     }
 
     const regularError = (errorObject as RegularErrorObject).error;
+    this.name = `SpotifyAPIError [${regularError.status}]`;
     return regularError.message;
   }
 }

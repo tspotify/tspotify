@@ -1,6 +1,7 @@
 import { AsyncQueue } from '@sapphire/async-queue';
 import { parseResponse } from '../util/Util.js';
 import SpotifyAPIError from './SpotifyAPIError.js';
+import HTTPError from './HTTPError.js';
 import type { Response } from 'node-fetch';
 import type APIRequest from './APIRequest.js';
 import type RESTManager from './RESTManager.js';
@@ -36,7 +37,7 @@ export default class RequestHandler {
     try {
       res = await request.make();
     } catch (error) {
-      throw new Error(error);
+      throw new HTTPError(request.method, error.message, error.name, request.path, error.type, error.code);
     }
 
     if (res && res.headers) {
@@ -49,7 +50,7 @@ export default class RequestHandler {
         try {
           errorObject = await parseResponse(res);
         } catch (error) {
-          throw new Error(error);
+          throw new HTTPError(request.method, error.message, error.name, request.path, error.type, error.code);
         }
         throw new SpotifyAPIError(request.method, request.path, res.status, errorObject);
       }
