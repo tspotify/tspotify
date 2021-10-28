@@ -11,7 +11,7 @@ import type {
   FetchMultipleAudioFeaturesOptions,
   FetchRecommendationsOptions,
   SearchTracksOptions,
-} from '../interfaces/Interfaces.js';
+} from '../typings/Interfaces.js';
 import type SimplifiedTrack from '../structures/SimplifiedTrack.js';
 import type {
   TrackObject,
@@ -25,7 +25,7 @@ import type {
   GetRecommendationsQuery,
   GetSearchResponse,
 } from 'spotify-api-types';
-import type { TrackResolvable, FetchedTrack, FetchedAudioFeatures, ArtistResolvable } from '../interfaces/Types.js';
+import type { TrackResolvable, FetchedTrack, FetchedAudioFeatures, ArtistResolvable } from '../typings/Types.js';
 
 export default class TrackManager extends BaseManager<TrackResolvable, Track> {
   constructor(client: Client) {
@@ -35,20 +35,20 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
   /**
    * Resolves a TrackResolvable to a Track object
    */
-  resolve(trackResolvable: TrackResolvable): Track | null {
+  override resolve(trackResolvable: TrackResolvable): Track | null {
     const track = super.resolve(trackResolvable);
     if (track) return track;
-    const trackID = this.resolveID(trackResolvable);
-    if (trackID) return super.resolve(trackID);
+    const trackId = this.resolveId(trackResolvable);
+    if (trackId) return super.resolve(trackId);
     return null;
   }
 
   /**
    * Resolves a TrackResolvable to a Track ID
    */
-  resolveID(trackResolvable: TrackResolvable): string | null {
-    const trackID = super.resolveID(trackResolvable);
-    if (trackID) return trackID;
+  override resolveId(trackResolvable: TrackResolvable): string | null {
+    const trackId = super.resolveId(trackResolvable);
+    if (trackId) return trackId;
     if ((trackResolvable as SimplifiedTrack).id) {
       return (trackResolvable as SimplifiedTrack).id;
     }
@@ -62,19 +62,19 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     options: T,
   ): Promise<FetchedTrack<T> | null> {
     if (!options) throw new Error('No track IDs were provided');
-    const trackId = this.resolveID(options as TrackResolvable);
+    const trackId = this.resolveId(options as TrackResolvable);
     // @ts-ignore
     if (trackId) return this._fetchSingle(trackId);
     const track = (options as FetchTrackOptions)?.track;
     if (track) {
-      const trackId = this.resolveID(track);
+      const trackId = this.resolveId(track);
       // @ts-ignore
       if (trackId) return this._fetchSingle(trackId, options);
     }
     const tracks = (options as FetchTracksOptions)?.tracks;
     if (tracks) {
       if (Array.isArray(tracks)) {
-        const trackIds = tracks.map(track => this.resolveID(track));
+        const trackIds = tracks.map(track => this.resolveId(track));
         // @ts-ignore
         if (trackIds) return this._fetchMany(trackIds, options);
       }
@@ -90,7 +90,7 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     const query: GetTrackQuery = {
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetTrackResponse = await this.client._api.tracks(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
@@ -112,7 +112,7 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
       ids,
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetMultipleTracksResponse = await this.client._api.tracks.get(requestData);
     data.tracks.forEach(trackObject => {
       const track = this.add((trackObject as TrackObject)?.id, options?.cacheAfterFetching, trackObject);
@@ -127,22 +127,22 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
    * @returns An `AudioFeatures` object or an array of `AudioFeatures` as a Promise
    */
   async fetchAudioFeatures<
-    T extends TrackResolvable | FetchSingleAudioFeaturesOptions | FetchMultipleAudioFeaturesOptions
+    T extends TrackResolvable | FetchSingleAudioFeaturesOptions | FetchMultipleAudioFeaturesOptions,
   >(options: T): Promise<FetchedAudioFeatures<T> | null> {
     if (!options) throw new Error('No tracks were provided');
-    const trackId = this.resolveID(options as TrackResolvable);
+    const trackId = this.resolveId(options as TrackResolvable);
     // @ts-ignore
     if (trackId) return this._fetchSingleAudioFeatures(trackId, options);
     const track = (options as FetchSingleAudioFeaturesOptions)?.track;
     if (track) {
-      const trackId = this.resolveID(track);
+      const trackId = this.resolveId(track);
       // @ts-ignore
       if (trackId) return this._fetchSingleAudioFeatures(trackId, options);
     }
     const tracks = (options as FetchMultipleAudioFeaturesOptions).tracks;
     if (tracks) {
       if (Array.isArray(tracks)) {
-        const trackIds = tracks.map(track => this.resolveID(track));
+        const trackIds = tracks.map(track => this.resolveId(track));
         // @ts-ignore
         if (trackIds) return this._fetchManyAudioFeatures(trackIds, options);
       }
@@ -156,8 +156,7 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
   ): Promise<AudioFeatures> {
     const track = this.cache.get(id);
     if (!options?.skipCacheCheck && track?.features) track.features;
-    const requestData = new RequestData('api', null, null);
-    const data: GetTrackAudioFeaturesResponse = await this.client._api('audio-features', id).get(requestData);
+    const data: GetTrackAudioFeaturesResponse = await this.client._api('audio-features', id).get();
     const audioFeatures = new AudioFeatures(this.client, data);
     if ((options?.cacheAfterFetching ?? true) && track) {
       track.features = audioFeatures;
@@ -184,7 +183,7 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     const query: GetMultipleTracksAudioFeaturesQuery = {
       ids,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetMultipleTracksAudioFeaturesResponse = await this.client._api('audio-features').get(requestData);
     data.audio_features.forEach(audioFeaturesObject => {
       const audioFeatures = audioFeaturesObject?.id ? new AudioFeatures(this.client, audioFeaturesObject) : null;
@@ -255,13 +254,13 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     if (!options?.seeds) throw new Error('No seeds were provided');
     options.seeds.forEach(seedData => {
       if (seedData?.type === 'ARTIST') {
-        const artistId = this.client.artists.resolveID(seedData.seed as ArtistResolvable);
+        const artistId = this.client.artists.resolveId(seedData.seed as ArtistResolvable);
         if (artistId) query.seed_artists.push(artistId);
       } else if (seedData?.type === 'GENRE') {
         const genre = seedData?.seed;
         if (genre && typeof genre === 'string') query.seed_genres.push(genre);
       } else if (seedData?.type === 'TRACK') {
-        const trackId = this.resolveID(seedData?.seed as TrackResolvable);
+        const trackId = this.resolveId(seedData?.seed as TrackResolvable);
         if (trackId) query.seed_tracks.push(trackId);
       }
     });
@@ -269,7 +268,7 @@ export default class TrackManager extends BaseManager<TrackResolvable, Track> {
     const totalSeeds = seed_artists.length + seed_genres.length + seed_tracks.length;
     if (totalSeeds < 1) throw new Error('Atleast one seed should be provided');
     if (totalSeeds > 5) throw new Error('Only upto 5 seeds can be provided');
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data = await this.client._api.recommendations.get(requestData);
     return new Recommendation(this.client, data);
   }

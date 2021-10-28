@@ -1,10 +1,9 @@
 import BaseManager from './BaseManager.js';
 import PublicUser from '../structures/PublicUser.js';
-import { RequestData } from '../structures/Misc.js';
 import type Client from '../client/Client.js';
-import type { FetchUserOptions } from '../interfaces/Interfaces.js';
 import type { GetUserResponse } from 'spotify-api-types';
-import type { UserResolvable } from '../interfaces/Types.js';
+import type { UserResolvable } from '../typings/Types.js';
+import type { FetchUserOptions } from '../typings/Interfaces.js';
 
 export default class UserManager extends BaseManager<UserResolvable, PublicUser> {
   constructor(client: Client) {
@@ -18,11 +17,11 @@ export default class UserManager extends BaseManager<UserResolvable, PublicUser>
    */
   async fetch<T extends UserResolvable | FetchUserOptions>(options: T): Promise<PublicUser | null> {
     if (!options) throw new Error('Invalid argument');
-    const userId = this.resolveID(options as UserResolvable);
+    const userId = this.resolveId(options as UserResolvable);
     if (userId) return this._fetchSingle(userId);
     const user = (options as FetchUserOptions)?.user;
     if (user) {
-      const userId = this.resolveID(user);
+      const userId = this.resolveId(user);
       if (userId) return this._fetchSingle(userId, options as FetchUserOptions);
     }
     return null;
@@ -33,8 +32,7 @@ export default class UserManager extends BaseManager<UserResolvable, PublicUser>
       const cachedUser = this.cache.get(id);
       if (cachedUser) return cachedUser;
     }
-    const requestData = new RequestData('api', null, null);
-    const data: GetUserResponse = await this.client._api.users(id).get(requestData);
+    const data: GetUserResponse = await this.client._api.users(id).get();
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
 }

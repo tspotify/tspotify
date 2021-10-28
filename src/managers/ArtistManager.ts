@@ -12,7 +12,7 @@ import type {
   FetchArtistsOptions,
   FetchArtistAlbumsOptions,
   SearchArtistsOptions,
-} from '../interfaces/Interfaces.js';
+} from '../typings/Interfaces.js';
 import type {
   GetArtistResponse,
   GetMultipleArtistsQuery,
@@ -26,7 +26,7 @@ import type {
   SimplifiedAlbumObject,
   GetSearchResponse,
 } from 'spotify-api-types';
-import type { ArtistResolvable, FetchedArtist } from '../interfaces/Types.js';
+import type { ArtistResolvable, FetchedArtist } from '../typings/Types.js';
 
 /**
  * Stores cache for artists and holds their API methods
@@ -39,20 +39,20 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
   /**
    * Resolves an ArtistResolvable to an Artist object
    */
-  resolve(artistResolvable: ArtistResolvable): Artist | null {
+  override resolve(artistResolvable: ArtistResolvable): Artist | null {
     const artist = super.resolve(artistResolvable);
     if (artist) return artist;
-    const artistID = this.resolveID(artistResolvable);
-    if (artistID) return super.resolve(artistID);
+    const artistId = this.resolveId(artistResolvable);
+    if (artistId) return super.resolve(artistId);
     return null;
   }
 
   /**
    * Resolves an ArtistResolvable to an Artist ID
    */
-  resolveID(artistResolvable: ArtistResolvable): string | null {
-    const artistID = super.resolveID(artistResolvable);
-    if (artistID) return artistID;
+  override resolveId(artistResolvable: ArtistResolvable): string | null {
+    const artistId = super.resolveId(artistResolvable);
+    if (artistId) return artistId;
     if ((artistResolvable as SimplifiedArtist).id) {
       return (artistResolvable as SimplifiedArtist).id;
     }
@@ -66,19 +66,19 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
     options: T,
   ): Promise<FetchedArtist<T> | null> {
     if (!options) throw new Error('No artist IDs were provided');
-    const artistId = this.resolveID(options as ArtistResolvable);
+    const artistId = this.resolveId(options as ArtistResolvable);
     // @ts-ignore
     if (artistId) return this._fetchSingle(artistId);
     const artist = (options as FetchArtistOptions)?.artist;
     if (artist) {
-      const artistId = this.resolveID(artist);
+      const artistId = this.resolveId(artist);
       // @ts-ignore
       if (artistId) return this._fetchSingle(artistId, options);
     }
     const artists = (options as FetchArtistsOptions)?.artists;
     if (artists) {
       if (Array.isArray(artists)) {
-        const artistIds = artists.map(artist => this.resolveID(artist));
+        const artistIds = artists.map(artist => this.resolveId(artist));
         // @ts-ignore
         if (artistIds) return this._fetchMany(artistIds, options);
       }
@@ -91,8 +91,7 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
       const cachedArtist = this.cache.get(id);
       if (cachedArtist) return cachedArtist;
     }
-    const requestData = new RequestData('api', null, null);
-    const data: GetArtistResponse = await this.client._api.artists(id).get(requestData);
+    const data: GetArtistResponse = await this.client._api.artists(id).get();
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
 
@@ -112,7 +111,7 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
     const query: GetMultipleArtistsQuery = {
       ids,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetMultipleArtistsResponse = await this.client._api.artists.get(requestData);
     data.artists.forEach(artistObject => {
       const artist = this.add((artistObject as ArtistObject).id, options?.cacheAfterFetching, artistObject);
@@ -129,13 +128,13 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
    */
   async fetchTopTracks(artist: ArtistResolvable, market: string): Promise<Collection<string, Track>> {
     if (!market || typeof market !== 'string') throw new Error('Invalid market');
-    const artistID = this.resolveID(artist);
-    if (!artistID) throw new Error('Invalid artist');
+    const artistId = this.resolveId(artist);
+    if (!artistId) throw new Error('Invalid artist');
     const query: GetArtistTopTracksQuery = {
       market,
     };
-    const requestData = new RequestData('api', query, null);
-    const data: GetArtistTopTracksResponse = await this.client._api.artists(artistID, 'top-tracks').get(requestData);
+    const requestData = new RequestData({ query });
+    const data: GetArtistTopTracksResponse = await this.client._api.artists(artistId, 'top-tracks').get(requestData);
     const tracks = new Collection<string, Track>();
     data.tracks.forEach(trackObject => {
       const track = new Track(this.client, trackObject);
@@ -150,12 +149,9 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
    * @returns A collection of `Artist` objects as a Promise
    */
   async fetchRelatedArtist(artist: ArtistResolvable): Promise<Collection<string, Artist>> {
-    const artistID = this.resolveID(artist);
-    if (!artistID) throw new Error('Invalid artist');
-    const requestData = new RequestData('api', null, null);
-    const data: GetRelatedArtistsResponse = await this.client._api
-      .artists(artistID, 'related-artists')
-      .get(requestData);
+    const artistId = this.resolveId(artist);
+    if (!artistId) throw new Error('Invalid artist');
+    const data: GetRelatedArtistsResponse = await this.client._api.artists(artistId, 'related-artists').get();
     const artists = new Collection<string, Artist>();
     data.artists.forEach(artistObject => {
       const artist = new Artist(this.client, artistObject);
@@ -174,16 +170,16 @@ export default class ArtistManager extends BaseManager<ArtistResolvable, Artist>
     artist: ArtistResolvable,
     options?: FetchArtistAlbumsOptions,
   ): Promise<Page<SimplifiedAlbumObject, SimplifiedAlbum>> {
-    const artistID = this.resolveID(artist);
-    if (!artistID) throw new Error('Invalid artist');
+    const artistId = this.resolveId(artist);
+    if (!artistId) throw new Error('Invalid artist');
     const query: GetArtistAlbumsQuery = {
       include_groups: options?.includeGroups,
       limit: options?.limit,
       market: options?.market,
       offset: options?.offset,
     };
-    const requestData = new RequestData('api', query, null);
-    const data: GetArtistAlbumsResponse = await this.client._api.artists(artistID).albums.get(requestData);
+    const requestData = new RequestData({ query });
+    const data: GetArtistAlbumsResponse = await this.client._api.artists(artistId).albums.get(requestData);
     return new Page(this.client, data, SimplifiedAlbum);
   }
 

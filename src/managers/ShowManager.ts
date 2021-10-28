@@ -11,7 +11,7 @@ import type {
   FetchShowsOptions,
   FetchShowEpisodesOptions,
   SearchShowsOptions,
-} from '../interfaces/Interfaces.js';
+} from '../typings/Interfaces.js';
 import type {
   SimplifiedShowObject,
   GetShowQuery,
@@ -23,7 +23,7 @@ import type {
   SimplifiedEpisodeObject,
   GetSearchResponse,
 } from 'spotify-api-types';
-import type { ShowResolvable, FetchedShow } from '../interfaces/Types.js';
+import type { ShowResolvable, FetchedShow } from '../typings/Types.js';
 
 export default class ShowManager extends BaseManager<ShowResolvable, Show> {
   constructor(client: Client) {
@@ -33,20 +33,20 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
   /**
    * Resolves a ShowResolvable to a Show object
    */
-  resolve(showResolvable: ShowResolvable): Show | null {
+  override resolve(showResolvable: ShowResolvable): Show | null {
     const show = super.resolve(showResolvable);
     if (show) return show;
-    const showID = this.resolveID(showResolvable);
-    if (showID) return super.resolve(showID);
+    const showId = this.resolveId(showResolvable);
+    if (showId) return super.resolve(showId);
     return null;
   }
 
   /**
    * Resolves a ShowResolvable to a Show ID
    */
-  resolveID(showResolvable: ShowResolvable): string | null {
-    const showID = super.resolveID(showResolvable);
-    if (showID) return showID;
+  override resolveId(showResolvable: ShowResolvable): string | null {
+    const showId = super.resolveId(showResolvable);
+    if (showId) return showId;
     if ((showResolvable as SimplifiedShow).id) {
       return (showResolvable as SimplifiedShow).id;
     }
@@ -58,14 +58,14 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     if (!options?.market) throw new Error('No market was provided');
     const show = (options as FetchShowOptions)?.show;
     if (show) {
-      const showId = this.resolveID(show);
+      const showId = this.resolveId(show);
       // @ts-ignore
       if (showId) return this._fetchSingle(showId, options);
     }
     const shows = (options as FetchShowsOptions)?.shows;
     if (shows) {
       if (Array.isArray(shows)) {
-        const showIds = shows.map(show => this.resolveID(show));
+        const showIds = shows.map(show => this.resolveId(show));
         // @ts-ignore
         if (showIds) return this._fetchMany(showIds, options);
       }
@@ -81,7 +81,7 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     const query: GetShowQuery = {
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetShowResponse = await this.client._api.shows(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
@@ -98,7 +98,7 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
       ids,
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetMultipleShowsResponse = await this.client._api.shows.get(requestData);
     const simplifiedShows = new Collection<string, SimplifiedShow>();
     data.shows.forEach(simplifiedShowObject => {
@@ -118,7 +118,7 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
     show: ShowResolvable,
     options: FetchShowEpisodesOptions,
   ): Promise<Page<SimplifiedEpisodeObject, SimplifiedEpisode>> {
-    const showId = this.resolveID(show);
+    const showId = this.resolveId(show);
     if (!showId) throw new Error('Invalid show');
     if (!options?.market) throw new Error('No market was provided');
     const query: GetShowEpisodesQuery = {
@@ -126,7 +126,7 @@ export default class ShowManager extends BaseManager<ShowResolvable, Show> {
       limit: options?.limit,
       offset: options?.offset,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetShowEpisodesResponse = await this.client._api.shows(showId).episodes.get(requestData);
     return new Page(this.client, data, SimplifiedEpisode);
   }

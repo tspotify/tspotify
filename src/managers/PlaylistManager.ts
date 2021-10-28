@@ -10,7 +10,7 @@ import type {
   FetchPlaylistItemsOptions,
   FetchFeaturedPlaylistsOptions,
   SearchPlaylistsOptions,
-} from '../interfaces/Interfaces.js';
+} from '../typings/Interfaces.js';
 import type {
   GetFeaturedPlaylistsQuery,
   GetFeaturedPlaylistsResponse,
@@ -25,7 +25,7 @@ import type {
   PlaylistTrackObject,
   SimplifiedPlaylistObject,
 } from 'spotify-api-types';
-import type { PlaylistResolvable, UserResolvable } from '../interfaces/Types.js';
+import type { PlaylistResolvable, UserResolvable } from '../typings/Types.js';
 
 /**
  * Stores cache for playlists and holds their API methods
@@ -40,10 +40,10 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
    * @param playlistResolvable A string or object that can be resolved to a Playlist
    * @returns A Playlist
    */
-  resolve(playlistResolvable: PlaylistResolvable): Playlist | null {
+  override resolve(playlistResolvable: PlaylistResolvable): Playlist | null {
     const playlist = super.resolve(playlistResolvable);
     if (playlist) return playlist;
-    const playlistId = this.resolveID(playlistResolvable);
+    const playlistId = this.resolveId(playlistResolvable);
     if (playlistId) return super.resolve(playlistId);
     return null;
   }
@@ -53,8 +53,8 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
    * @param playlistResolvable A string or object that can be resolved to a Playlist
    * @returns The ID of a Playlist
    */
-  resolveID(playlistResolvable: PlaylistResolvable): string | null {
-    const playlistId = super.resolveID(playlistResolvable);
+  override resolveId(playlistResolvable: PlaylistResolvable): string | null {
+    const playlistId = super.resolveId(playlistResolvable);
     if (playlistId) return playlistId;
     if ((playlistResolvable as BasePlaylist | Playlist).id) {
       return (playlistResolvable as BasePlaylist | Playlist).id;
@@ -64,7 +64,7 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
 
   async fetch(options: FetchPlaylistOptions): Promise<Playlist> {
     if (!options) throw new Error('Provide valid options');
-    const playlistId = this.resolveID(options?.playlist);
+    const playlistId = this.resolveId(options?.playlist);
     if (!playlistId) throw new Error('Invalid playlist');
     return this._fetchSigle(playlistId, options);
   }
@@ -78,7 +78,7 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
       market: options?.market,
       additional_types: 'episode',
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetPlaylistResponse = await this.client._api.playlists(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
@@ -93,13 +93,13 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
     user: UserResolvable,
     options?: FetchUserPlaylistsOptions,
   ): Promise<Page<SimplifiedPlaylistObject, SimplifiedPlaylist>> {
-    const userId = this.client.users.resolveID(user);
+    const userId = this.client.users.resolveId(user);
     if (!userId) throw new Error('Invalid user');
     const query: GetUserPlaylistsQuery = {
       limit: options?.limit,
       offset: options?.offset,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetUserPlaylistsResponse = await this.client._api.users(userId).playlists.get(requestData);
     return new Page(this.client, data, SimplifiedPlaylist);
   }
@@ -110,7 +110,7 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
    * @returns A Page of `PlaylistTrack` objects a Promise
    */
   async fetchItems(options: FetchPlaylistItemsOptions): Promise<Page<PlaylistTrackObject, PlaylistTrack>> {
-    const playlistId = this.resolveID(options?.playlist);
+    const playlistId = this.resolveId(options?.playlist);
     if (!playlistId) throw new Error('Invalid playlist');
     const query: GetPlaylistItemsQuery = {
       limit: options?.limit,
@@ -118,7 +118,7 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
       offset: options?.offset,
       additional_types: 'episode',
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetPlaylistItemsResponse = await this.client._api.playlists(playlistId).tracks.get(requestData);
     return new Page(this.client, data, PlaylistTrack);
   }
@@ -129,10 +129,9 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
    * @returns An array of `Image` object
    */
   async fetchCoverImage(playlist: PlaylistResolvable): Promise<Array<Image>> {
-    const playlistId = this.resolveID(playlist);
+    const playlistId = this.resolveId(playlist);
     if (!playlistId) throw new Error('Invalid Playlist');
-    const requestData = new RequestData('api', null, null);
-    const data: GetPlaylistCoverImageResponse = await this.client._api.playlists(playlistId).images.get(requestData);
+    const data: GetPlaylistCoverImageResponse = await this.client._api.playlists(playlistId).images.get();
     const images: Array<Image> = [];
     data.forEach(imageObject => {
       images.push(new Image(imageObject));
@@ -155,7 +154,7 @@ export default class PlaylistManager extends BaseManager<PlaylistResolvable, Pla
       offset: options?.offset,
       timestamp: options?.timestamp,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetFeaturedPlaylistsResponse = await this.client._api.browse('featured-playlists').get(requestData);
     return new Page(this.client, data.playlists, SimplifiedPlaylist);
   }

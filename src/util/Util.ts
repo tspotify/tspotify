@@ -1,5 +1,5 @@
-import type { Response } from 'node-fetch';
-import type { ClientOptions } from '../interfaces/Interfaces.js';
+import type { Response } from 'undici';
+import type { ClientOptions } from '../typings/Interfaces.js';
 
 const has = (obj: Record<string, unknown>, key: string) => Object.prototype.hasOwnProperty.call(obj, key);
 
@@ -22,7 +22,9 @@ export function mergeDefault(defaultObject: any, given: any): ClientOptions {
  * @param res The response sent by the API
  * @returns The body of the response
  */
-export async function parseResponse(res: Response): Promise<any> {
-  if (res.headers.get('content-type')?.startsWith('application/json')) return res.json();
-  return res.buffer();
+export async function parseResponse(res: Response): Promise<unknown> {
+  if (res.headers.get('content-type')?.startsWith('application/json')) {
+    return res.json();
+  }
+  return res.arrayBuffer();
 }

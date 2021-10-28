@@ -3,9 +3,9 @@ import Client from './client/Client.js';
 
 export * from './errors/ErrorIndex.js';
 
-export * from './interfaces/Interfaces.js';
-export * from './interfaces/Types.js';
-export * from './interfaces/Util.js';
+export * from './typings/Interfaces.js';
+export * from './typings/Types.js';
+export * from './typings/Util.js';
 
 import AlbumManager from './managers/AlbumManager.js';
 import ArtistManager from './managers/ArtistManager.js';

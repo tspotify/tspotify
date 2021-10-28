@@ -1,8 +1,6 @@
-import { AsyncQueue } from '@sapphire/async-queue';
 import { parseResponse } from '../util/Util.js';
+import { AsyncQueue } from '@sapphire/async-queue';
 import SpotifyAPIError from './SpotifyAPIError.js';
-import HTTPError from './HTTPError.js';
-import type { Response } from 'node-fetch';
 import type APIRequest from './APIRequest.js';
 import type RESTManager from './RESTManager.js';
 import type { AuthenticationErrorObject, RegularErrorObject } from 'spotify-api-types';
@@ -23,7 +21,7 @@ export default class RequestHandler {
     this.queue = new AsyncQueue();
   }
 
-  async push(request: APIRequest): Promise<any> {
+  async push(request: APIRequest): Promise<unknown> {
     await this.queue.wait();
     try {
       return await this.execute(request);
@@ -32,28 +30,14 @@ export default class RequestHandler {
     }
   }
 
-  async execute(request: APIRequest): Promise<any> {
-    let res: Response;
-    try {
-      res = await request.make();
-    } catch (error) {
-      throw new HTTPError(request.method, error.message, error.name, request.path, error.type, error.code);
+  async execute(request: APIRequest): Promise<unknown> {
+    const res = await request.make();
+
+    if (res.ok) {
+      return parseResponse(res);
     }
 
-    if (res && res.headers) {
-      if (res.ok) {
-        return parseResponse(res);
-      }
-
-      if (res.status >= 400 && res.status < 500) {
-        let errorObject: AuthenticationErrorObject | RegularErrorObject;
-        try {
-          errorObject = await parseResponse(res);
-        } catch (error) {
-          throw new HTTPError(request.method, error.message, error.name, request.path, error.type, error.code);
-        }
-        throw new SpotifyAPIError(request.method, request.path, res.status, errorObject);
-      }
-    }
+    const errorObject = (await parseResponse(res)) as AuthenticationErrorObject | RegularErrorObject;
+    throw new SpotifyAPIError(request.method, request.path, res.status, errorObject);
   }
 }

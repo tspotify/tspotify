@@ -68,7 +68,7 @@ export interface ClientCredentials {
   /**
    * The Client ID for the bot
    */
-  clientID: string;
+  clientId: string;
 
   /**
    * The Client Secret for the bot
@@ -109,7 +109,7 @@ export interface FetchAlbumsOptions extends CacheAfterFetching_O, Market_O, Skip
 /**
  * Options used for fetching tracks of an album
  */
-export interface FetchAlbumTracksOptions extends Limit_R, Market_O, Offset_R { }
+export interface FetchAlbumTracksOptions extends Limit_R, Market_O, Offset_R {}
 
 /**
  * Options used for fetching a collection of `SimplifiedAlbum` objects of an artist
@@ -135,13 +135,13 @@ export interface FetchArtistsOptions extends CacheAfterFetching_O, SkipCacheChec
   artists: Array<ArtistResolvable>;
 }
 
-export interface FetchCategoriesOptions extends Country_O, Locale_O, Limit_O, Offset_O { }
+export interface FetchCategoriesOptions extends Country_O, Locale_O, Limit_O, Offset_O {}
 
 export interface FetchCategoryOptions extends CacheAfterFetching_O, Country_O, Locale_O, SkipCacheCheck_O {
   categoryResolvable: CategoryResolvable;
 }
 
-export interface FetchCategoryPlaylistsOptions extends Country_O, Limit_O, Offset_O { }
+export interface FetchCategoryPlaylistsOptions extends Country_O, Limit_O, Offset_O {}
 
 export interface FetchEpisodeOptions extends CacheAfterFetching_O, SkipCacheCheck_O, Market_R {
   /**
@@ -165,7 +165,7 @@ export interface FetchMultipleAudioFeaturesOptions extends CacheAfterFetching_O,
   tracks: Array<TrackResolvable>;
 }
 
-export interface FetchNewReleasesOptions extends Country_O, Limit_O, Offset_O { }
+export interface FetchNewReleasesOptions extends Country_O, Limit_O, Offset_O {}
 
 export interface FetchPlaylistItemsOptions extends Limit_O, Market_R, Offset_O {
   /**
@@ -272,7 +272,7 @@ export interface ErrorMessageBuilder {
   (...args: Array<string>): string;
 }
 
-export interface FetchShowEpisodesOptions extends Limit_O, Market_R, Offset_O { }
+export interface FetchShowEpisodesOptions extends Limit_O, Market_R, Offset_O {}
 
 export interface FetchShowOptions extends CacheAfterFetching_O, Market_R, SkipCacheCheck_O {
   /**
@@ -316,11 +316,11 @@ export interface FetchUserOptions extends CacheAfterFetching_O, SkipCacheCheck_O
 /**
  * Options used for fetching playlists of a user
  */
-export interface FetchUserPlaylistsOptions extends Limit_O, Offset_O { }
+export interface FetchUserPlaylistsOptions extends Limit_O, Offset_O {}
 
 export interface StructureConstructable<T> {
   // @ts-ignore
-  new(...args: any[]): T;
+  new (...args: any[]): T;
 }
 
 export interface SearchOptions extends Limit_O, Offset_O {
@@ -332,17 +332,17 @@ export interface SearchOptions extends Limit_O, Offset_O {
   includeExternal?: string;
 }
 
-export interface SearchAlbumsOptions extends Market_O, SearchOptions { }
+export interface SearchAlbumsOptions extends Market_O, SearchOptions {}
 
-export interface SearchArtistsOptions extends Market_O, SearchOptions { }
+export interface SearchArtistsOptions extends Market_O, SearchOptions {}
 
-export interface SearchEpisodesOptions extends Market_R, SearchOptions { }
+export interface SearchEpisodesOptions extends Market_R, SearchOptions {}
 
-export interface SearchPlaylistsOptions extends Market_O, SearchOptions { }
+export interface SearchPlaylistsOptions extends Market_O, SearchOptions {}
 
-export interface SearchShowsOptions extends Market_R, SearchOptions { }
+export interface SearchShowsOptions extends Market_R, SearchOptions {}
 
-export interface SearchTracksOptions extends Market_O, SearchOptions { }
+export interface SearchTracksOptions extends Market_O, SearchOptions {}
 
 export interface SeedData {
   /**
@@ -354,4 +354,21 @@ export interface SeedData {
    * The type of this seed
    */
   type: SeedType;
+}
+
+export interface RequestDataOptions<Q, B> {
+  /**
+   * The query for the request
+   */
+  query?: Q;
+
+  /**
+   * The body for the request
+   */
+  body?: B;
+
+  /**
+   * Whether to use https://accounts.spotify.com as the base url
+   */
+  useAccounts?: boolean;
 }

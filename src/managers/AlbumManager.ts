@@ -12,7 +12,7 @@ import type {
   FetchAlbumTracksOptions,
   FetchNewReleasesOptions,
   SearchAlbumsOptions,
-} from '../interfaces/Interfaces.js';
+} from '../typings/Interfaces.js';
 import type BaseAlbum from '../structures/BaseAlbum.js';
 import type {
   AlbumObject,
@@ -28,7 +28,7 @@ import type {
   GetNewReleasesResponse,
   GetSearchResponse,
 } from 'spotify-api-types';
-import type { AlbumResolvable, FetchedAlbum } from '../interfaces/Types.js';
+import type { AlbumResolvable, FetchedAlbum } from '../typings/Types.js';
 
 /**
  * Stores cache for albums and holds their API methods
@@ -41,20 +41,20 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
   /**
    * Resolves an AlbumResolvable to an Album object
    */
-  resolve(albumResolvable: AlbumResolvable): Album | null {
+  override resolve(albumResolvable: AlbumResolvable): Album | null {
     const album = super.resolve(albumResolvable);
     if (album) return album;
-    const albumID = this.resolveID(albumResolvable);
-    if (albumID) return super.resolve(albumID);
+    const albumId = this.resolveId(albumResolvable);
+    if (albumId) return super.resolve(albumId);
     return null;
   }
 
   /**
    * Resolves an AlbumResolvable to an Album ID
    */
-  resolveID(albumResolvable: AlbumResolvable): string | null {
-    const albumID = super.resolveID(albumResolvable);
-    if (albumID) return albumID;
+  override resolveId(albumResolvable: AlbumResolvable): string | null {
+    const albumId = super.resolveId(albumResolvable);
+    if (albumId) return albumId;
     if ((albumResolvable as BaseAlbum | SimplifiedAlbum).id) {
       return (albumResolvable as BaseAlbum | SimplifiedAlbum).id;
     }
@@ -69,19 +69,19 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     options: T,
   ): Promise<FetchedAlbum<T> | null> {
     if (!options) throw new Error('No album IDs were provided');
-    const albumId = this.resolveID(options as string);
+    const albumId = this.resolveId(options as string);
     // @ts-ignore
     if (albumId) return this._fetchSingle(albumId);
     const album = (options as FetchAlbumOptions)?.album;
     if (album) {
-      const albumId = this.resolveID(album);
+      const albumId = this.resolveId(album);
       // @ts-ignore
       if (albumId) return this._fetchSingle(albumId, options);
     }
     const albums = (options as FetchAlbumsOptions)?.albums;
     if (albums) {
       if (Array.isArray(albums)) {
-        const albumIds = albums.map(album => this.resolveID(album));
+        const albumIds = albums.map(album => this.resolveId(album));
         // @ts-ignore
         if (albumIds) return this._fetchMany(albumIds, options);
       }
@@ -97,7 +97,7 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     const query: GetAlbumQuery = {
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetAlbumResponse = await this.client._api.albums(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
@@ -119,7 +119,7 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
       ids,
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetMultipleAlbumsResponse = await this.client._api.albums.get(requestData);
     data.albums.forEach(albumObject => {
       const album = this.add((albumObject as AlbumObject).id, options?.cacheAfterFetching, albumObject);
@@ -138,15 +138,15 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
     album: AlbumResolvable,
     options?: FetchAlbumTracksOptions,
   ): Promise<Page<SimplifiedTrackObject, SimplifiedTrack>> {
-    const albumID = this.resolveID(album);
-    if (!albumID) throw new Error('No album IDs were provided!');
+    const albumId = this.resolveId(album);
+    if (!albumId) throw new Error('No album IDs were provided!');
     const query: GetAlbumTracksQuery = {
       market: options?.market,
       limit: options?.limit,
       offset: options?.offset,
     };
-    const requestData = new RequestData('api', query, null);
-    const data: GetAlbumTracksResponse = await this.client._api.albums(albumID).tracks.get(requestData);
+    const requestData = new RequestData({ query });
+    const data: GetAlbumTracksResponse = await this.client._api.albums(albumId).tracks.get(requestData);
     return new Page(this.client, data, SimplifiedTrack);
   }
 
@@ -161,7 +161,7 @@ export default class AlbumManager extends BaseManager<AlbumResolvable, Album> {
       limit: options?.limit,
       offset: options?.offset,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetNewReleasesResponse = await this.client._api.browse('new-releases').get(requestData);
     return new Page(this.client, data.albums, SimplifiedAlbum);
   }

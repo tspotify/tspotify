@@ -10,7 +10,7 @@ import UserManager from '../managers/UserManager.js';
 import PlaylistManager from '../managers/PlaylistManager.js';
 import { Events } from '../util/Constants.js';
 import CategoryManager from '../managers/CategoryManager.js';
-import type { ClientCredentials, ClientOptions } from '../interfaces/Interfaces.js';
+import type { ClientCredentials, ClientOptions } from '../typings/Interfaces.js';
 import type {
   GetAvailableMarketsResponse,
   GetRecommendationGenresResponse,
@@ -133,7 +133,7 @@ export default class Client extends BaseClient {
     const body: PostClientCredentialsFlowBody = {
       grant_type: 'client_credentials',
     };
-    const requestData = new RequestData('account', null, body);
+    const requestData = new RequestData({ body, useAccounts: true });
     const data: PostClientCredentialsFlowResponse = await this._api.api.token.post(requestData);
     this.accessTokenDetails = new AccessTokenDetails(data);
     this.readyAt = this.lastTokenUpdateAt = new Date();
@@ -150,7 +150,7 @@ export default class Client extends BaseClient {
     const body: PostClientCredentialsFlowBody = {
       grant_type: 'client_credentials',
     };
-    const requestData = new RequestData('account', null, body);
+    const requestData = new RequestData({ body, useAccounts: true });
     const data: PostClientCredentialsFlowResponse = await this._api.api.token.post(requestData);
     this.accessTokenDetails = new AccessTokenDetails(data);
     this.lastTokenUpdateAt = new Date();
@@ -163,8 +163,7 @@ export default class Client extends BaseClient {
    * @returns An array of `ISO 3166-1 alpha-2` strings as a Promise
    */
   async fetchAvailableMarkets(): Promise<Array<string>> {
-    const requestData = new RequestData('api', null, null);
-    const data: GetAvailableMarketsResponse = await this._api.markets.get(requestData);
+    const data: GetAvailableMarketsResponse = await this._api.markets.get();
     return data.markets;
   }
 
@@ -173,10 +172,7 @@ export default class Client extends BaseClient {
    * @returns An array of genre strings as a Promise
    */
   async fetchRecommendationGenres(): Promise<Array<string>> {
-    const requestData = new RequestData('api', null, null);
-    const data: GetRecommendationGenresResponse = await this._api
-      .recommendations('available-genre-seeds')
-      .get(requestData);
+    const data: GetRecommendationGenresResponse = await this._api.recommendations('available-genre-seeds').get();
     return data.genres;
   }
 }

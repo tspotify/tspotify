@@ -5,7 +5,7 @@ import Collection from '../util/Collection.js';
 import SimplifiedEpisode from '../structures/SimplifiedEpisode.js';
 import { CustomTypeError } from '../errors/ErrorIndex.js';
 import type Client from '../client/Client.js';
-import type { FetchEpisodeOptions, FetchEpisodesOptions, SearchEpisodesOptions } from '../interfaces/Interfaces.js';
+import type { FetchEpisodeOptions, FetchEpisodesOptions, SearchEpisodesOptions } from '../typings/Interfaces.js';
 import type {
   GetEpisodeQuery,
   GetEpisodeResponse,
@@ -15,7 +15,7 @@ import type {
   SimplifiedEpisodeObject,
   GetSearchResponse,
 } from 'spotify-api-types';
-import type { EpisodeResolvable, FetchedEpisode } from '../interfaces/Types.js';
+import type { EpisodeResolvable, FetchedEpisode } from '../typings/Types.js';
 
 export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episode> {
   constructor(client: Client) {
@@ -25,20 +25,20 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
   /**
    * Resolves an EpisodeResolvable to an Episode object
    */
-  resolve(episodeResolvable: EpisodeResolvable): Episode | null {
+  override resolve(episodeResolvable: EpisodeResolvable): Episode | null {
     const episode = super.resolve(episodeResolvable);
     if (episode) return episode;
-    const episodeID = this.resolveID(episodeResolvable);
-    if (episodeID) return super.resolve(episodeID);
+    const episodeId = this.resolveId(episodeResolvable);
+    if (episodeId) return super.resolve(episodeId);
     return null;
   }
 
   /**
    * Resolves an EpisodeResolvable to an Episode ID
    */
-  resolveID(episodeResolvable: EpisodeResolvable): string | null {
-    const episodeID = super.resolveID(episodeResolvable);
-    if (episodeID) return episodeID;
+  override resolveId(episodeResolvable: EpisodeResolvable): string | null {
+    const episodeId = super.resolveId(episodeResolvable);
+    if (episodeId) return episodeId;
     if ((episodeResolvable as SimplifiedEpisode).id) {
       return (episodeResolvable as SimplifiedEpisode).id;
     }
@@ -52,14 +52,14 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
     if (!options) throw new Error('No episode IDs were provided');
     const episode = (options as FetchEpisodeOptions)?.episode;
     if (episode) {
-      const episodeId = this.resolveID(episode);
+      const episodeId = this.resolveId(episode);
       // @ts-ignore
       if (episodeId) return this._fetchSingle(episodeId, options);
     }
     const episodes = (options as FetchEpisodesOptions)?.episodes;
     if (episodes) {
       if (Array.isArray(episodes)) {
-        const episodeIds = episodes.map(episode => this.resolveID(episode));
+        const episodeIds = episodes.map(episode => this.resolveId(episode));
         // @ts-ignore
         if (episodeIds) return this._fetchMany(episodeIds, options);
       }
@@ -76,7 +76,7 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
     const query: GetEpisodeQuery = {
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetEpisodeResponse = await this.client._api.episodes(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
@@ -99,7 +99,7 @@ export default class EpisodeManager extends BaseManager<EpisodeResolvable, Episo
       ids,
       market: options?.market,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetMultipleEpisodesResponse = await this.client._api.episodes.get(requestData);
     data.episodes.forEach(episodeObject => {
       const episode = this.add((episodeObject as EpisodeObject)?.id, options?.cacheAfterFetching, episodeObject);

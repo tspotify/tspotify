@@ -7,7 +7,7 @@ import type {
   FetchCategoriesOptions,
   FetchCategoryOptions,
   FetchCategoryPlaylistsOptions,
-} from '../interfaces/Interfaces.js';
+} from '../typings/Interfaces.js';
 import type {
   CategoryObject,
   GetCategoryPlaylistQuery,
@@ -18,7 +18,7 @@ import type {
   GetMultipleCategoriesResponse,
   SimplifiedPlaylistObject,
 } from 'spotify-api-types';
-import type { CategoryResolvable, FetchedCategory } from '../interfaces/Types.js';
+import type { CategoryResolvable, FetchedCategory } from '../typings/Types.js';
 
 export default class CategoryManager extends BaseManager<CategoryResolvable, Category> {
   constructor(client: Client) {
@@ -34,12 +34,12 @@ export default class CategoryManager extends BaseManager<CategoryResolvable, Cat
     options: T,
   ): Promise<FetchedCategory<T>> {
     if (!options) throw new Error('No options were provided');
-    const categoryId = this.resolveID(options as CategoryResolvable);
+    const categoryId = this.resolveId(options as CategoryResolvable);
     // @ts-ignore
     if (categoryId) return this._fetchSingle(categoryId, options);
     const categoryResolvable = (options as FetchCategoryOptions)?.categoryResolvable;
     if (categoryResolvable) {
-      const categoryId = this.resolveID(categoryResolvable);
+      const categoryId = this.resolveId(categoryResolvable);
       // @ts-ignore
       if (categoryId) return this._fetchSingle(categoryId, options);
     }
@@ -56,7 +56,7 @@ export default class CategoryManager extends BaseManager<CategoryResolvable, Cat
       country: options?.country,
       locale: options?.locale,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetCategoryResponse = await this.client._api.browse.categories(id).get(requestData);
     return this.add(data.id, options?.cacheAfterFetching, data);
   }
@@ -68,7 +68,7 @@ export default class CategoryManager extends BaseManager<CategoryResolvable, Cat
       locale: options?.locale,
       offset: options?.offset,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetMultipleCategoriesResponse = await this.client._api.browse.categories.get(requestData);
     return new Page(this.client, data.categories, Category);
   }
@@ -83,14 +83,14 @@ export default class CategoryManager extends BaseManager<CategoryResolvable, Cat
     categoryResolvable: CategoryResolvable,
     options?: FetchCategoryPlaylistsOptions,
   ): Promise<Page<SimplifiedPlaylistObject, SimplifiedPlaylist>> {
-    const categoryId = this.resolveID(categoryResolvable);
+    const categoryId = this.resolveId(categoryResolvable);
     if (!categoryId) throw new Error('Invalid category');
     const query: GetCategoryPlaylistQuery = {
       country: options?.country,
       limit: options?.limit,
       offset: options?.offset,
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetCategoryPlaylistResponse = await this.client._api.browse
       .categories(categoryId)
       .playlists.get(requestData);
