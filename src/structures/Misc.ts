@@ -1,8 +1,10 @@
-import PublicUser from './PublicUser.js';
 import Track from './Track.js';
 import Episode from './Episode.js';
+import PublicUser from './PublicUser.js';
 import Collection from '../util/Collection.js';
 import SimplifiedTrack from './SimplifiedTrack.js';
+import type Client from '../client/Client.js';
+import type { RequestDataOptions, StructureConstructable } from '../typings/Interfaces.js';
 import type {
   CopyrightObject,
   ExternalIdObject,
@@ -24,9 +26,6 @@ import type {
   SimplifiedTrackObject,
   ClientCredentialsFlowAccessTokenObject,
 } from 'spotify-api-types';
-import type Client from '../client/Client.js';
-import type { StructureConstructable } from '../interfaces/Interfaces.js';
-import type { SubdomainType } from '../interfaces/Types.js';
 
 /**
  * The details about the access token returned by the API after logging in
@@ -96,26 +95,26 @@ export class TrackRestriction extends BaseRestriction {
 /**
  * Data used for generating an API request
  */
-export class RequestData<Q, B> {
+export class RequestData<Q = undefined, B = undefined> {
   /**
    * The subdomain of the endpoint being requested
    */
-  subdomain: SubdomainType;
+  useAccounts?: boolean;
 
   /**
    * The query object for the request
    */
-  query: Q;
+  query?: Q;
 
   /**
    * The body of the request
    */
-  body: B;
+  body?: B;
 
-  constructor(subdomain: SubdomainType, query: Q, body: B) {
-    this.subdomain = subdomain;
-    this.query = query;
-    this.body = body;
+  constructor(data: RequestDataOptions<Q, B>) {
+    this.useAccounts = data.useAccounts;
+    this.query = data.query;
+    this.body = data.body;
   }
 }
 

@@ -1,4 +1,4 @@
-import type { ClientOptions } from '../interfaces/Interfaces';
+import type { ClientOptions } from '../typings/Interfaces';
 
 /**
  * The default options with which the client gets initiated

@@ -2,7 +2,7 @@ import type RESTManager from './RESTManager.js';
 import type { RequestData } from '../structures/Misc.js';
 
 /* eslint-disable */
-const noop = () => { };
+const noop = () => {};
 const methods = ['get', 'post', 'delete', 'patch', 'put'];
 const reflectors = ['toString'];
 
@@ -23,9 +23,17 @@ export function buildRoute(manager: RESTManager): any {
             routeBucket.push(currentDirectory);
           }
         }
-        return (options: RequestData<unknown, unknown>) => manager.request(property, path.join('/'), Object.assign({
-          route: routeBucket.join('/')
-        }, options));
+        return (options: RequestData<Record<string, string> | undefined, Record<string, string> | undefined>) =>
+          manager.request(
+            property,
+            path.join('/'),
+            Object.assign(
+              {
+                route: routeBucket.join('/'),
+              },
+              options,
+            ),
+          );
       }
       path.push(property);
       return new Proxy(noop, handler);

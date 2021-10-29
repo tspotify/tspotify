@@ -3,7 +3,7 @@ import { ExternalUrl, Image } from './Misc.js';
 import type Client from '../client/Client.js';
 import type { Copyright } from './Misc.js';
 import type { SimplifiedShowObject, ImageObject, SimplifiedEpisodeObject } from 'spotify-api-types';
-import type { FetchShowEpisodesOptions } from '../interfaces/Interfaces.js';
+import type { FetchShowEpisodesOptions } from '../typings/Interfaces.js';
 import type { Page } from './Misc.js';
 import type SimplifiedEpisode from './SimplifiedEpisode.js';
 

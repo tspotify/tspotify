@@ -6,7 +6,7 @@
     "outDir": "dist",
     "strict": true,
     "moduleResolution": "Node",
-    "watch": true
+    "noImplicitOverride": true
   },
   "compileOnSave": true,
   "include": [

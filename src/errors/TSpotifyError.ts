@@ -1,4 +1,4 @@
-import type { ErrorMessageBuilder } from '../interfaces/Interfaces.js';
+import type { ErrorMessageBuilder } from '../typings/Interfaces.js';
 
 const errorMessagesMap = new Map<string, string | ErrorMessageBuilder>();
 
@@ -12,7 +12,7 @@ export function makeTspotifyError(Base: ErrorConstructor): any {
       if (Error.captureStackTrace) Error.captureStackTrace(this, TspotifyError);
     }
 
-    get name() {
+    override get name() {
       return `${super.name} [${this.code}]`;
     }
   };

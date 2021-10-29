@@ -6,7 +6,7 @@ import type Track from './Track.js';
 import type Artist from './Artist.js';
 import type { Page } from './Misc.js';
 import type SimplifiedAlbum from './SimplifiedAlbum.js';
-import type { FetchArtistAlbumsOptions } from '../interfaces/Interfaces.js';
+import type { FetchArtistAlbumsOptions } from '../typings/Interfaces.js';
 import type { SimplifiedArtistObject, SimplifiedAlbumObject } from 'spotify-api-types';
 
 export default class SimplifiedArtist extends BaseStructure {

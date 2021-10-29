@@ -3,8 +3,8 @@ import { RequestData } from '../structures/Misc.js';
 import { GetSearchQuery, GetSearchResponse } from 'spotify-api-types';
 import type Client from '../client/Client.js';
 import type BaseStructure from '../structures/BaseStructure.js';
-import type { SearchOptions, StructureConstructable } from '../interfaces/Interfaces.js';
-import type { SearchItemType } from '../interfaces/Types.js';
+import type { SearchOptions, StructureConstructable } from '../typings/Interfaces.js';
+import type { SearchItemType } from '../typings/Types.js';
 
 /**
  * Base class for all managers
@@ -53,7 +53,7 @@ export default class BaseManager<R, T extends BaseStructure> {
    * Resolves a structure resolvable to its id
    * @param idOrInstance The ID or instance of the strucutre held by this manager
    */
-  resolveID(idOrInstance: string | R): string | null {
+  resolveId(idOrInstance: string | R): string | null {
     if (idOrInstance instanceof this._holds) return idOrInstance.id;
     if (typeof idOrInstance === 'string') return idOrInstance;
     return null;
@@ -85,7 +85,7 @@ export default class BaseManager<R, T extends BaseStructure> {
       q: options.query,
       type: [type],
     };
-    const requestData = new RequestData('api', query, null);
+    const requestData = new RequestData({ query });
     const data: GetSearchResponse = await this.client._api.search.get(requestData);
     return data;
   }

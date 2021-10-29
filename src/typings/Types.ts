@@ -18,7 +18,7 @@ import type Playlist from '../structures/Playlist.js';
 import type BasePlaylist from '../structures/BasePlaylist.js';
 import type AudioFeatures from '../structures/AudioFeatures.js';
 import type Category from '../structures/Category.js';
-import type { Page } from '../structures/Misc.js';
+import type { Page, RequestData } from '../structures/Misc.js';
 import {
   FetchAlbumOptions,
   FetchAlbumsOptions,
@@ -57,8 +57,8 @@ export type FetchedArtist<T extends ArtistResolvable | FetchArtistOptions | Fetc
   : Collection<string, Artist>;
 
 export type FetchedAudioFeatures<
-  T extends TrackResolvable | FetchSingleAudioFeaturesOptions | FetchMultipleAudioFeaturesOptions
-  > = T extends TrackResolvable | FetchSingleAudioFeaturesOptions ? AudioFeatures : Array<AudioFeatures>;
+  T extends TrackResolvable | FetchSingleAudioFeaturesOptions | FetchMultipleAudioFeaturesOptions,
+> = T extends TrackResolvable | FetchSingleAudioFeaturesOptions ? AudioFeatures : Array<AudioFeatures>;
 
 export type FetchedCategory<T extends CategoryResolvable | FetchCategoryOptions | FetchCategoriesOptions> = T extends
   | CategoryResolvable
@@ -95,3 +95,7 @@ export type SubdomainType = 'api' | 'account';
 export type UserResolvable = string | PublicUser | PrivateUser;
 
 export type TrackResolvable = string | SimplifiedTrack | Track;
+
+export interface ExtendedRequestData<Q = undefined, B = undefined> extends RequestData<Q, B> {
+  route: string;
+}
