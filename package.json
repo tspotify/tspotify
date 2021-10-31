@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "doc": "typedoc",
-    "test": "node test/test.js"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -24,12 +24,16 @@
     "undici": "^4.8.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-angular": "^13.2.0",
     "@types/node": "^16.11.1",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "spotify-api-types": "^0.4.5",
     "typedoc": "^0.22.6",
